@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+:root {
+  /* Kino Games Palette */
+  --kino-black: #050505;
+  --kino-gray: #121212;
+  --kino-silver: #F4F1EC;
+  --kino-red: #ff3b30;
+  --kino-blue: #00f0ff;
+  --kino-gold: #d4af37;
+
+  /* New Design Tokens */
+  --bg-dark: #0E0E0E;
+  --bg-light: #F6F4F1;
+  --text-on-dark: #F6F4F1;
+  --text-on-light: #111111;
+  --accent-red: #D63A2F;
+  --accent-teal: #2BB3A3;
+  --accent-gold: #C9A24D;
+  --border-dark: #2A2A2A;
+  --border-light: #DED9D1;
+}
+
+@theme inline {
+  --color-kino-black: var(--kino-black);
+  --color-kino-gray: var(--kino-gray);
+  --color-kino-silver: var(--kino-silver);
+  --color-kino-red: var(--kino-red);
+  --color-kino-blue: var(--kino-blue);
+  --color-kino-gold: var(--kino-gold);
+
+  --color-bg-dark: var(--bg-dark);
+  --color-bg-light: var(--bg-light);
+  --color-text-on-dark: var(--text-on-dark);
+  --color-text-on-light: var(--text-on-light);
+  --color-accent-red: var(--accent-red);
+  --color-accent-teal: var(--accent-teal);
+  --color-accent-gold: var(--accent-gold);
+  --color-border-dark: var(--border-dark);
+  --color-border-light: var(--border-light);
+
+  --font-syne: var(--font-syne);
+  --font-manrope: var(--font-manrope);
+  --font-inter: var(--font-inter);
+  --font-garet: "Garet", "Inter", sans-serif;
+}
+
+body {
+  background: var(--kino-black);
+  color: var(--kino-silver);
+  font-family: var(--font-manrope), sans-serif;
+}
