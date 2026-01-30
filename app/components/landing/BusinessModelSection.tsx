@@ -19,7 +19,7 @@ export function BusinessModelSection() {
     ];
   
     return (
-      <section className="py-24 px-4 bg-kino-gray">
+      <section className="min-h-screen flex flex-col justify-center py-24 px-4 bg-kino-gray">
         <div className="max-w-7xl mx-auto">
           <h2 className="font-syne font-bold text-4xl text-white mb-16 text-center">Business Model</h2>
           

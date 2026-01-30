@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function ContactSection() {
   return (
-    <section className="relative py-32 px-4 flex items-center justify-center bg-kino-black overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center py-32 px-4 bg-kino-black overflow-hidden">
       {/* Background Bokeh */}
       <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-kino-red/20 rounded-full blur-[120px]" />

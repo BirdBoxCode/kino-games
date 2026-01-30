@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function WhyGamesSection() {
   return (
-    <section className="relative py-24 px-4 bg-kino-black overflow-hidden">
+    <section className="relative min-h-screen flex flex-col justify-center py-24 px-4 bg-kino-black overflow-hidden">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         {/* Text Content */}
         <div className="z-10">
