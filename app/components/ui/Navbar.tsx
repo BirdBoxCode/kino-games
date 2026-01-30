@@ -8,9 +8,9 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const navLinks = [
   { name: "About", href: "/#about" },
-  { name: "Projects", href: "/#projects" },
+  { name: "How It Works", href: "/#how-it-works" },
+  { name: "Business Model", href: "/#business-model" },
   { name: "Partners", href: "/#partners" },
-  { name: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -30,13 +30,13 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full h-[120px] bg-transparent border-b border-text-on-dark flex items-center justify-center z-50 px-4 md:px-12 backdrop-blur-sm">
+      <nav className="fixed top-0 left-0 w-full h-[120px] bg-transparent border-b-[2px] border-[#2A2A2A] flex items-center justify-center z-50 px-4 md:px-12 backdrop-blur-sm">
         <div className="w-full max-w-[1440px] flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="relative z-50">
             <div className="w-[157px] h-[43.2px] relative">
               <Image
-                src="/navbarlogo.png"
+                src="/navbarlogo.svg"
                 alt="Kino Games Logo"
                 fill
                 className="object-contain"
@@ -45,7 +45,7 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation & CTA */}
           <div className="hidden md:flex items-center gap-[40px]">
             {navLinks.map((link) => (
               <Link
@@ -56,13 +56,9 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-          </div>
-
-          {/* CTA Button */}
-          <div className="hidden md:flex">
             <Link
               href="/#contact"
-              className="flex items-center gap-[10px] px-[9px] py-[10px] bg-accent-teal border border-accent-teal rounded-[6px] text-text-on-light font-inter font-medium text-[16px] tracking-[2px] hover:bg-opacity-90 transition-colors"
+              className="flex items-center gap-[10px] px-[9px] py-[10px] bg-accent-gold border border-accent-gold rounded-[6px] text-text-on-light font-inter font-medium text-[16px] tracking-[2px] hover:bg-opacity-90 transition-colors"
             >
               Contact Us
             </Link>
