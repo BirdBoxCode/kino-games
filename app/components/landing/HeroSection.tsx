@@ -6,40 +6,6 @@ import { ChevronDown } from "lucide-react";
 export function HeroSection() {
   return (
     <section className="relative h-screen w-full overflow-hidden bg-bg-dark">
-      {/* Background Video Layer */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-black/20 z-10" /> {/* Subtle Overlay */}
-        
-        {/* Cloudflare Stream Iframe with CSS Cover Hack */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-[56.25vw] min-w-full min-h-full">
-            <iframe
-            src="https://customer-ui5gikvnytrm15ts.cloudflarestream.com/55e47c504d533490f89daf2a742481ee/iframe?muted=true&preload=true&loop=true&autoplay=true&controls=false"
-            className="w-full h-full"
-            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-            allowFullScreen
-            title="Hero Video"
-            style={{
-                width: '100%',
-                height: '100%',
-            }}
-            />
-        </div>
-        <style jsx global>{`
-          @media (min-aspect-ratio: 16/9) {
-            .video-container iframe {
-              width: 100vw;
-              height: 56.25vw;
-            }
-          }
-          @media (max-aspect-ratio: 16/9) {
-            .video-container iframe {
-              height: 100vh;
-              width: 177.78vh;
-            }
-          }
-        `}</style>
-      </div>
-
       {/* Content Layer */}
       <div className="relative z-30 flex h-full flex-col items-center justify-center text-center px-4">
         {/* H1 */}
