@@ -7,10 +7,14 @@ export function HeroSection() {
   return (
     <section className="relative h-screen w-full overflow-hidden bg-bg-dark flex flex-col items-center justify-center p-[64px_80px] gap-[24px]">
       {/* Background Video */}
-      <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
+      <div className="absolute inset-0 z-0 w-full h-full pointer-events-none overflow-hidden">
         <iframe
           src="https://customer-ui5gikvnytrm15ts.cloudflarestream.com/4a677d3d7f2772a492c90f254f36c73f/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-ui5gikvnytrm15ts.cloudflarestream.com%2F4a677d3d7f2772a492c90f254f36c73f%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
-          className="w-full h-full object-cover scale-125" // Slight scale to ensure no edges if aspect ratio differs slightly, mimicking cover
+          // "min-w-full min-h-full" ensures it covers the box.
+          // "w-[177.77vh]" ensures that if height is limiting (tall screen), width is 16:9 of height.
+          // "h-[56.25vw]" ensures that if width is limiting (wide screen), height is 9/16 of width.
+          // Centering ensures we crop from middle.
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.77vh] h-[56.25vw] min-w-full min-h-full"
           allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
           allowFullScreen={true}
         ></iframe>
