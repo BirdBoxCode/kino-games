@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useTransform, useMotionValue } from "framer-motion";
-import { ChevronDown } from "lucide-react";
 import { useEffect } from "react";
 
 interface HeroSectionProps {
@@ -16,22 +15,16 @@ export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
   }, [scrollProgress, motionProgress]);
 
   // Refined phased sequence
-  // 1. 0 -> 0.4: Arrow turns Gold & Slides
-  const arrowColor = useTransform(motionProgress, [0, 0.4], ["#F6F4F1", "#F9C962"]);
-  const arrowY = useTransform(motionProgress, [0, 0.4], [0, 15]);
-  
-  // 2. 0.4 -> 0.8: Content fades & Blur increases
+  // 1. 0.4 -> 0.7: Content fades
   const contentOpacity = useTransform(motionProgress, [0.4, 0.7], [1, 0]);
   const contentY = useTransform(motionProgress, [0.4, 0.7], [0, -40]);
+  
+  // 2. 0.4 -> 0.8: Video Blur
   const videoBlur = useTransform(motionProgress, [0.4, 0.8], [0, 10]);
   const videoBlurOpacity = useTransform(motionProgress, [0.4, 0.8], [0, 1]);
   
-  // 3. 0.8 -> 1.0: Whole section fades out
+  // 3. 0.8 -> 1.0: Whole section fades out to reveal next page
   const sectionOpacity = useTransform(motionProgress, [0.8, 1.0], [1, 0]);
-  const arrowOpacityFinal = useTransform(motionProgress, [0.8, 1.0], [1, 0]);
-
-  // Combined arrow opacity
-  const arrowScale = useTransform(motionProgress, [0, 0.15, 0.7], [1, 1.1, 0.9]);
 
   return (
     <motion.section 
@@ -96,29 +89,6 @@ export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
         >
           A new cultural experience bringing video games into cinemas
         </motion.p>
-      </motion.div>
-
-      {/* Scroll Indicator */}
-      <motion.div 
-        initial={{ opacity: 0, x: "-50%" }}
-        animate={{ 
-          opacity: scrollProgress === 0 ? 1 : undefined,
-          y: scrollProgress === 0 ? [0, 10, 0] : undefined,
-          x: "-50%"
-        } as any}
-        transition={{ 
-            opacity: scrollProgress === 0 ? { delay: 1, duration: 1 } : { duration: 0.2 },
-            y: scrollProgress === 0 ? { repeat: Infinity, duration: 2, ease: "easeInOut" } : { duration: 0 }
-        }}
-        style={{
-          opacity: arrowOpacityFinal,
-          scale: arrowScale,
-          y: arrowY,
-          color: arrowColor
-        }}
-        className="absolute bottom-8 left-1/2 z-30 flex flex-col items-center"
-      >
-        <ChevronDown size={32} strokeWidth={1.5} />
       </motion.div>
     </motion.section>
   );

@@ -17,7 +17,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
   // Aligned with hero exit phased sequence
   const sectionOpacity = useTransform(motionProgress, [0.5, 0.9], [0, 1]);
   const sectionScale = useTransform(motionProgress, [0.5, 0.9], [0.98, 1]);
-  const sectionY = useTransform(motionProgress, [0.5, 0.9], [10, 0]);
+  const sectionY = 0; // Removed vertical motion for static "switch" effect
 
   return (
     <motion.section 

@@ -13,12 +13,12 @@ export default function Home() {
       <CinematicScrollContainer>
         <HeroSection />
         <SectionWhy />
+        <WhyGamesSection />
+        <HowItWorksSection />
+        <BusinessModelSection />
+        <PartnersSection />
+        <ContactSection />
       </CinematicScrollContainer>
-      <WhyGamesSection />
-      <HowItWorksSection />
-      <BusinessModelSection />
-      <PartnersSection />
-      <ContactSection />
     </main>
   );
 }

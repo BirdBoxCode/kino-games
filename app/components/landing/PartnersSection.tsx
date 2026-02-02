@@ -1,11 +1,19 @@
 "use client";
 
-export function PartnersSection() {
+import { motion } from "framer-motion";
+
+interface PartnersSectionProps {
+  scrollProgress?: number;
+}
+
+export function PartnersSection({ scrollProgress = 0 }: PartnersSectionProps) {
     // Placeholder partners
     const partners = ["Cinemas Deluxe", "Indie Game Co", "A24 Games", "Retro Arcade", "Film Institute", "Neon Future"];
   
     return (
-      <section className="min-h-screen flex flex-col justify-center py-12 bg-kino-black overflow-hidden border-b border-white/5 relative z-10">
+      <motion.section 
+        className="min-h-screen flex flex-col justify-center py-12 bg-kino-black overflow-hidden border-b border-white/5 relative z-10"
+      >
         <div className="absolute inset-0 bg-white/2 pointer-events-none" />
         <div className="flex animate-marquee whitespace-nowrap">
           {[...partners, ...partners, ...partners].map((partner, i) => (
@@ -27,6 +35,6 @@ export function PartnersSection() {
             animation: marquee 30s linear infinite;
           }
         `}</style>
-      </section>
+      </motion.section>
     );
   }

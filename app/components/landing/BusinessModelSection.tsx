@@ -1,4 +1,20 @@
-export function BusinessModelSection() {
+"use client";
+
+import { motion, useTransform, useMotionValue } from "framer-motion";
+import { useEffect } from "react";
+
+interface BusinessModelSectionProps {
+  scrollProgress?: number;
+}
+
+export function BusinessModelSection({ scrollProgress = 0 }: BusinessModelSectionProps) {
+  const motionProgress = useMotionValue(scrollProgress);
+  
+  useEffect(() => {
+    motionProgress.set(scrollProgress);
+  }, [scrollProgress, motionProgress]);
+
+  const yOffset = useTransform(motionProgress, [0, 0.2, 0.8, 1.0], [20, 0, 0, -20]);
     const models = [
       {
         title: "Ticket Sales",
@@ -19,7 +35,10 @@ export function BusinessModelSection() {
     ];
   
     return (
-      <section className="min-h-screen flex flex-col justify-center py-24 px-4 bg-kino-gray">
+      <motion.section 
+        style={{ y: yOffset }}
+        className="min-h-screen flex flex-col justify-center py-24 px-4 bg-kino-gray"
+      >
         <div className="max-w-7xl mx-auto">
           <h2 className="font-syne font-bold text-4xl text-white mb-16 text-center">Business Model</h2>
           
@@ -36,6 +55,6 @@ export function BusinessModelSection() {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
     );
   }

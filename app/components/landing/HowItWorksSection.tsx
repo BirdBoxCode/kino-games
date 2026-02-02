@@ -1,4 +1,21 @@
-export function HowItWorksSection() {
+"use client";
+
+import { motion, useTransform, useMotionValue } from "framer-motion";
+import { useEffect } from "react";
+
+interface HowItWorksSectionProps {
+  scrollProgress?: number;
+}
+
+export function HowItWorksSection({ scrollProgress = 0 }: HowItWorksSectionProps) {
+  const motionProgress = useMotionValue(scrollProgress);
+  
+  useEffect(() => {
+    motionProgress.set(scrollProgress);
+  }, [scrollProgress, motionProgress]);
+
+  const sectionOpacity = useTransform(motionProgress, [0.8, 1.0], [1, 0]);
+
     const steps = [
       {
         id: "01",
@@ -18,7 +35,10 @@ export function HowItWorksSection() {
     ];
   
     return (
-      <section className="min-h-screen flex flex-col justify-center py-32 bg-kino-black border-y border-white/5">
+      <motion.section 
+        style={{ opacity: sectionOpacity }}
+        className="min-h-screen flex flex-col justify-center py-32 bg-kino-black border-y border-white/5"
+      >
         <div className="max-w-7xl mx-auto px-4">
           <div className="mb-20 text-center">
             <h2 className="font-syne font-bold text-3xl text-kino-silver uppercase tracking-widest mb-2">Process</h2>
@@ -43,6 +63,6 @@ export function HowItWorksSection() {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
     );
   }

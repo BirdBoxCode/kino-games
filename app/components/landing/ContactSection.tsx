@@ -1,8 +1,15 @@
-import Link from "next/link";
+"use client";
 
-export function ContactSection() {
+import Link from "next/link";
+import { motion } from "framer-motion";
+
+interface ContactSectionProps {
+  scrollProgress?: number;
+}
+
+export function ContactSection({ scrollProgress = 0 }: ContactSectionProps) {
   return (
-    <section className="relative min-h-screen flex items-center justify-center py-32 px-4 bg-kino-black overflow-hidden">
+    <motion.section className="relative min-h-screen flex items-center justify-center py-32 px-4 bg-kino-black overflow-hidden">
       {/* Background Bokeh */}
       <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-kino-red/20 rounded-full blur-[120px]" />
@@ -27,6 +34,6 @@ export function ContactSection() {
             </Link>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
