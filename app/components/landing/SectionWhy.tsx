@@ -14,9 +14,9 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
     motionProgress.set(scrollProgress);
   }, [scrollProgress, motionProgress]);
 
-  // Aligned with hero exit phased sequence
-  const sectionOpacity = useTransform(motionProgress, [0.5, 0.9], [0, 1]);
-  const sectionScale = useTransform(motionProgress, [0.5, 0.9], [0.98, 1]);
+  // Aligned with standard switch-based interaction: 0 = active, 1 = transitioning away
+  const sectionOpacity = useTransform(motionProgress, [0, 0.5], [1, 0]);
+  const sectionScale = useTransform(motionProgress, [0, 0.5], [1, 0.98]);
   const sectionY = 0; // Removed vertical motion for static "switch" effect
 
   return (
