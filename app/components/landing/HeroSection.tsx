@@ -1,11 +1,43 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useTransform, useMotionValue } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { useEffect } from "react";
 
-export function HeroSection() {
+interface HeroSectionProps {
+  scrollProgress?: number; // 0-1 value from CinematicScrollContainer
+}
+
+export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
+  const motionProgress = useMotionValue(scrollProgress);
+  
+  useEffect(() => {
+    motionProgress.set(scrollProgress);
+  }, [scrollProgress, motionProgress]);
+
+  // Refined phased sequence
+  // 1. 0 -> 0.4: Arrow turns Gold & Slides
+  const arrowColor = useTransform(motionProgress, [0, 0.4], ["#F6F4F1", "#F9C962"]);
+  const arrowY = useTransform(motionProgress, [0, 0.4], [0, 15]);
+  
+  // 2. 0.4 -> 0.8: Content fades & Blur increases
+  const contentOpacity = useTransform(motionProgress, [0.4, 0.7], [1, 0]);
+  const contentY = useTransform(motionProgress, [0.4, 0.7], [0, -40]);
+  const videoBlur = useTransform(motionProgress, [0.4, 0.8], [0, 10]);
+  const videoBlurOpacity = useTransform(motionProgress, [0.4, 0.8], [0, 1]);
+  
+  // 3. 0.8 -> 1.0: Whole section fades out
+  const sectionOpacity = useTransform(motionProgress, [0.8, 1.0], [1, 0]);
+  const arrowOpacityFinal = useTransform(motionProgress, [0.8, 1.0], [1, 0]);
+
+  // Combined arrow opacity
+  const arrowScale = useTransform(motionProgress, [0, 0.15, 0.7], [1, 1.1, 0.9]);
+
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-bg-dark flex flex-col items-center justify-center p-[64px_80px] gap-[24px]">
+    <motion.section 
+      style={{ opacity: sectionOpacity }}
+      className="relative h-screen w-full overflow-hidden bg-bg-dark flex flex-col items-center justify-center p-[64px_80px] gap-[24px]"
+    >
       {/* Background Video */}
       <div className="absolute inset-0 z-0 w-full h-full pointer-events-none overflow-hidden">
         <iframe
@@ -18,12 +50,28 @@ export function HeroSection() {
           allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
           allowFullScreen={true}
         ></iframe>
-        {/* Subtle Overlay */}
+        {/* Subtle Static Overlay */}
         <div className="absolute inset-0 bg-black/30 z-10" />
+        
+        {/* Cinematic Blur Overlay */}
+        <motion.div 
+          className="absolute inset-0 z-15 pointer-events-none"
+          style={{ 
+            opacity: videoBlurOpacity,
+            backdropFilter: useTransform(videoBlur, (v) => `blur(${v}px)`),
+            backgroundColor: 'rgba(0,0,0,0.2)'
+          }}
+        />
       </div>
 
       {/* Content Layer */}
-      <div className="relative z-20 flex flex-col justify-center items-start gap-[10px] w-full max-w-[1440px] flex-1">
+      <motion.div 
+        className="relative z-20 flex flex-col justify-center items-start gap-[10px] w-full max-w-[1440px] flex-1"
+        style={{ 
+          opacity: contentOpacity,
+          y: contentY
+        }}
+      >
         {/* H1 */}
         <motion.h1 
             initial={{ opacity: 0, y: 20 }}
@@ -48,20 +96,30 @@ export function HeroSection() {
         >
           A new cultural experience bringing video games into cinemas
         </motion.p>
-      </div>
+      </motion.div>
 
       {/* Scroll Indicator */}
       <motion.div 
         initial={{ opacity: 0, x: "-50%" }}
-        animate={{ opacity: 1, y: [0, 10, 0], x: "-50%" }}
+        animate={{ 
+          opacity: scrollProgress === 0 ? 1 : undefined,
+          y: scrollProgress === 0 ? [0, 10, 0] : undefined,
+          x: "-50%"
+        } as any}
         transition={{ 
-            opacity: { delay: 1, duration: 1 },
-            y: { repeat: Infinity, duration: 2, ease: "easeInOut" } 
+            opacity: scrollProgress === 0 ? { delay: 1, duration: 1 } : { duration: 0.2 },
+            y: scrollProgress === 0 ? { repeat: Infinity, duration: 2, ease: "easeInOut" } : { duration: 0 }
         }}
-        className="absolute bottom-8 left-1/2 z-30"
+        style={{
+          opacity: arrowOpacityFinal,
+          scale: arrowScale,
+          y: arrowY,
+          color: arrowColor
+        }}
+        className="absolute bottom-8 left-1/2 z-30 flex flex-col items-center"
       >
-        <ChevronDown size={32} color="#F6F4F1" strokeWidth={1.5} />
+        <ChevronDown size={32} strokeWidth={1.5} />
       </motion.div>
-    </section>
+    </motion.section>
   );
 }
