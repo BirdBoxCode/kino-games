@@ -1,6 +1,7 @@
 import { HeroSection } from "../components/landing/HeroSection";
 import { SectionWhy } from "../components/landing/SectionWhy";
 import { SectionGamesCinemas } from "../components/landing/SectionGamesCinemas";
+import { SectionHow } from "../components/landing/SectionHow";
 import { WhyGamesSection } from "../components/landing/WhyGamesSection";
 import { HowItWorksSection } from "../components/landing/HowItWorksSection";
 import { BusinessModelSection } from "../components/landing/BusinessModelSection";
@@ -15,6 +16,7 @@ export default function Home() {
         <HeroSection />
         <SectionWhy />
         <SectionGamesCinemas />
+        <SectionHow />
         <WhyGamesSection />
         <HowItWorksSection />
         <BusinessModelSection />
