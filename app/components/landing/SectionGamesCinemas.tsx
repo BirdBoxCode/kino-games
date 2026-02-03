@@ -45,12 +45,9 @@ export function SectionGamesCinemas() {
         className="overlay-darker"
         style={{
           position: 'absolute',
-          bottom: '-24px',
-          left: 0,
-          width: '1440px',
-          maxWidth: '100vw',
-          height: '1210px',
-          flexShrink: 0,
+          inset: 0,
+          width: '100%',
+          height: '100%',
           background: 'linear-gradient(82deg, rgba(0, 0, 0, 0.58) 48.86%, rgba(208, 208, 208, 0.10) 82.27%, rgba(208, 208, 208, 0.07) 93.7%)',
           zIndex: 1,
           pointerEvents: 'none'
@@ -102,47 +99,36 @@ export function SectionGamesCinemas() {
           {/* =======================
               BLOCK 1: FOR CINEMAS
              ======================= */}
-          <div className="content-top">
-            {/* Header */}
-            <h2 
-              className="section-header"
-              style={{
-                fontFamily: 'Garet, Inter, sans-serif',
-                fontSize: 'clamp(32px, 5vw, 54px)',
-                fontWeight: 850,
-                lineHeight: '110%',
-                letterSpacing: '0.7px',
-                textTransform: 'uppercase',
-                color: '#F6F4F1',
-                margin: '0 0 10px 0'
-              }}
-            >
-              FOR <span style={{ color: '#F9C962' }}>CINEMAS</span>
-            </h2>
+          <div className="content-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '40px', width: '100%', flexWrap: 'wrap' }}>
+            {/* Text Column */}
+            <div className="text-column" style={{ flex: '1 1 400px' }}>
+              <h2 
+                className="section-header"
+                style={{
+                  fontFamily: 'Garet, Inter, sans-serif',
+                  fontSize: 'clamp(32px, 5vw, 54px)',
+                  fontWeight: 850,
+                  lineHeight: '110%',
+                  letterSpacing: '0.7px',
+                  textTransform: 'uppercase',
+                  color: '#F6F4F1',
+                  margin: '0 0 10px 0'
+                }}
+              >
+                FOR <span style={{ color: '#F9C962' }}>CINEMAS</span>
+              </h2>
 
-            {/* Bullets */}
-            <div 
-              className="bullets"
-              style={{
-                display: 'flex',
-                // height: '159px', // Allow auto height for responsiveness
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'flex-start',
-                alignSelf: 'stretch',
-                marginBottom: '10px'
-              }}
-            >
-              {/* Bullet 1 */}
-              <Bullet text="New audiences beyond traditional cinema-goers" />
-              {/* Bullet 2 */}
-              <Bullet text="Fresh programming formats" />
-              {/* Bullet 3 */}
-              <Bullet text="Cultural relevance in digital art" />
+              <div className="bullets" style={{ display: 'flex', flexDirection: 'column',}}>
+                <Bullet text="New audiences beyond traditional cinema-goers" />
+                <Bullet text="Fresh programming formats" />
+                <Bullet text="Cultural relevance in digital art" />
+              </div>
             </div>
 
-            {/* Lighthouse Images */}
-            <LighthouseGallery images={cinemasImages} />
+            {/* Gallery Column */}
+            <div className="gallery-column" style={{ flex: '1 1 50%', maxWidth: '50%' }}>
+              <LighthouseGallery images={cinemasImages} />
+            </div>
           </div>
 
            {/* Divider Line */}
@@ -160,47 +146,36 @@ export function SectionGamesCinemas() {
           {/* ==================================
               BLOCK 2: FOR GAME RIGHT-HOLDERS
              ================================== */}
-          <div className="content-top">
-             {/* Header */}
-             <h2 
-              className="section-header"
-              style={{
-                fontFamily: 'Garet, Inter, sans-serif',
-                fontSize: 'clamp(32px, 5vw, 54px)',
-                fontWeight: 850,
-                lineHeight: '110%',
-                letterSpacing: '0.7px',
-                textTransform: 'uppercase',
-                color: '#F6F4F1',
-                margin: '0 0 10px 0'
-              }}
-            >
-              FOR <span style={{ color: '#F9C962' }}>GAME RIGHT-HOLDERS</span>
-            </h2>
+          <div className="content-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '40px', width: '100%', flexWrap: 'wrap' }}>
+            {/* Text Column */}
+            <div className="text-column" style={{ flex: '1 1 400px' }}>
+               <h2 
+                className="section-header"
+                style={{
+                  fontFamily: 'Garet, Inter, sans-serif',
+                  fontSize: 'clamp(32px, 5vw, 54px)',
+                  fontWeight: 850,
+                  lineHeight: '110%',
+                  letterSpacing: '0.7px',
+                  textTransform: 'uppercase',
+                  color: '#F6F4F1',
+                  margin: '0 0 10px 0'
+                }}
+              >
+                FOR <span style={{ color: '#F9C962' }}>GAME RIGHT-HOLDERS</span>
+              </h2>
 
-             {/* Bullets */}
-             <div 
-              className="bullets"
-              style={{
-                display: 'flex',
-                // height: '159px',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'flex-start',
-                alignSelf: 'stretch',
-                marginBottom: '10px'
-              }}
-            >
-              {/* Bullet 1 */}
-              <Bullet text="New audiences beyond traditional gaming spaces" />
-              {/* Bullet 2 */}
-              <Bullet text="Premium cinema venues for launches and events" />
-              {/* Bullet 3 */}
-              <Bullet text="Games presented as cultural works on the big screen" />
+              <div className="bullets" style={{ display: 'flex', flexDirection: 'column',}}>
+                <Bullet text="New audiences beyond traditional gaming spaces" />
+                <Bullet text="Premium cinema venues for launches and events" />
+                <Bullet text="Games presented as cultural works on the big screen" />
+              </div>
             </div>
 
-            {/* Lighthouse Images */}
-            <LighthouseGallery images={gamesImages} />
+            {/* Gallery Column */}
+            <div className="gallery-column" style={{ flex: '1 1 50%', maxWidth: '50%' }}>
+              <LighthouseGallery images={gamesImages} />
+            </div>
           </div>
 
         </div>

@@ -40,12 +40,16 @@ export function LighthouseGallery({ images }: LighthouseGalleryProps) {
         className="lighthouse-images"
         style={{
           display: 'flex',
-          height: '150px', // Reduced from 222px for better fit
+          height: '150px', 
           padding: '10px',
           gap: '10px',
-          alignSelf: 'stretch',
-          overflowX: 'auto', // For mobile scroll
-          scrollbarWidth: 'none', // Hide scrollbar for premium feel
+          width: '100%',
+          overflowX: 'auto', 
+          scrollbarWidth: 'none',
+          alignItems: 'center',
+          // Fade effect on the right side
+          maskImage: 'linear-gradient(to right, black 85%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to right, black 85%, transparent 100%)'
         }}
       >
         {images.map((src, index) => (
@@ -54,7 +58,7 @@ export function LighthouseGallery({ images }: LighthouseGalleryProps) {
             className="lighthouse-image-wrapper"
             style={{
               flex: '1 0 0',
-              minWidth: '200px', // Ensure minimum width for scrolling
+              minWidth: '120px', // Reduced to allow 4 items to fit in ~500px+
               alignSelf: 'stretch',
               borderRadius: '6px',
               overflow: 'hidden',
