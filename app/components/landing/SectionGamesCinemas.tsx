@@ -22,14 +22,16 @@ export function SectionGamesCinemas() {
       className="section-games-cinemas"
       style={{
         display: 'flex',
-        padding: '109px min(80px, 5%)',
+        padding: '80px min(80px, 5%)', // Reduced top padding
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'flex-start',
-        gap: '29px',
+        gap: '15px', // Reduced gap
         alignSelf: 'stretch',
         position: 'relative',
         overflow: 'hidden',
+        height: '100vh', // Enforce full viewport height
+        minHeight: '800px',
         // Background from requirements
         backgroundImage: 'url(/section-games-cinemas-bg.jpg)', // Updated background image
         backgroundRepeat: 'no-repeat',
@@ -112,7 +114,7 @@ export function SectionGamesCinemas() {
                 letterSpacing: '0.7px',
                 textTransform: 'uppercase',
                 color: '#F6F4F1',
-                margin: '0 0 20px 0'
+                margin: '0 0 10px 0'
               }}
             >
               FOR <span style={{ color: '#F9C962' }}>CINEMAS</span>
@@ -128,7 +130,7 @@ export function SectionGamesCinemas() {
                 justifyContent: 'center',
                 alignItems: 'flex-start',
                 alignSelf: 'stretch',
-                marginBottom: '20px'
+                marginBottom: '10px'
               }}
             >
               {/* Bullet 1 */}
@@ -150,7 +152,7 @@ export function SectionGamesCinemas() {
                width: '100%',
                height: '1px',
                background: '#F6F4F1',
-               margin: '40px 0',
+               margin: '20px 0', // Reduced margin
                opacity: 0.5
              }}
            />
@@ -170,7 +172,7 @@ export function SectionGamesCinemas() {
                 letterSpacing: '0.7px',
                 textTransform: 'uppercase',
                 color: '#F6F4F1',
-                margin: '0 0 20px 0'
+                margin: '0 0 10px 0'
               }}
             >
               FOR <span style={{ color: '#F9C962' }}>GAME RIGHT-HOLDERS</span>
@@ -186,7 +188,7 @@ export function SectionGamesCinemas() {
                 justifyContent: 'center',
                 alignItems: 'flex-start',
                 alignSelf: 'stretch',
-                marginBottom: '20px'
+                marginBottom: '10px'
               }}
             >
               {/* Bullet 1 */}
