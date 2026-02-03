@@ -51,14 +51,16 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="font-inter font-medium text-[16px] text-text-on-dark tracking-[2px] hover:opacity-80 transition-opacity"
+                className="relative font-inter font-medium text-[16px] text-text-on-dark tracking-[2px] group py-1"
               >
                 {link.name}
+                {/* Right-to-left underline animation */}
+                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-accent-gold scale-x-0 origin-right group-hover:scale-x-100 transition-transform duration-300 ease-out" />
               </Link>
             ))}
             <Link
               href="/#contact"
-              className="flex items-center gap-[10px] px-[9px] py-[10px] bg-accent-gold border border-accent-gold rounded-[6px] text-text-on-light font-inter font-medium text-[16px] tracking-[2px] hover:bg-opacity-90 transition-colors"
+              className="flex items-center gap-[10px] px-[18px] py-[10px] bg-transparent border-2 border-accent-gold rounded-[6px] text-text-on-dark font-inter font-medium text-[16px] tracking-[2px] hover:bg-accent-gold hover:text-text-on-light transition-all duration-300"
             >
               Contact Us
             </Link>
@@ -90,15 +92,16 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="font-inter font-medium text-[24px] text-text-on-dark tracking-[2px] hover:opacity-80 transition-opacity"
+                  className="relative font-inter font-medium text-[24px] text-text-on-dark tracking-[2px] group py-1"
                 >
                   {link.name}
+                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-accent-gold scale-x-0 origin-right group-hover:scale-x-100 transition-transform duration-300 ease-out" />
                 </Link>
               ))}
               <Link
                 href="/#contact"
                 onClick={() => setIsOpen(false)}
-                className="mt-4 flex items-center gap-[10px] px-[20px] py-[15px] bg-accent-teal border border-accent-teal rounded-[6px] text-text-on-light font-inter font-medium text-[18px] tracking-[2px]"
+                className="mt-4 flex items-center gap-[10px] px-[24px] py-[12px] bg-transparent border-2 border-accent-gold rounded-[6px] text-text-on-dark font-inter font-medium text-[18px] tracking-[2px] hover:bg-accent-gold hover:text-text-on-light transition-all duration-300"
               >
                 Contact Us
               </Link>

@@ -2,6 +2,7 @@
 
 import { motion, useTransform, useMotionValue } from "framer-motion";
 import { useEffect } from "react";
+import Link from "next/link";
 
 interface HeroSectionProps {
   scrollProgress?: number; // 0-1 value from CinematicScrollContainer
@@ -29,16 +30,12 @@ export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
   return (
     <motion.section 
       style={{ opacity: sectionOpacity }}
-      className="relative h-screen w-full overflow-hidden bg-bg-dark flex flex-col items-center justify-center p-[64px_80px] gap-[24px]"
+      className="relative h-screen w-full overflow-hidden bg-bg-dark flex flex-col items-start justify-center p-8 md:p-[64px_80px] gap-[24px] self-stretch"
     >
       {/* Background Video */}
       <div className="absolute inset-0 z-0 w-full h-full pointer-events-none overflow-hidden">
         <iframe
           src="https://customer-ui5gikvnytrm15ts.cloudflarestream.com/4a677d3d7f2772a492c90f254f36c73f/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-ui5gikvnytrm15ts.cloudflarestream.com%2F4a677d3d7f2772a492c90f254f36c73f%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
-          // "min-w-full min-h-full" ensures it covers the box.
-          // "w-[177.77vh]" ensures that if height is limiting (tall screen), width is 16:9 of height.
-          // "h-[56.25vw]" ensures that if width is limiting (wide screen), height is 9/16 of width.
-          // Centering ensures we crop from middle.
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.77vh] h-[56.25vw] min-w-full min-h-full"
           allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
           allowFullScreen={true}
@@ -57,9 +54,8 @@ export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
         />
       </div>
 
-      {/* Content Layer */}
       <motion.div 
-        className="relative z-20 flex flex-col justify-center items-start gap-[10px] w-full max-w-[1440px] flex-1"
+        className="relative z-20 flex flex-col justify-center items-start gap-[5px] w-full max-w-[1280px] shrink-0"
         style={{ 
           opacity: contentOpacity,
           y: contentY
@@ -70,25 +66,39 @@ export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex flex-col items-start"
+            className="flex flex-col items-start m-0"
         >
-          <span className="font-garet font-[850] text-[64px] leading-[100%] tracking-[2px] uppercase text-[#F6F4F1]">
+          <span className="font-garet font-[850] text-[40px] sm:text-[54px] md:text-[64px] leading-[100%] tracking-[2px] uppercase text-[#F6F4F1]">
             NEW MEDIUM.
           </span>
-          <span className="font-garet font-[850] text-[64px] leading-[100%] tracking-[2px] uppercase text-[#F9C962]">
+          <span className="font-garet font-[850] text-[40px] sm:text-[54px] md:text-[64px] leading-[100%] tracking-[2px] uppercase text-[#F9C962]">
             NEW AUDIENCE.
           </span>
         </motion.h1>
 
-        {/* Subheadline */}
-        <motion.p 
+        <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-          className="font-inter font-[400] text-[24px] leading-normal tracking-[0.5px] text-[#F6F4F1] w-[781px] max-w-full"
+          className="flex flex-col items-start gap-[20px] shrink-0 w-full"
         >
-          A new cultural experience bringing video games into cinemas
-        </motion.p>
+          {/* Subheadline */}
+          <p className="font-inter font-[400] text-[18px] md:text-[24px] leading-normal tracking-[0.5px] text-[#F6F4F1] w-full max-w-[781px] m-0">
+            A new cultural experience bringing video games into cinemas.
+          </p>
+
+          {/* Catalogue Link */}
+          <Link href="/catalogue" className="flex items-center gap-2 cursor-pointer group no-underline">
+            <span className="font-inter font-bold text-[20px] leading-normal tracking-[0.5px] text-[#F9C962] group-hover:translate-x-1 transition-transform duration-300">
+              →
+            </span>
+            <span className="relative font-inter font-bold text-[20px] leading-normal tracking-[0.5px] text-[#F6F4F1]">
+              View our catalogue
+              {/* Right-to-left underline animation */}
+              <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-[#F6F4F1] scale-x-0 origin-right group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+            </span>
+          </Link>
+        </motion.div>
       </motion.div>
     </motion.section>
   );

@@ -28,9 +28,9 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
         justifyContent: 'center',
         alignItems: 'flex-start',
         gap: '29px',
-        padding: '64px 80px',
+        padding: '64px min(80px, 5%)',
         height: '100vh',
-        minHeight: '964px',
+        minHeight: '800px',
         width: '100%',
         position: 'relative',
         overflow: 'hidden',
@@ -66,7 +66,9 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
           alignItems: 'flex-start',
           gap: '10px',
           position: 'relative',
-          zIndex: 2
+          zIndex: 2,
+          width: '100%',
+          maxWidth: '1280px'
         }}
       >
         {/* Section Sub-header */}
@@ -75,7 +77,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
           style={{
             color: '#F2EFEA',
             fontFamily: 'var(--font-inter), Inter, sans-serif',
-            fontSize: '24px',
+            fontSize: 'max(18px, 1.5vw)',
             fontStyle: 'normal',
             fontWeight: 600,
             lineHeight: 'normal',
@@ -90,8 +92,8 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
           className="conte-wrapper"
           style={{
             display: 'flex',
-            width: '1280px',
-            maxWidth: '100%',
+            width: '100%',
+            maxWidth: '1280px',
             flexDirection: 'column',
             alignItems: 'flex-start',
             gap: '5px'
@@ -113,7 +115,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
               className="section-header"
               style={{
                 fontFamily: 'var(--font-garet), Garet, Inter, sans-serif',
-                fontSize: '54px',
+                fontSize: 'clamp(32px, 5vw, 54px)',
                 fontStyle: 'normal',
                 fontWeight: 850,
                 lineHeight: '110%',
@@ -133,11 +135,11 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
             className="bullets"
             style={{
               display: 'flex',
-              height: '159px',
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'flex-start',
-              alignSelf: 'stretch'
+              alignSelf: 'stretch',
+              marginTop: '10px'
             }}
           >
             {/* Bullet 1 */}
@@ -145,11 +147,9 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
               className="bullet"
               style={{
                 display: 'flex',
-                height: '77px',
-                padding: '10px',
+                padding: '10px 0',
                 alignItems: 'center',
                 gap: '10px',
-                flexShrink: 0,
                 alignSelf: 'stretch'
               }}
             >
@@ -173,23 +173,20 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
                 className="point-wrapper"
                 style={{
                   display: 'flex',
-                  paddingBottom: '10px',
-                  justifyContent: 'flex-end',
                   alignItems: 'center'
                 }}
               >
                 <p
                   className="paragraph"
                   style={{
-                    width: '569px',
-                    height: '47px',
-                    maxWidth: '100%',
+                    maxWidth: '569px',
+                    width: '100%',
                     color: '#F6F4F1',
                     fontFamily: 'var(--font-inter), Inter, sans-serif',
-                    fontSize: '20px',
+                    fontSize: 'clamp(16px, 1.8vw, 20px)',
                     fontStyle: 'normal',
                     fontWeight: 500,
-                    lineHeight: 'normal',
+                    lineHeight: '1.4',
                     letterSpacing: '0.5px',
                     margin: 0
                   }}
@@ -204,7 +201,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
               className="bullet"
               style={{
                 display: 'flex',
-                padding: '10px',
+                padding: '10px 0',
                 alignItems: 'center',
                 gap: '10px',
                 alignSelf: 'stretch'
@@ -230,22 +227,20 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
                 className="point-wrapper"
                 style={{
                   display: 'flex',
-                  paddingRight: '430px',
                   alignItems: 'center'
                 }}
               >
                 <p
                   className="paragraph"
                   style={{
-                    width: '510px',
-                    height: '47px',
-                    maxWidth: '100%',
+                    maxWidth: '510px',
+                    width: '100%',
                     color: '#F6F4F1',
                     fontFamily: 'var(--font-inter), Inter, sans-serif',
-                    fontSize: '20px',
+                    fontSize: 'clamp(16px, 1.8vw, 20px)',
                     fontStyle: 'normal',
                     fontWeight: 500,
-                    lineHeight: 'normal',
+                    lineHeight: '1.4',
                     letterSpacing: '0.5px',
                     margin: 0
                   }}
