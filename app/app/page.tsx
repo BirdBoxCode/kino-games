@@ -2,11 +2,6 @@ import { HeroSection } from "../components/landing/HeroSection";
 import { SectionWhy } from "../components/landing/SectionWhy";
 import { SectionGamesCinemas } from "../components/landing/SectionGamesCinemas";
 import { SectionHow } from "../components/landing/SectionHow";
-import { WhyGamesSection } from "../components/landing/WhyGamesSection";
-import { HowItWorksSection } from "../components/landing/HowItWorksSection";
-import { BusinessModelSection } from "../components/landing/BusinessModelSection";
-import { PartnersSection } from "../components/landing/PartnersSection";
-import { ContactSection } from "../components/landing/ContactSection";
 import { CinematicScrollContainer } from "../components/landing/CinematicScrollContainer";
 
 export default function Home() {
@@ -17,11 +12,6 @@ export default function Home() {
         <SectionWhy />
         <SectionGamesCinemas />
         <SectionHow />
-        <WhyGamesSection />
-        <HowItWorksSection />
-        <BusinessModelSection />
-        <PartnersSection />
-        <ContactSection />
       </CinematicScrollContainer>
     </main>
   );
