@@ -33,6 +33,16 @@ export function SectionHow() {
             font-size: 32px !important;
           }
         }
+        .content-wrapper {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+        @media (min-width: 768px) {
+          .content-wrapper {
+            padding-left: 48px;
+            padding-right: 48px;
+          }
+        }
       `}</style>
       <section 
         className="section-how"
@@ -81,7 +91,7 @@ export function SectionHow() {
           alignItems: 'flex-start',
           gap: '20px',
           width: '100%',
-          maxWidth: '1280px',
+          maxWidth: '1440px', // Matches Navbar
           margin: '0 auto',
           height: '100%', 
           justifyContent: 'center'
@@ -142,17 +152,21 @@ export function SectionHow() {
             }}
           >
             {/* Trail Item 1 */}
-            <div className="trail-item" style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+            <div className="trail-item" style={{ display: 'flex', flexDirection: 'row', gap: '20px', alignItems: 'center' }}>
               <div 
                 className="squiggle-frame1"
                 style={{
                   display: 'flex',
-                  padding: '0 48px',
+                  padding: '0', 
                   alignItems: 'center',
-                  gap: '10px'
+                  justifyContent: 'center',
+                  width: '80px', // Fixed width for alignment
+                  flexShrink: 0
                 }}
               >
-                <Squiggle1 />
+                <div style={{ transform: 'scale(0.8)' }}>
+                   <Squiggle1 />
+                </div>
               </div>
               <div className="how-p1" style={{ maxWidth: '600px' }}>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '20px', color: '#F6F4F1', margin: 0 }}>
@@ -162,25 +176,24 @@ export function SectionHow() {
               </div>
             </div>
 
-            {/* Trail Item 2 */}
-            <div className="trail-item" style={{ display: 'flex', flexDirection: 'column', gap: '5px', alignSelf: 'flex-start', marginLeft: '5%' }}> 
-               {/* Note: User asked for specific structure (squiggle-frame inner parts). 
-                   And "positioned like the layout screenshot". Squiggle 2 frame has "justify-content: flex-end" and padding. 
-                   It implies a staggered layout. */}
+            {/* Trail Item 2 - Staggered Left Margin for Visual Trail Effect */}
+            <div className="trail-item" style={{ display: 'flex', flexDirection: 'row', gap: '20px', alignItems: 'center', marginLeft: '40px' }}> 
               <div 
                 className="squiggle-frame-2"
                 style={{
                    display: 'flex',
-                   padding: '0 99px',
-                   justifyContent: 'flex-end', // As requested, but this might need the text to be aligned similarly? 
-                   // The text should probably follow the squiggle.
+                   padding: '0',
+                   justifyContent: 'center',
                    alignItems: 'center',
-                   gap: '10px'
+                   width: '120px', // Wider frame for this squiggle
+                   flexShrink: 0
                 }}
               >
-                <Squiggle2 />
+                 <div style={{ transform: 'scale(0.8)' }}>
+                  <Squiggle2 />
+                 </div>
               </div>
-              <div className="how-p2" style={{ maxWidth: '600px', marginLeft: '99px' }}>
+              <div className="how-p2" style={{ maxWidth: '600px' }}>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '20px', color: '#F6F4F1', margin: 0 }}>
                   <span style={{ fontWeight: 700 }}>Designed to fit existing cinemas.</span><br/>
                   <span style={{ fontWeight: 500 }}>Screen, sound, and interaction work within standard cinema infrastructure.</span>
@@ -188,48 +201,26 @@ export function SectionHow() {
               </div>
             </div>
 
-            {/* Trail Item 3 */}
-            <div className="trail-item" style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+            {/* Trail Item 3 - More Staggered */}
+            <div className="trail-item" style={{ display: 'flex', flexDirection: 'row', gap: '20px', alignItems: 'center', marginLeft: '80px' }}>
                <div 
                  className="squiggle-frame-3"
                  style={{
                     display: 'flex',
-                    padding: '0 143px',
-                    justifyContent: 'flex-end',
+                    padding: '0',
+                    justifyContent: 'center',
                     alignItems: 'center',
-                    gap: '10px'
+                    width: '60px',
+                    flexShrink: 0
                  }}
                >
-                 <Squiggle3 />
+                 <div style={{ transform: 'scale(0.8)' }}>
+                   <Squiggle3 />
+                 </div>
                </div>
-               <div className="how-p3" style={{ maxWidth: '600px', marginLeft: '48px' }}>
-                  <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '20px', color: '#F6F4F1', margin: 0 }}>
-                    <span style={{ fontWeight: 500 }}>Browse our </span>
-                    <a href="#" style={{ color: '#F6F4F1', fontWeight: 700, textDecoration: 'underline' }}>catalogue of games</a>
-                    <span style={{ fontWeight: 500 }}>, book the time slot you require, pludg in and play!</span>
-                  </p>
-                  {/* Note: Copy says "pludg in" - typo in prompt "pludg in and play!". I will fix to "plug" or keep strictly? 
-                      Prompt says "underline + 700: plug in and play."
-                      Text p3 lead: "Browse our catalogue of games, decide how long you want it for,"
-                      Emphasis: "plug in and play."
-                      Wait, the prompt text definition for p3 was:
-                      Lead: "Browse our catalogue of games, decide how long you want it for,"
-                      Emphasis: "plug in and play."
-                      It didn't explicitly ask for a link on "catalogue of games" in the text block definition, but the reference image might show it.
-                      I will stick to the text copy provided in the prompt strictly.
-                  */}
-               </div>
-               {/* Re-reading prompt text for p3:
-                   Lead: "Browse our catalogue of games, decide how long you want it for,"
-                   Emphasis (underline): "plug in and play."
-                   
-                   My previous intuition was wrong. I will use exact text.
-               */}
-               <div className="how-p3-corrected" style={{ maxWidth: '600px', paddingLeft: '48px' }}>
+               <div className="how-p3" style={{ maxWidth: '600px' }}>
                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '20px', color: '#F6F4F1', margin: 0 }}>
-                    <span style={{ fontWeight: 500 }}>Browse our catalogue of games, decide how long you want it for, </span>
-                    <br/>
-                    <span style={{ fontWeight: 700, textDecoration: 'underline' }}>plug in and play.</span>
+                    <span style={{ fontWeight: 500 }}>Browse our catalogue of games, decide how long you want it for, plug in and play.</span>
                    </p>
                </div>
             </div>

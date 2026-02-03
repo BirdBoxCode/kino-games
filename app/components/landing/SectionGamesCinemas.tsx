@@ -55,6 +55,18 @@ export function SectionGamesCinemas() {
       />
 
       {/* Content Wrapper */}
+      <style jsx>{`
+        .content-wrapper {
+          padding-left: 16px; 
+          padding-right: 16px;
+        }
+        @media (min-width: 768px) {
+          .content-wrapper {
+            padding-left: 48px;
+            padding-right: 48px;
+          }
+        }
+      `}</style>
       <div 
         className="content-wrapper"
         style={{
@@ -65,7 +77,8 @@ export function SectionGamesCinemas() {
           position: 'relative',
           zIndex: 2,
           width: '100%',
-          maxWidth: '1280px'
+          maxWidth: '1440px', // Matches Navbar
+          margin: '0 auto',
         }}
       >
         {/* Section Sub Header */}
