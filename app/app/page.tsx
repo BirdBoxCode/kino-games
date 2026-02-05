@@ -3,6 +3,7 @@ import { SectionWhy } from "../components/landing/SectionWhy";
 import { SectionGamesCinemas } from "../components/landing/SectionGamesCinemas";
 import { SectionSimpleSetup } from "../components/landing/SectionSimpleSetup";
 import { SectionHow } from "../components/landing/SectionHow";
+import { SectionModel } from "../components/landing/SectionModel";
 import { CinematicScrollContainer } from "../components/landing/CinematicScrollContainer";
 
 export default function Home() {
@@ -12,8 +13,9 @@ export default function Home() {
         <HeroSection />
         <SectionWhy />
         <SectionGamesCinemas />
-        <SectionSimpleSetup />
         <SectionHow />
+        <SectionSimpleSetup />
+        <SectionModel />
       </CinematicScrollContainer>
     </main>
   );
