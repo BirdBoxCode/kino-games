@@ -16,9 +16,12 @@ export default function Home() {
         <SectionGamesCinemas />
         <SectionHow />
         <SectionSimpleSetup />
+        <SectionModel />
       </CinematicScrollContainer>
-      <SectionModel />
-      <SectionPartners />
+      
+      <div id="home-normal-scroll" className="relative z-[200] bg-kino-black">
+        <SectionPartners />
+      </div>
     </main>
   );
 }

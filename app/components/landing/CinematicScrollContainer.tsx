@@ -36,6 +36,12 @@ export function CinematicScrollContainer({
       if (hasUnlocked) return;
       hasUnlocked = true;
       document.body.style.overflow = '';
+      
+      // Jump to the normal content
+      const normalContent = document.getElementById('home-normal-scroll');
+      if (normalContent) {
+        normalContent.scrollIntoView({ behavior: 'auto' });
+      }
     };
 
     const performSwitchLocal = (targetIndex: number) => {
@@ -49,12 +55,24 @@ export function CinematicScrollContainer({
     };
 
     const handleWheel = (e: WheelEvent) => {
-      // If at last section and scrolling down, unlock and allow normal scroll
+      // If we have unlocked, we might need to re-lock if scrolling up from the top
+      // But for now, let's keep it simple: once unlocked, we rely on normal scroll
+      // untill the user scrolls back up entirely (which is tricky with this hybrid approach).
+      // For this specific request: "Only AFTER the user reaches SectionModel, the NEXT scroll should exit"
+      
+      if (hasUnlocked) {
+        // If we are unlocked, we just let normal scrolling happen.
+        // Optional: Re-lock if we scroll back up to the top of home-normal-scroll?
+        // The user didn't explicitly ask for re-locking, just "scrolling UP... should re-enter cinematic mode only if needed".
+        return;
+      }
+
       const isScrollingDown = e.deltaY > 0;
       const isAtLastSection = activeIndex === totalSections - 1;
+      
       if (isAtLastSection && isScrollingDown) {
         unlockScroll();
-        return; // Allow normal page scroll
+        return;
       }
 
       if (isTransitioning) {
@@ -96,14 +114,17 @@ export function CinematicScrollContainer({
     };
     
     const handleTouchMove = (e: TouchEvent) => {
+      if (hasUnlocked) return;
+
       const delta = touchStart - e.touches[0].clientY;
       
       // If at last section and swiping up (scrolling down), unlock and allow normal scroll
       const isSwipingUp = delta > 0;
       const isAtLastSection = activeIndex === totalSections - 1;
+      
       if (isAtLastSection && isSwipingUp) {
         unlockScroll();
-        return; // Allow normal page scroll
+        return; 
       }
       
       if (isTransitioning) {
