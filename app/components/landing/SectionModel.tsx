@@ -77,9 +77,6 @@ export function SectionModel() {
             priority
         />
       </div>
-
-
-
     </section>
   );
 }

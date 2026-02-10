@@ -49,18 +49,6 @@ export function CinematicScrollContainer({
     const handleWheel = (e: WheelEvent) => {
       if (!isCinematic) return;
 
-      const isScrollingDown = e.deltaY > 0;
-      const isAtLastSection = activeIndex === totalSections - 1;
-
-      // EXIT CINEMATIC MODE
-      if (isAtLastSection && isScrollingDown) {
-        setIsCinematic(false);
-        document.body.style.overflow = '';
-        // Align scroll to the bottom of the spacer so natural scroll takes over
-        window.scrollTo({ top: (totalSections - 1) * window.innerHeight, behavior: "instant" });
-        return;
-      }
-
       if (isTransitioning) {
         e.preventDefault();
         return;
@@ -77,14 +65,24 @@ export function CinematicScrollContainer({
         intent.set(0);
       }, 200);
 
+      // EXIT Logic based on intent
       if (Math.abs(currentIntent) >= THRESHOLD) {
         const direction = currentIntent > 0 ? 1 : -1;
         const targetIndex = activeIndex + direction;
 
+        // Normal section switch
         if (targetIndex >= 0 && targetIndex < totalSections) {
           performSwitchLocal(targetIndex);
           accumulatedDelta = 0;
           intent.set(0);
+        } 
+        // EXIT Condition: targetIndex is beyond last section
+        else if (targetIndex === totalSections) {
+           setIsCinematic(false);
+           document.body.style.overflow = '';
+           window.scrollTo({ top: (totalSections - 1) * window.innerHeight, behavior: "instant" });
+           accumulatedDelta = 0;
+           intent.set(0);
         }
       }
     };
@@ -96,24 +94,13 @@ export function CinematicScrollContainer({
     
     const handleTouchMove = (e: TouchEvent) => {
       if (!isCinematic) return;
-      
-      const delta = touchStart - e.touches[0].clientY;
-      const isSwipingUp = delta > 0;
-      const isAtLastSection = activeIndex === totalSections - 1;
-      
-      // EXIT CINEMATIC MODE
-      if (isAtLastSection && isSwipingUp) {
-        setIsCinematic(false);
-        document.body.style.overflow = '';
-        window.scrollTo({ top: (totalSections - 1) * window.innerHeight, behavior: "instant" });
-        return; 
-      }
-      
+
       if (isTransitioning) {
         e.preventDefault();
         return;
       }
       
+      const delta = touchStart - e.touches[0].clientY;
       e.preventDefault();
       const currentIntent = Math.max(-1, Math.min(1, delta / 250));
       intent.set(currentIntent);
@@ -121,9 +108,15 @@ export function CinematicScrollContainer({
       if (Math.abs(currentIntent) >= THRESHOLD) {
         const direction = currentIntent > 0 ? 1 : -1;
         const targetIndex = activeIndex + direction;
+        
         if (targetIndex >= 0 && targetIndex < totalSections) {
           performSwitchLocal(targetIndex);
           intent.set(0);
+        } else if (targetIndex === totalSections) {
+           setIsCinematic(false);
+           document.body.style.overflow = '';
+           window.scrollTo({ top: (totalSections - 1) * window.innerHeight, behavior: "instant" });
+           intent.set(0);
         }
       }
     };
@@ -163,8 +156,9 @@ export function CinematicScrollContainer({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isCinematic, prefersReducedMotion, totalSections]);
 
-  const canGoDown = activeIndex < totalSections - 1;
+  const canGoDown = activeIndex < totalSections; // Allow "down" intent even on last section (for exit)
   const canGoUp = activeIndex > 0;
+  
   const indicatorProgress = useTransform(intent, (v) => {
     if (v > 0 && !canGoDown) return 0;
     if (v < 0 && !canGoUp) return 0;
@@ -175,7 +169,8 @@ export function CinematicScrollContainer({
     return <div className="flex flex-col">{children}</div>;
   }
 
-  const isAtLastSection = activeIndex === totalSections - 1;
+  // const isAtLastSection = activeIndex === totalSections - 1; 
+  // We remove this check for the indicator so it shows even on the last section
 
   return (
     <div style={{ height: `${totalSections * 100}vh`, position: 'relative' }}>
@@ -207,7 +202,7 @@ export function CinematicScrollContainer({
           );
         })}
 
-        {!isAtLastSection && isCinematic && <ScrollIndicator progress={indicatorProgress} />}
+        {isCinematic && <ScrollIndicator progress={indicatorProgress} />}
       </div>
     </div>
   );
