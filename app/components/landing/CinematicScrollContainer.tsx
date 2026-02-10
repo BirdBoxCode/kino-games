@@ -162,6 +162,11 @@ export function CinematicScrollContainer({
   const indicatorProgress = useTransform(intent, (v) => {
     if (v > 0 && !canGoDown) return 0;
     if (v < 0 && !canGoUp) return 0;
+    
+    // Suppress animation when scrolling DOWN from the last section (Exit)
+    // The user requested: "remove the scroll animation... when the user scrolls down"
+    if (activeIndex === totalSections - 1 && v > 0) return 0;
+
     return Math.min(1, Math.abs(v) / THRESHOLD);
   });
 
