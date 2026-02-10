@@ -25,7 +25,7 @@ export function SectionModel({ scrollProgress = 0 }: SectionModelProps) {
 
   return (
     <motion.section
-      className="relative w-full h-screen min-h-[964px] flex flex-col justify-center items-start overflow-hidden bg-[#0E0E0E] px-[20px] py-[64px] md:px-[80px]"
+      className="relative w-full h-screen min-h-[964px] flex flex-col justify-center items-start overflow-hidden bg-[#0E0E0E] px-[20px] pt-[160px] pb-[64px] md:px-[80px]"
       style={{ opacity: sectionOpacity }}
     >
       {/* Overlay */}
@@ -89,14 +89,15 @@ export function SectionModel({ scrollProgress = 0 }: SectionModelProps) {
       <div 
         className="absolute z-20 pointer-events-none"
         style={{
-            width: '1271px',
+            width: '90%',
+            maxWidth: '1271px',
             height: '572px',
             left: '0px',
             bottom: '0px'
         }}
       >
         <Image
-            src="/section-model/hand-image.png"
+            src="/section-model/hand-image2.png"
             alt="Hand holding ticket"
             fill
             className="object-contain object-left-bottom"

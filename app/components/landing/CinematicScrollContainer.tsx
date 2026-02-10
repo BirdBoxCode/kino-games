@@ -39,6 +39,14 @@ export function CinematicScrollContainer({
     };
 
     const handleWheel = (e: WheelEvent) => {
+      // Allow normal scrolling if at last section and scrolling down
+      const isScrollingDown = e.deltaY > 0;
+      const isAtLastSection = activeIndex === totalSections - 1;
+      if (isAtLastSection && isScrollingDown) {
+        // Don't prevent default - allow normal page scroll to content below
+        return;
+      }
+
       if (isTransitioning) {
         e.preventDefault();
         return;
@@ -78,13 +86,22 @@ export function CinematicScrollContainer({
     };
     
     const handleTouchMove = (e: TouchEvent) => {
+      const delta = touchStart - e.touches[0].clientY;
+      
+      // Allow normal scrolling if at last section and swiping up (scrolling down)
+      const isSwipingUp = delta > 0;
+      const isAtLastSection = activeIndex === totalSections - 1;
+      if (isAtLastSection && isSwipingUp) {
+        // Don't prevent default - allow normal page scroll to content below
+        return;
+      }
+      
       if (isTransitioning) {
         e.preventDefault();
         return;
       }
       
       e.preventDefault();
-      const delta = touchStart - e.touches[0].clientY;
       // Touch sensitivity
       const currentIntent = Math.max(-1, Math.min(1, delta / 250));
       intent.set(currentIntent);
@@ -129,30 +146,47 @@ export function CinematicScrollContainer({
     return <div className="flex flex-col">{children}</div>;
   }
 
-  return (
-    <div className="fixed inset-0 overflow-hidden bg-bg-dark touch-none">
-      {children.map((child, index) => {
-        const isActive = index === activeIndex;
-        return (
-          <div 
-            key={index}
-            className="absolute inset-0"
-            style={{ 
-              zIndex: isActive ? 50 : 10,
-              opacity: isActive ? 1 : 0,
-              pointerEvents: isActive ? 'auto' : 'none',
-              transition: 'opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1)',
-              transform: isActive ? 'scale(1)' : 'scale(1.05)',
-              visibility: isActive ? 'visible' : (index === activeIndex - 1 || index === activeIndex + 1 ? 'visible' : 'hidden')
-            }}
-          >
-            {cloneElement(child, { scrollProgress: isActive ? 0 : 1 } as Record<string, unknown>)}
-          </div>
-        );
-      })}
+  // Check if we're at the last section
+  const isAtLastSection = activeIndex === totalSections - 1;
 
-      {/* Global Scroll Indicator */}
-      <ScrollIndicator progress={indicatorProgress} />
+  return (
+    <div 
+      className="relative w-full"
+      style={{
+        minHeight: `${totalSections * 100}vh`
+      }}
+    >
+      {/* Scroll-locked container */}
+      <div 
+        className="fixed inset-0 overflow-hidden"
+        style={{
+          backgroundColor: '#0E0E0E',
+          touchAction: 'none'
+        }}
+      >
+        {children.map((child, index) => {
+          const isActive = index === activeIndex;
+          return (
+            <div 
+              key={index}
+              className="absolute inset-0"
+              style={{ 
+                zIndex: isActive ? 50 : 10,
+                opacity: isActive ? 1 : 0,
+                pointerEvents: isActive ? 'auto' : 'none',
+                transition: 'opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1)',
+                transform: isActive ? 'scale(1)' : 'scale(1.05)',
+                visibility: isActive ? 'visible' : (index === activeIndex - 1 || index === activeIndex + 1 ? 'visible' : 'hidden')
+              }}
+            >
+              {cloneElement(child, { scrollProgress: isActive ? 0 : 1 } as Record<string, unknown>)}
+            </div>
+          );
+        })}
+
+        {/* Global Scroll Indicator - hide when at last section */}
+        {!isAtLastSection && <ScrollIndicator progress={indicatorProgress} />}
+      </div>
     </div>
   );
 }

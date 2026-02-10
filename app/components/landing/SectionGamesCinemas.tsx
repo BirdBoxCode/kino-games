@@ -33,7 +33,7 @@ export function SectionGamesCinemas() {
         height: "100vh", // Enforce full viewport height
         minHeight: "800px",
         // Background from requirements
-        backgroundImage: "url(/section-games-cinemas-bg.jpg)", // Updated background image
+        backgroundImage: "url(/Lobby.png)", // Updated background image
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundSize: "cover",
@@ -49,7 +49,7 @@ export function SectionGamesCinemas() {
           width: "100%",
           height: "100%",
           background:
-            "linear-gradient(82deg, rgba(0, 0, 0, 0.58) 48.86%, rgba(208, 208, 208, 0.10) 82.27%, rgba(208, 208, 208, 0.07) 93.7%)",
+            "linear-gradient(82deg, rgba(0, 0, 0, 0.36) 48.86%, rgba(142, 142, 142, 0.00) 72.57%)",
           zIndex: 1,
           pointerEvents: "none",
         }}

@@ -31,7 +31,7 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
       {/* Background Image: Dark Cinema */}
       <div className="absolute inset-0 z-0 select-none pointer-events-none">
         <Image
-          src="/assets/section-simple-setup/dark-cinema.jpg"
+          src="/dark_cinema.png"
           alt="Dark Cinema Background"
           fill
           className="object-cover object-center"
@@ -48,7 +48,7 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
 
       {/* Block Wrapper */}
       <motion.div 
-        className="relative z-20 flex flex-col justify-center items-start gap-[40px] h-full w-full max-w-[1440px] px-[20px] md:px-[80px] py-[64px]"
+        className="relative z-20 flex flex-col justify-center items-start gap-[40px] h-full w-full max-w-[1440px] px-[20px] md:px-[80px] pt-[160px] pb-[64px]"
         style={{ 
           opacity: contentOpacity,
           y: contentY
