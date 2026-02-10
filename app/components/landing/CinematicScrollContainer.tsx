@@ -54,6 +54,18 @@ export function CinematicScrollContainer({
         return;
       }
 
+      const isScrollingDown = e.deltaY > 0;
+      const isAtLastSection = activeIndex === totalSections - 1;
+
+      // EXIT CINEMATIC MODE
+      // Immediate exit if at last section and scrolling down (and not transitioning)
+      if (isAtLastSection && isScrollingDown) {
+        setIsCinematic(false);
+        document.body.style.overflow = '';
+        window.scrollTo({ top: (totalSections - 1) * window.innerHeight, behavior: "instant" });
+        return;
+      }
+
       e.preventDefault();
       accumulatedDelta += e.deltaY;
       const currentIntent = Math.max(-1, Math.min(1, accumulatedDelta / INTENT_DAMPING));
@@ -65,24 +77,15 @@ export function CinematicScrollContainer({
         intent.set(0);
       }, 200);
 
-      // EXIT Logic based on intent
+      // Section Switch Logic
       if (Math.abs(currentIntent) >= THRESHOLD) {
         const direction = currentIntent > 0 ? 1 : -1;
         const targetIndex = activeIndex + direction;
 
-        // Normal section switch
         if (targetIndex >= 0 && targetIndex < totalSections) {
           performSwitchLocal(targetIndex);
           accumulatedDelta = 0;
           intent.set(0);
-        } 
-        // EXIT Condition: targetIndex is beyond last section
-        else if (targetIndex === totalSections) {
-           setIsCinematic(false);
-           document.body.style.overflow = '';
-           window.scrollTo({ top: (totalSections - 1) * window.innerHeight, behavior: "instant" });
-           accumulatedDelta = 0;
-           intent.set(0);
         }
       }
     };
@@ -101,6 +104,17 @@ export function CinematicScrollContainer({
       }
       
       const delta = touchStart - e.touches[0].clientY;
+      const isSwipingUp = delta > 0;
+      const isAtLastSection = activeIndex === totalSections - 1;
+      
+      // EXIT CINEMATIC MODE
+      if (isAtLastSection && isSwipingUp) {
+        setIsCinematic(false);
+        document.body.style.overflow = '';
+        window.scrollTo({ top: (totalSections - 1) * window.innerHeight, behavior: "instant" });
+        return; 
+      }
+
       e.preventDefault();
       const currentIntent = Math.max(-1, Math.min(1, delta / 250));
       intent.set(currentIntent);
@@ -112,11 +126,6 @@ export function CinematicScrollContainer({
         if (targetIndex >= 0 && targetIndex < totalSections) {
           performSwitchLocal(targetIndex);
           intent.set(0);
-        } else if (targetIndex === totalSections) {
-           setIsCinematic(false);
-           document.body.style.overflow = '';
-           window.scrollTo({ top: (totalSections - 1) * window.innerHeight, behavior: "instant" });
-           intent.set(0);
         }
       }
     };
