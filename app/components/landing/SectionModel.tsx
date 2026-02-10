@@ -1,32 +1,11 @@
 "use client";
 
-import { motion, useTransform, useMotionValue } from "framer-motion";
-import { useEffect } from "react";
 import Image from "next/image";
 
-
-interface SectionModelProps {
-  scrollProgress?: number;
-}
-
-export function SectionModel({ scrollProgress = 0 }: SectionModelProps) {
-  const motionProgress = useMotionValue(scrollProgress);
-
-  useEffect(() => {
-    motionProgress.set(scrollProgress);
-  }, [scrollProgress, motionProgress]);
-
-  // Animation: Fade out content when scrolling away (0.8 -> 1.0)
-  const sectionOpacity = useTransform(motionProgress, [0.8, 1.0], [1, 0]);
-  
-  // Content enter/exit animation
-  const contentOpacity = useTransform(motionProgress, [0.4, 0.7], [1, 0]);
-  const contentY = useTransform(motionProgress, [0.4, 0.7], [0, -40]);
-
+export function SectionModel() {
   return (
-    <motion.section
+    <section
       className="relative w-full h-screen min-h-[964px] flex flex-col justify-center items-start overflow-hidden bg-[#0E0E0E] px-[20px] pt-[160px] pb-[64px] md:px-[80px]"
-      style={{ opacity: sectionOpacity }}
     >
       {/* Overlay */}
       <div 
@@ -37,13 +16,7 @@ export function SectionModel({ scrollProgress = 0 }: SectionModelProps) {
       />
 
       {/* Block Wrapper */}
-      <motion.div
-        className="relative z-20 flex flex-col items-start gap-[40px] h-full md:h-[804px] shrink-0 w-full max-w-[1440px]"
-        style={{
-          opacity: contentOpacity,
-          y: contentY
-        }}
-      >
+      <div className="relative z-20 flex flex-col items-start gap-[40px] h-full md:h-[804px] shrink-0 w-full max-w-[1440px]">
         {/* Content Wrapper */}
         <div className="flex items-start gap-[10px] w-full">
           {/* Content */}
@@ -83,7 +56,7 @@ export function SectionModel({ scrollProgress = 0 }: SectionModelProps) {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Hand Image */}
       <div 
@@ -107,6 +80,6 @@ export function SectionModel({ scrollProgress = 0 }: SectionModelProps) {
 
 
 
-    </motion.section>
+    </section>
   );
 }

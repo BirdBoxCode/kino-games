@@ -25,8 +25,18 @@ export function CinematicScrollContainer({
   useEffect(() => {
     if (prefersReducedMotion) return;
 
+    // Lock body scroll when component mounts
+    document.body.style.overflow = 'hidden';
+
     let accumulatedDelta = 0;
     let timeoutId: NodeJS.Timeout;
+    let hasUnlocked = false;
+
+    const unlockScroll = () => {
+      if (hasUnlocked) return;
+      hasUnlocked = true;
+      document.body.style.overflow = '';
+    };
 
     const performSwitchLocal = (targetIndex: number) => {
       setIsTransitioning(true);
@@ -39,12 +49,12 @@ export function CinematicScrollContainer({
     };
 
     const handleWheel = (e: WheelEvent) => {
-      // Allow normal scrolling if at last section and scrolling down
+      // If at last section and scrolling down, unlock and allow normal scroll
       const isScrollingDown = e.deltaY > 0;
       const isAtLastSection = activeIndex === totalSections - 1;
       if (isAtLastSection && isScrollingDown) {
-        // Don't prevent default - allow normal page scroll to content below
-        return;
+        unlockScroll();
+        return; // Allow normal page scroll
       }
 
       if (isTransitioning) {
@@ -88,12 +98,12 @@ export function CinematicScrollContainer({
     const handleTouchMove = (e: TouchEvent) => {
       const delta = touchStart - e.touches[0].clientY;
       
-      // Allow normal scrolling if at last section and swiping up (scrolling down)
+      // If at last section and swiping up (scrolling down), unlock and allow normal scroll
       const isSwipingUp = delta > 0;
       const isAtLastSection = activeIndex === totalSections - 1;
       if (isAtLastSection && isSwipingUp) {
-        // Don't prevent default - allow normal page scroll to content below
-        return;
+        unlockScroll();
+        return; // Allow normal page scroll
       }
       
       if (isTransitioning) {
@@ -126,6 +136,8 @@ export function CinematicScrollContainer({
     window.addEventListener("touchend", handleTouchEnd);
 
     return () => {
+      // Cleanup: unlock scroll and remove listeners
+      document.body.style.overflow = '';
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
@@ -150,20 +162,12 @@ export function CinematicScrollContainer({
   const isAtLastSection = activeIndex === totalSections - 1;
 
   return (
-    <div 
-      className="relative w-full"
-      style={{
-        minHeight: `${totalSections * 100}vh`
-      }}
-    >
-      {/* Scroll-locked container */}
-      <div 
-        className="fixed inset-0 overflow-hidden"
-        style={{
-          backgroundColor: '#0E0E0E',
-          touchAction: 'none'
-        }}
-      >
+    <>
+      {/* Spacer to push normal content down */}
+      <div style={{ height: `${totalSections * 100}vh` }} />
+      
+      {/* Fixed cinematic container */}
+      <div className="fixed inset-0 overflow-hidden" style={{ backgroundColor: '#0E0E0E', touchAction: 'none', zIndex: 100 }}>
         {children.map((child, index) => {
           const isActive = index === activeIndex;
           return (
@@ -187,6 +191,6 @@ export function CinematicScrollContainer({
         {/* Global Scroll Indicator - hide when at last section */}
         {!isAtLastSection && <ScrollIndicator progress={indicatorProgress} />}
       </div>
-    </div>
+    </>
   );
 }

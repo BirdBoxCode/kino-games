@@ -16,8 +16,8 @@ export default function Home() {
         <SectionGamesCinemas />
         <SectionHow />
         <SectionSimpleSetup />
-        <SectionModel />
       </CinematicScrollContainer>
+      <SectionModel />
       <SectionPartners />
     </main>
   );
