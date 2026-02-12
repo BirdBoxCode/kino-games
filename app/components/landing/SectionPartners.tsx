@@ -1,11 +1,27 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import Image from "next/image";
 
 export function SectionPartners() {
+  const sectionRef = useRef<HTMLElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "center center"]
+  });
+
+  // Parallax effect: 
+  // Slides UP from below as you scroll down (enter view)
+  // Slides DOWN as you scroll up (leave view)
+  const y = useTransform(scrollYProgress, [0, 1], ["100%", "0%"]);
+  // Optional: slight rotation or scale for more dynamic entry
+  const rotate = useTransform(scrollYProgress, [0, 1], [-10, 0]);
+
   return (
     <section
+      ref={sectionRef}
       className="relative w-full flex flex-col justify-start items-start overflow-hidden px-[20px] md:px-[80px] py-[64px] gap-[40px]"
       style={{
         height: "auto",
@@ -30,6 +46,27 @@ export function SectionPartners() {
           }}
         />
       </div>
+
+      {/* Controller Image - Decorative Parallax */}
+      <motion.div
+        className="absolute left-[-2%] bottom-0 z-10 pointer-events-none"
+        style={{
+            y,
+            rotate,
+            width: 'clamp(350px, 45vw, 650px)',
+            height: 'clamp(350px, 45vw, 650px)',
+            transformOrigin: 'bottom left'
+        }}
+      >
+        <div className="relative w-full h-full"> 
+             <Image
+              src="/section-partners/controller1.png"
+              alt="Game Controller"
+              fill
+              className="object-contain object-bottom-left"
+            />
+        </div>
+      </motion.div>
 
       {/* Content Wrapper */}
       <div className="relative z-20 flex flex-col gap-[32px] w-full max-w-[1280px]">
@@ -68,28 +105,6 @@ export function SectionPartners() {
           </div>
         </div>
       </div>
-
-      {/* Controller Image - Decorative Animation */}
-      <motion.div
-        className="absolute left-0 bottom-0 z-20 pointer-events-none"
-        initial={{ opacity: 0, x: -50, y: 50 }}
-        whileInView={{ opacity: 1, x: 0, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        viewport={{ once: true, margin: "-10%" }}
-        style={{
-            width: '300px',
-            height: '300px'
-        }}
-      >
-        <div className="relative w-full h-full"> 
-             <Image
-              src="/section-partners/controller1.png"
-              alt="Game Controller"
-              fill
-              className="object-contain object-bottom-left"
-            />
-        </div>
-      </motion.div>
     </section>
   );
 }

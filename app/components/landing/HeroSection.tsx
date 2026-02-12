@@ -35,7 +35,7 @@ export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
       {/* Background Video */}
       <div className="absolute inset-0 z-0 w-full h-full pointer-events-none overflow-hidden">
         <iframe
-          src="https://customer-ui5gikvnytrm15ts.cloudflarestream.com/caaca57da49e26e0f62d5bde3b2b2fb6/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-ui5gikvnytrm15ts.cloudflarestream.com%2Fcaaca57da49e26e0f62d5bde3b2b2fb6%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
+          src="https://customer-ui5gikvnytrm15ts.cloudflarestream.com/a73ce1629b56335532957bb1d618eb95/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-ui5gikvnytrm15ts.cloudflarestream.com%2Fcaaca57da49e26e0f62d5bde3b2b2fb6%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.77vh] h-[56.25vw] min-w-full min-h-full"
           allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
           allowFullScreen={true}
