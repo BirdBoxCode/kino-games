@@ -3,6 +3,7 @@
 import { motion, useTransform, useMotionValue } from "framer-motion";
 import { useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface SectionSimpleSetupProps {
   scrollProgress?: number;
@@ -68,6 +69,28 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
             <p className="text-[#F6F4F1] font-inter text-[18px] md:text-[20px] font-medium tracking-[0.5px] max-w-[600px] mt-2">
               Games are transformed into cinema-ready experiences through a simple, flexible setup.
             </p>
+            
+            {/* CTA Link */}
+            <div 
+              style={{
+                display: 'flex',
+                padding: '20px 0',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '10px'
+              }}
+            >
+              <Link href="/catalogue" className="flex items-center gap-2 cursor-pointer group no-underline">
+                <span className="font-inter font-bold text-[20px] leading-normal tracking-[0.5px] text-[#F9C962] group-hover:translate-x-1 transition-transform duration-300">
+                  →
+                </span>
+                <span className="relative font-inter font-bold text-[20px] leading-normal tracking-[0.5px] text-[#F6F4F1]">
+                  Find out more!
+                  {/* Right-to-left underline animation */}
+                  <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-[#F6F4F1] scale-x-0 origin-right group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+                </span>
+              </Link>
+            </div>
           </div>
 
             {/* Schematic Image - Replaces manual SVG/HTML visualization */}
