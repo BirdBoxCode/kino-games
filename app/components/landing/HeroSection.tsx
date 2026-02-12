@@ -40,8 +40,7 @@ export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
           allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
           allowFullScreen={true}
         ></iframe>
-        {/* Subtle Static Overlay */}
-        <div className="absolute inset-0 bg-black/30 z-10" />
+
         
         {/* Cinematic Blur Overlay */}
         <motion.div 
