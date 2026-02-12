@@ -18,6 +18,7 @@ export default function Home() {
         <SectionSimpleSetup />
         <SectionModel />
       </CinematicScrollContainer>
+      
       <SectionPartners />
     </main>
   );

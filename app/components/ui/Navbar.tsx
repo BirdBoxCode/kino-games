@@ -30,7 +30,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full h-[120px] bg-transparent border-b-[1px] border-[#2A2A2A] flex items-center justify-center z-50 px-4 md:px-12 backdrop-blur-sm">
+      <nav className="fixed top-0 left-0 w-full h-[120px] bg-transparent border-b-[1px] border-[#2A2A2A] flex items-center justify-center z-[999] px-4 md:px-12 backdrop-blur-sm">
         <div className="w-full max-w-[1440px] flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="relative z-50">

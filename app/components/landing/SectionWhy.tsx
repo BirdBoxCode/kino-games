@@ -34,7 +34,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
         width: '100%',
         position: 'relative',
         overflow: 'hidden',
-        backgroundImage: 'url(/section-why-bg.png)',
+        backgroundImage: 'url(/KidsCinema2.png)',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -52,7 +52,9 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
           inset: '0',
           width: '100%',
           height: '100%',
-          background: 'linear-gradient(86deg, rgba(0,0,0,0.37) 46.51%, rgba(102,102,102,0.37) 97.46%)',
+
+          background: 'linear-gradient(78deg, rgba(0, 0, 0, 0.34) 48.03%, rgba(102, 102, 102, 0.00) 93.6%)',
+
           zIndex: 1
         }}
       />

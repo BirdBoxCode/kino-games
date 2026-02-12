@@ -13,17 +13,26 @@ export function CinematicScrollContainer({
 }: CinematicScrollContainerProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const intent = useMotionValue(0); // -1 to 1
+  const [isCinematic, setIsCinematic] = useState(true);
+  const intent = useMotionValue(0); 
   const prefersReducedMotion = useReducedMotion();
   const totalSections = children.length;
 
   // Sensitivity settings
-  const THRESHOLD = 0.4; // How much intent is needed to trigger switch
-  const INTENT_DAMPING = 1200; // Larger = slower accumulation for wheel
-  const COOLDOWN_MS = 1000; // Prevent rapid-fire skips
+  const THRESHOLD = 0.4; 
+  const INTENT_DAMPING = 1200; 
+  const COOLDOWN_MS = 1000; 
 
   useEffect(() => {
     if (prefersReducedMotion) return;
+
+    if (!isCinematic) {
+      document.body.style.overflow = '';
+      return;
+    }
+
+    // Lock body scroll when cinematic
+    document.body.style.overflow = 'hidden';
 
     let accumulatedDelta = 0;
     let timeoutId: NodeJS.Timeout;
@@ -32,41 +41,43 @@ export function CinematicScrollContainer({
       setIsTransitioning(true);
       setActiveIndex(targetIndex);
       
-      // Cooldown to prevent multi-skip
       setTimeout(() => {
         setIsTransitioning(false);
       }, COOLDOWN_MS);
     };
 
     const handleWheel = (e: WheelEvent) => {
-      // Allow normal scrolling if at last section and scrolling down
-      const isScrollingDown = e.deltaY > 0;
-      const isAtLastSection = activeIndex === totalSections - 1;
-      if (isAtLastSection && isScrollingDown) {
-        // Don't prevent default - allow normal page scroll to content below
-        return;
-      }
+      if (!isCinematic) return;
 
       if (isTransitioning) {
         e.preventDefault();
         return;
       }
 
-      e.preventDefault();
+      const isScrollingDown = e.deltaY > 0;
+      const isAtLastSection = activeIndex === totalSections - 1;
 
-      // Accumulate intent
+      // EXIT CINEMATIC MODE
+      // Immediate exit if at last section and scrolling down (and not transitioning)
+      if (isAtLastSection && isScrollingDown) {
+        setIsCinematic(false);
+        document.body.style.overflow = '';
+        window.scrollTo({ top: (totalSections - 1) * window.innerHeight, behavior: "instant" });
+        return;
+      }
+
+      e.preventDefault();
       accumulatedDelta += e.deltaY;
       const currentIntent = Math.max(-1, Math.min(1, accumulatedDelta / INTENT_DAMPING));
       intent.set(currentIntent);
 
-      // Reset accumulation if user stops scrolling for a bit (decay feel)
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
         accumulatedDelta = 0;
         intent.set(0);
       }, 200);
 
-      // Check threshold
+      // Section Switch Logic
       if (Math.abs(currentIntent) >= THRESHOLD) {
         const direction = currentIntent > 0 ? 1 : -1;
         const targetIndex = activeIndex + direction;
@@ -79,36 +90,39 @@ export function CinematicScrollContainer({
       }
     };
 
-    // Touch support
     let touchStart = 0;
     const handleTouchStart = (e: TouchEvent) => {
        touchStart = e.touches[0].clientY;
     };
     
     const handleTouchMove = (e: TouchEvent) => {
-      const delta = touchStart - e.touches[0].clientY;
-      
-      // Allow normal scrolling if at last section and swiping up (scrolling down)
-      const isSwipingUp = delta > 0;
-      const isAtLastSection = activeIndex === totalSections - 1;
-      if (isAtLastSection && isSwipingUp) {
-        // Don't prevent default - allow normal page scroll to content below
-        return;
-      }
-      
+      if (!isCinematic) return;
+
       if (isTransitioning) {
         e.preventDefault();
         return;
       }
       
+      const delta = touchStart - e.touches[0].clientY;
+      const isSwipingUp = delta > 0;
+      const isAtLastSection = activeIndex === totalSections - 1;
+      
+      // EXIT CINEMATIC MODE
+      if (isAtLastSection && isSwipingUp) {
+        setIsCinematic(false);
+        document.body.style.overflow = '';
+        window.scrollTo({ top: (totalSections - 1) * window.innerHeight, behavior: "instant" });
+        return; 
+      }
+
       e.preventDefault();
-      // Touch sensitivity
       const currentIntent = Math.max(-1, Math.min(1, delta / 250));
       intent.set(currentIntent);
 
       if (Math.abs(currentIntent) >= THRESHOLD) {
         const direction = currentIntent > 0 ? 1 : -1;
         const targetIndex = activeIndex + direction;
+        
         if (targetIndex >= 0 && targetIndex < totalSections) {
           performSwitchLocal(targetIndex);
           intent.set(0);
@@ -126,19 +140,42 @@ export function CinematicScrollContainer({
     window.addEventListener("touchend", handleTouchEnd);
 
     return () => {
+      document.body.style.overflow = '';
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [activeIndex, isTransitioning, totalSections, prefersReducedMotion, intent]);
+  }, [activeIndex, isTransitioning, totalSections, prefersReducedMotion, intent, isCinematic]);
 
-  // Map intent to 0-1 for the ScrollIndicator (only shows if we have sections left/prev)
-  const canGoDown = activeIndex < totalSections - 1;
+  // RE-ENTER CINEMATIC MODE
+  useEffect(() => {
+    if (prefersReducedMotion || isCinematic) return;
+
+    const handleScroll = () => {
+      // If user scrolls back UP into the cinematic spacer area
+      const threshold = (totalSections - 1) * window.innerHeight - 50; // Buffer
+      if (window.scrollY < threshold) {
+        setIsCinematic(true);
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isCinematic, prefersReducedMotion, totalSections]);
+
+  const canGoDown = activeIndex < totalSections; // Allow "down" intent even on last section (for exit)
   const canGoUp = activeIndex > 0;
+  
   const indicatorProgress = useTransform(intent, (v) => {
     if (v > 0 && !canGoDown) return 0;
     if (v < 0 && !canGoUp) return 0;
+    
+    // Suppress animation when scrolling DOWN from the last section (Exit)
+    // The user requested: "remove the scroll animation... when the user scrolls down"
+    if (activeIndex === totalSections - 1 && v > 0) return 0;
+
     return Math.min(1, Math.abs(v) / THRESHOLD);
   });
 
@@ -146,22 +183,17 @@ export function CinematicScrollContainer({
     return <div className="flex flex-col">{children}</div>;
   }
 
-  // Check if we're at the last section
-  const isAtLastSection = activeIndex === totalSections - 1;
+  // const isAtLastSection = activeIndex === totalSections - 1; 
+  // We remove this check for the indicator so it shows even on the last section
 
   return (
-    <div 
-      className="relative w-full"
-      style={{
-        minHeight: `${totalSections * 100}vh`
-      }}
-    >
-      {/* Scroll-locked container */}
+    <div style={{ height: `${totalSections * 100}vh`, position: 'relative' }}>
       <div 
-        className="fixed inset-0 overflow-hidden"
-        style={{
-          backgroundColor: '#0E0E0E',
-          touchAction: 'none'
+        className={isCinematic ? "fixed inset-0 overflow-hidden" : "absolute bottom-0 w-full h-screen overflow-hidden"}
+        style={{ 
+          backgroundColor: '#0E0E0E', 
+          touchAction: 'none', 
+          zIndex: 100 
         }}
       >
         {children.map((child, index) => {
@@ -184,8 +216,7 @@ export function CinematicScrollContainer({
           );
         })}
 
-        {/* Global Scroll Indicator - hide when at last section */}
-        {!isAtLastSection && <ScrollIndicator progress={indicatorProgress} />}
+        {isCinematic && <ScrollIndicator progress={indicatorProgress} />}
       </div>
     </div>
   );
