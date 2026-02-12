@@ -15,7 +15,7 @@ export function SectionPartners() {
   // Parallax effect: 
   // Slides UP from below as you scroll down (enter view)
   // Slides DOWN as you scroll up (leave view)
-  const y = useTransform(scrollYProgress, [0, 1], ["100%", "0%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["100%", "-30%"]);
   // Optional: slight rotation or scale for more dynamic entry
   const rotate = useTransform(scrollYProgress, [0, 1], [-10, 0]);
 
@@ -37,6 +37,28 @@ export function SectionPartners() {
           className="object-cover object-center"
           priority={false}
         />
+        
+        <motion.div
+            className="absolute bottom-0 z-0 pointer-events-none"
+            style={{
+                left: 'calc(20% - 100px)',
+                y,
+                rotate,
+                width: 'clamp(250px, 35vw, 500px)',
+                height: 'clamp(400px, 50vw, 750px)',
+                transformOrigin: 'bottom left'
+            }}
+        >
+            <div className="relative w-[300px] h-full"> 
+                <Image
+                src="/section-partners/hand-controller.png"
+                alt="Hand Holding Game Controller"
+                fill
+                className="object-contain object-bottom-left"
+                />
+            </div>
+        </motion.div>
+
         {/* Overlay */}
         <div
           className="absolute inset-0 z-1"
@@ -47,26 +69,7 @@ export function SectionPartners() {
         />
       </div>
 
-      {/* Controller Image - Decorative Parallax */}
-      <motion.div
-        className="absolute left-[-2%] bottom-0 z-10 pointer-events-none"
-        style={{
-            y,
-            rotate,
-            width: 'clamp(350px, 45vw, 650px)',
-            height: 'clamp(350px, 45vw, 650px)',
-            transformOrigin: 'bottom left'
-        }}
-      >
-        <div className="relative w-full h-full"> 
-             <Image
-              src="/section-partners/controller1.png"
-              alt="Game Controller"
-              fill
-              className="object-contain object-bottom-left"
-            />
-        </div>
-      </motion.div>
+
 
       {/* Content Wrapper */}
       <div className="relative z-20 flex flex-col gap-[32px] w-full max-w-[1280px]">
