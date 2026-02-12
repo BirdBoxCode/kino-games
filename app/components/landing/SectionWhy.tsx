@@ -34,7 +34,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
         width: '100%',
         position: 'relative',
         overflow: 'hidden',
-        backgroundImage: 'url(/KidsCinema2.png)',
+        backgroundImage: 'url(/kids-cinema-2.png)',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
