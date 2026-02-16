@@ -32,9 +32,10 @@ export function ScrollIndicator({ progress, className = "" }: ScrollIndicatorPro
   }, [progress, motionProgress]);
 
   // Phase 1: Gold circle appears and chevron changes color (0 -> 0.4)
-  const circleScale = useTransform(motionProgress, [0, 0.4], [0, 1]);
-  const circleOpacity = useTransform(motionProgress, [0, 0.1], [0, 1]);
-  const chevronColor = useTransform(motionProgress, [0.2, 0.4], ["#F6F4F1", "#000000"]);
+  // Phase 1: Gold circle appears and chevron changes color (0 -> 0.2) - Faster response
+  const circleScale = useTransform(motionProgress, [0, 0.2], [0, 1]);
+  const circleOpacity = useTransform(motionProgress, [0, 0.05], [0, 1]);
+  const chevronColor = useTransform(motionProgress, [0.1, 0.2], ["#F6F4F1", "#000000"]);
   
   // Phase 2: Fade out at the very end of the transition (Disabled for now as intent reaches 0 after switch)
   // Actually, we can keep it as a safety or if we want it to fade when intent is full.
