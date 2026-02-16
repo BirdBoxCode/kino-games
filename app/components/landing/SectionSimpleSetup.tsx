@@ -85,7 +85,7 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
                   →
                 </span>
                 <span className="relative font-inter font-bold text-[20px] leading-normal tracking-[0.5px] text-[#F6F4F1]">
-                  Find out more!
+                  Ask us anything
                   {/* Right-to-left underline animation */}
                   <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-[#F6F4F1] scale-x-0 origin-right group-hover:scale-x-100 transition-transform duration-300 ease-out" />
                 </span>

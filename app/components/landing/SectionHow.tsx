@@ -45,6 +45,7 @@ export function SectionHow() {
         }
       `}</style>
       <section 
+        id="how-it-works"
         className="section-how"
         style={{
           display: 'flex',

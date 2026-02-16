@@ -6,6 +6,7 @@ import Link from "next/link";
 export function SectionModel() {
   return (
     <section
+      id="our-model"
       className="relative w-full h-screen min-h-[964px] flex flex-col justify-center items-start overflow-hidden bg-[#0E0E0E] px-[20px] pt-[160px] pb-[64px] md:px-[80px]"
     >
       {/* Overlay */}
@@ -26,7 +27,7 @@ export function SectionModel() {
             <div className="flex flex-col items-start gap-[5px] self-stretch">
               {/* Section Sub-header */}
               <h3 className="section-sub-header text-[#F6F4F1] font-inter text-[20px] md:text-[24px] font-semibold tracking-[0.5px]">
-                Business Model
+                How ticket sales are shared
               </h3>
               
               {/* Section Header */}
@@ -65,7 +66,7 @@ export function SectionModel() {
                   gap: '10px'
                 }}
               >
-                <Link href="/catalogue" className="flex items-center gap-2 cursor-pointer group no-underline">
+                <Link href="https://catalog.kinogames.eu/" className="flex items-center gap-2 cursor-pointer group no-underline">
                   <span className="font-inter font-bold text-[20px] leading-normal tracking-[0.5px] text-[#F9C962] group-hover:translate-x-1 transition-transform duration-300">
                     →
                   </span>

@@ -87,7 +87,7 @@ export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
           </p>
 
           {/* Catalogue Link */}
-          <Link href="/catalogue" className="flex items-center gap-2 cursor-pointer group no-underline">
+          <Link href="https://catalog.kinogames.eu/" className="flex items-center gap-2 cursor-pointer group no-underline">
             <span className="font-inter font-bold text-[20px] leading-normal tracking-[0.5px] text-[#F9C962] group-hover:translate-x-1 transition-transform duration-300">
               →
             </span>

@@ -21,6 +21,7 @@ export function SectionPartners() {
 
   return (
     <section
+      id="partners"
       ref={sectionRef}
       className="relative w-full flex flex-col justify-start items-start overflow-hidden px-[20px] md:px-[80px] py-[64px] gap-[40px]"
       style={{

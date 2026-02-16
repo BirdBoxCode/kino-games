@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const footerLinks = {
   explore: [
-    { name: "View Catalogue", href: "/catalogue" },
+    { name: "View Catalogue", href: "https://catalog.kinogames.eu/" },
     { name: "Contact", href: "/#contact" },
   ],
   legal: [
