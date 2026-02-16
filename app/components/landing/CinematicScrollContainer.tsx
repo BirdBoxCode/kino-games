@@ -8,13 +8,19 @@ interface CinematicScrollContainerProps {
   children: ReactElement[];
 }
 
+
+// Sensitivity settings
+const THRESHOLD = 0.4; 
+const INTENT_DAMPING = 1200; 
+const COOLDOWN_MS = 1000; 
+
 export function CinematicScrollContainer({ 
   children, 
 }: CinematicScrollContainerProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isCinematic, setIsCinematic] = useState(true);
-  const intent = useMotionValue(0); 
+  const intent = useMotionValue(0);
   const prefersReducedMotion = useReducedMotion();
   const totalSections = children.length;
 
