@@ -6,6 +6,7 @@ import { SectionHow } from "../components/landing/SectionHow";
 import { SectionModel } from "../components/landing/SectionModel";
 import { SectionPartners } from "../components/landing/SectionPartners";
 import { CinematicScrollContainer } from "../components/landing/CinematicScrollContainer";
+import Footer from "../components/ui/Footer";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       </CinematicScrollContainer>
       
       <SectionPartners />
+      <Footer />
     </main>
   );
 }
