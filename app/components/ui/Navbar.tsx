@@ -34,18 +34,22 @@ export default function Navbar() {
     }));
   };
 
-  const handleNavClick = (e: React.MouseEvent, link: { index: number; type: string; name: string }) => {
+  const handleNavClick = (e: React.MouseEvent, link: { index: number; type: string; name: string; href: string }) => {
     e.preventDefault(); // Prevent default anchor jump
     setIsOpen(false);
 
     if (link.type === 'cinematic') {
       goToSection(link.index);
     } else if (link.type === 'normal') {
-      // Normal scroll for Partners
-      const partnersSection = document.getElementById("partners");
-      if (partnersSection) {
-        partnersSection.scrollIntoView({ behavior: "smooth" });
-      }
+      // Normal scroll for non-cinematic sections (Partners, etc.)
+      const targetId = link.href.replace('/#', '');
+      
+      window.dispatchEvent(new CustomEvent('cinematic-nav', { 
+        detail: {
+          type: 'scroll-to-target',
+          targetId
+        } 
+      }));
     }
   };
 

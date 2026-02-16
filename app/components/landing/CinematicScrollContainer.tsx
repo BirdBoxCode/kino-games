@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, ReactElement, cloneElement } from "react";
+import { useEffect, useState, ReactElement, cloneElement, useCallback } from "react";
 import { useReducedMotion, useMotionValue, useTransform } from "framer-motion";
 import { ScrollIndicator } from "./ScrollIndicator";
 
@@ -24,19 +24,19 @@ export function CinematicScrollContainer({
   const COOLDOWN_MS = 1000; 
 
   // Move performSwitch logic here so it can be used by both event listener and scroll handler
-  const performSwitch = (targetIndex: number) => {
+  const performSwitch = useCallback((targetIndex: number) => {
     setIsTransitioning(true);
     setActiveIndex(targetIndex);
     
     setTimeout(() => {
       setIsTransitioning(false);
     }, COOLDOWN_MS);
-  };
+  }, []);
 
   // Event Listener for programmatic navigation (Navbar)
   useEffect(() => {
     const handleNavRequest = (e: any) => {
-      const { index, type } = e.detail;
+      const { index, type, targetId } = e.detail;
 
       if (type === 'cinematic') {
         // If we are currently in Normal Scroll Mode (scrolled past),
@@ -46,12 +46,36 @@ export function CinematicScrollContainer({
           window.scrollTo({ top: 0, behavior: 'instant' });
         }
         performSwitch(index);
+      } else if (type === 'scroll-to-target') {
+        const targetElement = document.getElementById(targetId);
+
+        if (isCinematic) {
+          setIsCinematic(false);
+          document.body.style.overflow = '';
+          // Jump to the end of the cinematic spacer to simulate scrolling down from the last section
+          // The spacer height is totalSections * 100vh.
+          // The last section starts at (totalSections - 1) * 100vh.
+          // We scroll to the top of the last section to ensure visual continuity before scrolling away.
+          window.scrollTo({ top: (totalSections - 1) * window.innerHeight, behavior: "instant" });
+          
+          // Then smooth scroll to the target after a short delay to allow state/layout to settle
+          setTimeout(() => {
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 100);
+        } else {
+          // Already in normal mode, just scroll there
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
       }
     };
 
     window.addEventListener('cinematic-nav', handleNavRequest);
     return () => window.removeEventListener('cinematic-nav', handleNavRequest);
-  }, [isCinematic]); // Re-bind if isCinematic changes, though mainly we just need access to state setters
+  }, [isCinematic, performSwitch, totalSections]);
 
   useEffect(() => {
     if (prefersReducedMotion) return;
@@ -167,7 +191,7 @@ export function CinematicScrollContainer({
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [activeIndex, isTransitioning, totalSections, prefersReducedMotion, intent, isCinematic]);
+  }, [activeIndex, isTransitioning, totalSections, prefersReducedMotion, intent, isCinematic, performSwitch]);
 
   // RE-ENTER CINEMATIC MODE
   useEffect(() => {

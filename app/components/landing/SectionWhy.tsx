@@ -21,6 +21,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
 
   return (
     <motion.section 
+      id="about"
       className="section-why"
       style={{
         display: 'flex',
