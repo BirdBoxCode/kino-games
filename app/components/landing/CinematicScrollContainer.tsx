@@ -23,6 +23,36 @@ export function CinematicScrollContainer({
   const INTENT_DAMPING = 1200; 
   const COOLDOWN_MS = 1000; 
 
+  // Move performSwitch logic here so it can be used by both event listener and scroll handler
+  const performSwitch = (targetIndex: number) => {
+    setIsTransitioning(true);
+    setActiveIndex(targetIndex);
+    
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, COOLDOWN_MS);
+  };
+
+  // Event Listener for programmatic navigation (Navbar)
+  useEffect(() => {
+    const handleNavRequest = (e: any) => {
+      const { index, type } = e.detail;
+
+      if (type === 'cinematic') {
+        // If we are currently in Normal Scroll Mode (scrolled past),
+        // we must scroll back to top to re-enter cinematic experience.
+        if (!isCinematic) {
+          setIsCinematic(true);
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+        performSwitch(index);
+      }
+    };
+
+    window.addEventListener('cinematic-nav', handleNavRequest);
+    return () => window.removeEventListener('cinematic-nav', handleNavRequest);
+  }, [isCinematic]); // Re-bind if isCinematic changes, though mainly we just need access to state setters
+
   useEffect(() => {
     if (prefersReducedMotion) return;
 
@@ -36,15 +66,6 @@ export function CinematicScrollContainer({
 
     let accumulatedDelta = 0;
     let timeoutId: NodeJS.Timeout;
-
-    const performSwitchLocal = (targetIndex: number) => {
-      setIsTransitioning(true);
-      setActiveIndex(targetIndex);
-      
-      setTimeout(() => {
-        setIsTransitioning(false);
-      }, COOLDOWN_MS);
-    };
 
     const handleWheel = (e: WheelEvent) => {
       if (!isCinematic) return;
@@ -83,7 +104,7 @@ export function CinematicScrollContainer({
         const targetIndex = activeIndex + direction;
 
         if (targetIndex >= 0 && targetIndex < totalSections) {
-          performSwitchLocal(targetIndex);
+          performSwitch(targetIndex);
           accumulatedDelta = 0;
           intent.set(0);
         }
@@ -124,7 +145,7 @@ export function CinematicScrollContainer({
         const targetIndex = activeIndex + direction;
         
         if (targetIndex >= 0 && targetIndex < totalSections) {
-          performSwitchLocal(targetIndex);
+          performSwitch(targetIndex);
           intent.set(0);
         }
       }
