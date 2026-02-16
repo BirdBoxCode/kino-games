@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useTransform, MotionValue, useMotionValue } from "framer-motion";
+import { motion, useTransform, MotionValue, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useEffect } from "react";
 
@@ -17,11 +17,9 @@ interface ScrollIndicatorProps {
  * At the end of the transition (0.8 -> 1.0):
  * - The entire indicator fades out.
  */
-const THRESHOLD = 0.4;
-
 export function ScrollIndicator({ progress, className = "" }: ScrollIndicatorProps) {
-  // Ensure we have a MotionValue for transforms
   const motionProgress = useMotionValue(0);
+  const prefersReducedMotion = useReducedMotion();
   
   useEffect(() => {
     if (typeof progress === "number") {
@@ -31,51 +29,40 @@ export function ScrollIndicator({ progress, className = "" }: ScrollIndicatorPro
     }
   }, [progress, motionProgress]);
 
-  // Phase 1: Gold circle appears and chevron changes color (0 -> 0.4)
-  // Phase 1: Gold circle appears and chevron changes color (0 -> 0.2) - Faster response
-  const circleScale = useTransform(motionProgress, [0, 0.2], [0, 1]);
-  const circleOpacity = useTransform(motionProgress, [0, 0.05], [0, 1]);
-  const chevronColor = useTransform(motionProgress, [0.1, 0.2], ["#F6F4F1", "#000000"]);
+  // Amplify progress so the bar fills up quickly (sensitivity 3x)
+  const amplifiedProgress = useTransform(motionProgress, (v) => Math.min(v * 3, 1));
   
-  // Phase 2: Fade out at the very end of the transition (Disabled for now as intent reaches 0 after switch)
-  // Actually, we can keep it as a safety or if we want it to fade when intent is full.
-  const groupOpacity = useTransform(motionProgress, [THRESHOLD, THRESHOLD + 0.1], [1, 1]);
+  // Smooth out the movement with a spring
+  const smoothProgress = useSpring(amplifiedProgress, { stiffness: 400, damping: 30 });
 
-  // Floating effect when at rest
-  const floatY = useTransform(motionProgress, [0, 0.05], [10, 0]);
+  const activeScale = prefersReducedMotion ? 0 : smoothProgress;
 
   return (
     <motion.div 
-      style={{ opacity: groupOpacity }}
-      className={`absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center h-16 w-16 ${className}`}
+      className={`absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center justify-end ${className}`}
     >
-      {/* Filled Gold Circle */}
-      <motion.div 
-        className="absolute rounded-full bg-[#F9C962] pointer-events-none"
-        style={{
-          width: '100%',
-          height: '100%',
-          scale: circleScale,
-          opacity: circleOpacity
-        }}
-      />
+      {/* Vertical Progress Bar */}
+      {/* Track */}
+      <div className="relative w-[8px] h-[56px] rounded-full border border-[#F6F4F1]/30 bg-black/20 backdrop-blur-sm overflow-hidden">
+        {/* Fill */}
+        <motion.div 
+          className="absolute bottom-0 left-0 w-full h-full bg-[#F9C962] rounded-full"
+          style={{ 
+            scaleY: activeScale,
+            originY: 1 
+          }}
+        />
+      </div>
 
       {/* Chevron Icon */}
       <motion.div
-        animate={{
-          y: [0, 10, 0]
-        }}
+        animate={{ y: [0, 6, 0] }}
         transition={{
           y: { repeat: Infinity, duration: 2, ease: "easeInOut" }
         }}
-        style={{ 
-          color: chevronColor as unknown as string,
-          y: floatY // This will override the animation slightly or add to it? 
-          // Actually, motion.div animate and style.y can conflict.
-        }}
-        className="relative z-10 flex items-center justify-center"
+        className="text-[#F6F4F1] opacity-80 -mt-[3px]"
       >
-        <ChevronDown size={32} strokeWidth={2} />
+        <ChevronDown size={28} strokeWidth={2} />
       </motion.div>
     </motion.div>
   );

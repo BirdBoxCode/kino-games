@@ -81,7 +81,7 @@ export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
           className="flex flex-col items-start gap-[20px] shrink-0 w-full"
         >
           {/* Subheadline */}
-          <p className="font-inter font-[400] text-[18px] md:text-[24px] leading-normal tracking-[0.5px] text-[#F6F4F1] w-full max-w-[781px] m-0">
+          <p className="font-inter font-normal text-[18px] md:text-[24px] leading-normal tracking-[0.5px] text-[#F6F4F1] w-full max-w-[781px] m-0">
             A new cultural experience bringing video games into cinemas.
           </p>
 
