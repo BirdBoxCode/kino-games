@@ -1,6 +1,8 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { LighthouseGallery } from "./LighthouseGallery";
+import { LightSweep, contentVariants } from "./ProjectorReveal";
 
 export function SectionGamesCinemas() {
   const cinemasImages = [
@@ -108,8 +110,11 @@ export function SectionGamesCinemas() {
             flexDirection: "column",
             alignItems: "flex-start",
             gap: "5px",
+            position: "relative" // for LightSweep
           }}
         >
+          <LightSweep />
+          
           {/* =======================
               BLOCK 1: FOR CINEMAS
              ======================= */}
@@ -126,7 +131,8 @@ export function SectionGamesCinemas() {
           >
             {/* Text Column */}
             <div className="text-column" style={{ flex: "1 1 400px" }}>
-              <h3
+              <motion.h3
+                variants={contentVariants}
                 className="section-header"
                 style={{
                   fontFamily: "Garet, Inter, sans-serif",
@@ -140,7 +146,7 @@ export function SectionGamesCinemas() {
                 }}
               >
                 FOR <span style={{ color: "#F9C962" }}>CINEMAS</span>
-              </h3>
+              </motion.h3>
 
               <div
                 className="bullets"
@@ -153,16 +159,18 @@ export function SectionGamesCinemas() {
             </div>
 
             {/* Gallery Column */}
-            <div
+            <motion.div
+              variants={contentVariants}
               className="gallery-column"
               style={{ flex: "1 1 50%", maxWidth: "50%" }}
             >
               <LighthouseGallery images={cinemasImages} />
-            </div>
+            </motion.div>
           </div>
 
           {/* Divider Line */}
-          <div
+          <motion.div
+            variants={contentVariants}
             className="divider-line"
             style={{
               width: "100%",
@@ -189,7 +197,8 @@ export function SectionGamesCinemas() {
           >
             {/* Text Column */}
             <div className="text-column" style={{ flex: "1 1 400px" }}>
-              <h3
+              <motion.h3
+                variants={contentVariants}
                 className="section-header"
                 style={{
                   fontFamily: "Garet, Inter, sans-serif",
@@ -203,7 +212,7 @@ export function SectionGamesCinemas() {
                 }}
               >
                 FOR <span style={{ color: "#F9C962" }}>GAME RIGHT-HOLDERS</span>
-              </h3>
+              </motion.h3>
 
               <div
                 className="bullets"
@@ -216,12 +225,13 @@ export function SectionGamesCinemas() {
             </div>
 
             {/* Gallery Column */}
-            <div
+            <motion.div
+              variants={contentVariants}
               className="gallery-column"
               style={{ flex: "1 1 50%", maxWidth: "50%" }}
             >
               <LighthouseGallery images={gamesImages} />
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -231,7 +241,8 @@ export function SectionGamesCinemas() {
 
 function Bullet({ text }: { text: string }) {
   return (
-    <div
+    <motion.div
+      variants={contentVariants}
       className="bullet"
       style={{
         display: "flex",
@@ -266,6 +277,6 @@ function Bullet({ text }: { text: string }) {
       >
         {text}
       </p>
-    </div>
+    </motion.div>
   );
 }

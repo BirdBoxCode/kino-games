@@ -4,6 +4,7 @@ import { motion, useTransform, useMotionValue } from "framer-motion";
 import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { LightSweep, contentVariants } from "./ProjectorReveal";
 
 interface SectionSimpleSetupProps {
   scrollProgress?: number;
@@ -56,10 +57,14 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
         }}
       >
         {/* Content Wrapper */}
-        <div className="flex flex-col items-start w-full max-w-[1280px] gap-[40px]">
-          
+        <div className="flex flex-col items-start w-full max-w-[1280px] gap-[40px] relative">
+          <LightSweep />
+
           {/* Content Top */}
-          <div className="flex flex-col items-start gap-[5px] self-stretch">
+          <motion.div 
+            variants={contentVariants}
+            className="flex flex-col items-start gap-[5px] self-stretch"
+          >
             <h3 className="text-[#F6F4F1] font-inter text-[20px] md:text-[24px] font-semibold tracking-[0.5px]">
               From game to cinema
             </h3>
@@ -91,12 +96,15 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
                 </span>
               </Link>
             </div>
-          </div>
+          </motion.div>
 
             {/* Schematic Image - Replaces manual SVG/HTML visualization */}
             {/* Styles applied as per user request */}
             {/* content-bottom: flex, w 1327px, h 573px, flex-col, justify-center, items-center, gap 10px, shrink 0 */}
-            <div className="relative flex flex-col justify-center items-center gap-[10px] w-full max-w-[1327px] h-auto md:h-[573px] shrink-0 mt-8 md:mt-0">
+            <motion.div 
+              variants={contentVariants}
+              className="relative flex flex-col justify-center items-center gap-[10px] w-full max-w-[1327px] h-auto md:h-[573px] shrink-0 mt-8 md:mt-0"
+            >
                <Image 
                  src="/section-simple-setup/schema-image.png"
                  alt="Simple Setup Schematic: Main Screen, Host, Players, Game System, Audience"
@@ -106,7 +114,7 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
                  className="w-full max-w-[1229px] h-auto shrink-0 aspect-[284/113] object-contain"
                  priority
                />
-            </div>
+            </motion.div>
         </div>
       </motion.div>
     </motion.section>

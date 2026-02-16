@@ -3,6 +3,7 @@
 import { useEffect, useState, ReactElement, cloneElement, useCallback } from "react";
 import { useReducedMotion, useMotionValue, useTransform } from "framer-motion";
 import { ScrollIndicator } from "./ScrollIndicator";
+import { ProjectorReveal } from "./ProjectorReveal";
 
 interface CinematicScrollContainerProps {
   children: ReactElement[];
@@ -24,10 +25,7 @@ export function CinematicScrollContainer({
   const prefersReducedMotion = useReducedMotion();
   const totalSections = children.length;
 
-  // Sensitivity settings
-  const THRESHOLD = 0.4; 
-  const INTENT_DAMPING = 1200; 
-  const COOLDOWN_MS = 1000; 
+ 
 
   // Move performSwitch logic here so it can be used by both event listener and scroll handler
   const performSwitch = useCallback((targetIndex: number) => {
@@ -250,20 +248,27 @@ export function CinematicScrollContainer({
         {children.map((child, index) => {
           const isActive = index === activeIndex;
           return (
-            <div 
-              key={index}
+            <ProjectorReveal 
+              key={index} 
+              isActive={isActive}
               className="absolute inset-0"
-              style={{ 
-                zIndex: isActive ? 50 : 10,
-                opacity: isActive ? 1 : 0,
-                pointerEvents: isActive ? 'auto' : 'none',
-                transition: 'opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1)',
-                transform: isActive ? 'scale(1)' : 'scale(1.05)',
-                visibility: isActive ? 'visible' : (index === activeIndex - 1 || index === activeIndex + 1 ? 'visible' : 'hidden')
-              }}
             >
-              {cloneElement(child, { scrollProgress: isActive ? 0 : 1 } as Record<string, unknown>)}
-            </div>
+              {/* Keep z-index and pointer-events logic on a wrapper if needed, 
+                  or let ProjectorReveal handle basic visibility. 
+                  ProjectorReveal sets opacity to 0 when hidden, so pointerEvents should be none effectively,
+                  but explicit handling is safer. */}
+               <div
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    pointerEvents: isActive ? 'auto' : 'none',
+                    zIndex: isActive ? 50 : 10,
+                    // Remove manual opacity/transform transitions as ProjectorReveal handles entrance
+                  }}
+               >
+                 {cloneElement(child, { scrollProgress: isActive ? 0 : 1 } as Record<string, unknown>)}
+               </div>
+            </ProjectorReveal>
           );
         })}
 

@@ -3,6 +3,7 @@
 import { motion, useTransform, useMotionValue } from "framer-motion";
 import { useEffect } from "react";
 import Link from "next/link";
+import { LightSweep, contentVariants } from "./ProjectorReveal";
 
 interface HeroSectionProps {
   scrollProgress?: number; // 0-1 value from CinematicScrollContainer
@@ -15,7 +16,7 @@ export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
     motionProgress.set(scrollProgress);
   }, [scrollProgress, motionProgress]);
 
-  // Refined phased sequence
+  // Refined phased sequence for SCROLLING (Exit)
   // 1. 0.4 -> 0.7: Content fades
   const contentOpacity = useTransform(motionProgress, [0.4, 0.7], [1, 0]);
   const contentY = useTransform(motionProgress, [0.4, 0.7], [0, -40]);
@@ -60,11 +61,11 @@ export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
           y: contentY
         }}
       >
+        <LightSweep />
+        
         {/* H1 */}
         <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            variants={contentVariants}
             className="flex flex-col items-start m-0"
         >
           <span className="font-garet font-[850] text-[40px] sm:text-[54px] md:text-[64px] leading-[100%] tracking-[2px] uppercase text-[#F6F4F1]">
@@ -76,9 +77,7 @@ export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
         </motion.h1>
 
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+          variants={contentVariants}
           className="flex flex-col items-start gap-[20px] shrink-0 w-full"
         >
           {/* Subheadline */}
