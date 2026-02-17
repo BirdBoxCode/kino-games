@@ -41,21 +41,22 @@ export function SectionPartners() {
         <motion.div
             className="absolute z-0 pointer-events-none"
             style={{
-                left: 'calc(20% - 140px)',
-                bottom: -100,
+                right: -50,
+                top: 0,
+                display: 'none',
                 y,
                 rotate,
                 width: 'clamp(250px, 35vw, 500px)',
                 height: 'clamp(360px, 50vw, 750px)',
-                transformOrigin: 'bottom left'
+                transformOrigin: 'center center'
             }}
         >
-            <div className="relative w-[300px] h-full"> 
+            <div className="relative w-[300px] h-full" style={{ transform: 'rotate(-90deg)' }}> 
                 <Image
                 src="/section-partners/hand-controller.png"
                 alt="Hand Holding Game Controller"
                 fill
-                className="object-contain object-bottom-left"
+                className="object-contain object-top-right"
                 />
             </div>
         </motion.div>
@@ -83,7 +84,7 @@ export function SectionPartners() {
         <div className="w-full h-[1px] bg-[#F6F4F1] opacity-20 mb-[40px]" />
 
         {/* Cinemas Group */}
-        <div className="flex flex-col gap-[32px] w-full mb-[64px]">
+        <div className="flex flex-col gap-[32px] w-full mb-[64px] bg-black/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-10">
           <h3 className="font-inter text-[20px] font-bold tracking-[0.5px] uppercase text-[#F6F4F1] opacity-60">
             Cinema Partners
           </h3>
@@ -101,17 +102,20 @@ export function SectionPartners() {
                 "lab-1-logo-black.png",
                 "spiel_fabrique_transparent.png",
               ].map((logo, i) => (
-                <div key={`cinema-${i}`} className="relative w-full aspect-video rounded-[12px] bg-[#0E0E0E] flex items-center justify-center overflow-hidden border border-[#FFFFFF10]">
+                <div 
+                  key={`cinema-${i}`} 
+                  className="group relative w-full aspect-video rounded-[12px] bg-[#1A1A1A] flex items-center justify-center overflow-hidden border border-[#FFFFFF10]"
+                >
                   <Image
                     src={`/section-partners/partner-logos/${logo}`}
                     alt={logo.split('.')[0]}
                     fill
-                    className="object-contain p-6"
+                    className="object-contain p-6 md:p-8 transition-all duration-300 opacity-80 group-hover:opacity-100 group-hover:scale-105"
                   />
                 </div>
               ))}
               {/* One more placeholder to make it 12 items for 4x3 grid feeling (11 items + 1) */}
-               <div className="w-full aspect-video rounded-[12px] bg-[#0E0E0E] border border-[#FFFFFF10]" />
+               <div className="group relative w-full aspect-video rounded-[12px] bg-[#1A1A1A] border border-[#FFFFFF10]" />
           </div>
         </div>
 
@@ -119,14 +123,17 @@ export function SectionPartners() {
         <div className="w-full h-[1px] bg-[#F6F4F1] opacity-20 mb-[40px]" />
 
         {/* Game Right-holders Group */}
-        <div className="flex flex-col gap-[32px] w-full">
+        <div className="flex flex-col gap-[32px] w-full bg-black/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-10">
           <h3 className="font-inter text-[20px] font-bold tracking-[0.5px] uppercase text-[#F6F4F1] opacity-60">
             Game Right-holders
           </h3>
           <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-[16px]">
               {/* Placeholders 4x3 = 12 items */}
               {[...Array(12)].map((_, i) => (
-                <div key={`game-placeholder-${i}`} className="w-full aspect-video rounded-[12px] bg-[#0E0E0E] border border-[#FFFFFF10]" />
+                <div 
+                  key={`game-placeholder-${i}`} 
+                  className="w-full aspect-video rounded-[12px] bg-[#1A1A1A] border border-[#FFFFFF10]" 
+                />
               ))}
           </div>
         </div>
