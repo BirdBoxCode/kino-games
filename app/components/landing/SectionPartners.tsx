@@ -46,7 +46,7 @@ export function SectionPartners() {
                 y,
                 rotate,
                 width: 'clamp(250px, 35vw, 500px)',
-                height: 'clamp(400px, 50vw, 750px)',
+                height: 'clamp(360px, 50vw, 750px)',
                 transformOrigin: 'bottom left'
             }}
         >

@@ -28,10 +28,10 @@ export function SectionGamesCinemas() {
       className="section-games-cinemas"
       style={{
         display: "flex",
-        padding: "80px min(80px, 5%)", // Reduced top padding
+        padding: "80px 0", // Vertical padding only
         flexDirection: "column",
         justifyContent: "center",
-        alignItems: "flex-start",
+        alignItems: "center", // Center content
         gap: "15px", // Reduced gap
         alignSelf: "stretch",
         position: "relative",
@@ -62,20 +62,9 @@ export function SectionGamesCinemas() {
       />
 
       {/* Content Wrapper */}
-      <style jsx>{`
-        .content-wrapper {
-          padding-left: 16px;
-          padding-right: 16px;
-        }
-        @media (min-width: 768px) {
-          .content-wrapper {
-            padding-left: 48px;
-            padding-right: 48px;
-          }
-        }
-      `}</style>
+
       <div
-        className="content-wrapper"
+        className="content-wrapper px-[20px] md:px-[80px]"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -139,7 +128,7 @@ export function SectionGamesCinemas() {
             }}
           >
             {/* Text Column */}
-            <div className="text-column" style={{ flex: "1 1 400px" }}>
+            <div className="text-column" style={{ flex: "2 1 400px" }}>
 
               <motion.div
                 variants={contentVariants}
@@ -288,7 +277,7 @@ export function SectionGamesCinemas() {
             }}
           >
             {/* Text Column */}
-            <div className="text-column" style={{ flex: "1 1 400px" }}>
+            <div className="text-column" style={{ flex: "2 1 400px" }}>
 
               <motion.div
                 variants={contentVariants}
@@ -314,7 +303,7 @@ export function SectionGamesCinemas() {
             {/* Gallery Column */}
             <motion.div
               variants={contentVariants}
-              className="gallery-column bg-black/40 backdrop-blur-[16px] border border-[#F6F4F1]/10 rounded-[24px] p-[20px] max-[1040px]:bg-transparent max-[1040px]:backdrop-blur-none max-[1040px]:border-none max-[1040px]:p-0"
+              className="gallery-column bg-black/40 backdrop-blur-lg border border-[#F6F4F1]/10 rounded-[24px] p-[20px] max-[1040px]:bg-transparent max-[1040px]:backdrop-blur-none max-[1040px]:border-none max-[1040px]:p-0"
               style={{ 
                 flex: "1 1 400px",
                 maxWidth: "100%", 
