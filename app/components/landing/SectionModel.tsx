@@ -20,7 +20,7 @@ export function SectionModel() {
       />
 
       {/* Block Wrapper */}
-      <div className="relative z-20 flex flex-col items-start gap-[40px] h-full md:h-[804px] shrink-0 w-full max-w-[1440px]">
+      <div className="relative z-20 flex flex-col items-start gap-[0px] w-full max-w-[1440px] grow">
         {/* Content Wrapper */}
         <div className="flex items-start gap-[10px] w-full relative">
           <LightSweep />
@@ -72,21 +72,22 @@ export function SectionModel() {
             </div>
           </motion.div>
         </div>
-      </div>
 
-      {/* Hand Image */}
-      <motion.div 
-        variants={contentVariants}
-        className="absolute z-20 pointer-events-none w-[90%] md:w-full max-w-[1271px] h-[40vh] md:h-[55vh] left-0 bottom-0"
-      >
-        <Image
-            src="/section-model/hand-image2.png"
-            alt="Hand holding ticket"
-            fill
-            className="object-contain object-bottom-left"
-            priority
-        />
-      </motion.div>
+
+        {/* Hand Image - Moved inside flow to prevent overlap */}
+        <motion.div 
+          variants={contentVariants}
+          className="relative z-20 pointer-events-none w-[90%] md:w-full max-w-[1000px] h-[40vh] md:h-[55vh] self-start -ml-[20px] md:-ml-[80px]"
+        >
+          <Image
+              src="/section-model/hand-image2.png"
+              alt="Hand holding ticket"
+              fill
+              className="object-contain object-left-bottom"
+              priority
+          />
+        </motion.div>
+      </div>
     </section>
   );
 }
