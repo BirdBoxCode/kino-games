@@ -161,7 +161,7 @@ export function SectionHow() {
                    <Squiggle1 />
                 </div>
               </div>
-              <div className="how-p1" style={{ maxWidth: '600px' }}>
+              <div className="how-p1" style={{ maxWidth: '500px' }}>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#F6F4F1', margin: 0 }}>
                   <span style={{ fontWeight: 700 }}>Games are adapted for the cinema environment.</span><br/>
                   <span style={{ fontWeight: 500 }}>Simple formats designed specifically for large screens and shared spaces.</span>
@@ -186,7 +186,7 @@ export function SectionHow() {
                   <Squiggle2 />
                  </div>
               </div>
-              <div className="how-p2" style={{ maxWidth: '600px' }}>
+              <div className="how-p2" style={{ maxWidth: '500px' }}>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#F6F4F1', margin: 0 }}>
                   <span style={{ fontWeight: 700 }}>Designed to fit existing cinemas.</span><br/>
                   <span style={{ fontWeight: 500 }}>Screen, sound, and interaction work within standard cinema infrastructure.</span>
@@ -211,7 +211,7 @@ export function SectionHow() {
                    <Squiggle3 />
                  </div>
                </div>
-               <div className="how-p3" style={{ maxWidth: '600px' }}>
+               <div className="how-p3" style={{ maxWidth: '500px' }}>
                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#F6F4F1', margin: 0 }}>
                     <span style={{ fontWeight: 500 }}>Browse our catalogue of games, decide how long you want it for, plug in and play.</span>
                    </p>
