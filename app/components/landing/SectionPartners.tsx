@@ -73,41 +73,64 @@ export function SectionPartners() {
 
 
       {/* Content Wrapper */}
-      <div className="relative z-20 flex flex-col gap-[32px] w-full max-w-[1280px]">
+      <div className="relative z-20 flex flex-col w-full max-w-[1280px]">
         {/* Section Header */}
-        <h2 className="font-garet text-[40px] md:text-[48px] font-[850] leading-[110%] tracking-[0.7px] uppercase text-[#F6F4F1]">
+        <h2 className="font-garet text-[40px] md:text-[48px] font-[850] leading-[110%] tracking-[0.7px] uppercase text-[#F6F4F1] mb-[40px]">
           OUR PARTNERS<br />AND COLLABORATORS
         </h2>
 
-        {/* Partner Groups */}
-        <div className="flex flex-col md:flex-row gap-[64px] items-start w-full">
-          
-          {/* Cinemas Group */}
-          <div className="flex flex-col gap-[16px] w-full">
-            <h3 className="font-inter text-[20px] font-bold tracking-[0.5px] text-[#F6F4F1]">
-              Cinemas
-            </h3>
-            <div className="flex gap-[24px] flex-wrap">
-               {/* Placeholders */}
-               {[1, 2, 3, 4].map((i) => (
-                 <div key={`cinema-${i}`} className="w-[88px] h-[88px] rounded-[8px] bg-[#0E0E0E]" />
-               ))}
-            </div>
-          </div>
+        {/* Divider */}
+        <div className="w-full h-[1px] bg-[#F6F4F1] opacity-20 mb-[40px]" />
 
-          {/* Game Creators Group */}
-          <div className="flex flex-col gap-[16px] w-full">
-            <h3 className="font-inter text-[20px] font-bold tracking-[0.5px] text-[#F6F4F1]">
-              Game Right-holders
-            </h3>
-            <div className="flex gap-[24px] flex-wrap">
-               {/* Placeholders */}
-               {[1, 2, 3, 4].map((i) => (
-                 <div key={`game-${i}`} className="w-[88px] h-[88px] rounded-[8px] bg-[#0E0E0E]" />
-               ))}
-            </div>
+        {/* Cinemas Group */}
+        <div className="flex flex-col gap-[32px] w-full mb-[64px]">
+          <h3 className="font-inter text-[20px] font-bold tracking-[0.5px] uppercase text-[#F6F4F1] opacity-60">
+            Cinema Partners
+          </h3>
+          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-[16px]">
+              {[
+                "Arcadia - Logo.jpg",
+                "Creative Europe Media Logo.png",
+                "FEFFS - Logo.png",
+                "KSPJ - Logo.png",
+                "Logo-SF-Yellow-Square-Vector_1.png",
+                "NERDIC_RGB_WortBildmarke_Quer_B.jpg",
+                "Quai10 - Logo.png",
+                "Savoy - Logo.png",
+                "Votiv-DeFrance-Hauptlogo-Schwarz.png",
+                "lab-1-logo-black.png",
+                "spiel_fabrique_transparent.png",
+              ].map((logo, i) => (
+                <div key={`cinema-${i}`} className="relative w-full aspect-video rounded-[12px] bg-[#0E0E0E] flex items-center justify-center overflow-hidden border border-[#FFFFFF10]">
+                  <Image
+                    src={`/section-partners/partner-logos/${logo}`}
+                    alt={logo.split('.')[0]}
+                    fill
+                    className="object-contain p-6"
+                  />
+                </div>
+              ))}
+              {/* One more placeholder to make it 12 items for 4x3 grid feeling (11 items + 1) */}
+               <div className="w-full aspect-video rounded-[12px] bg-[#0E0E0E] border border-[#FFFFFF10]" />
           </div>
         </div>
+
+        {/* Divider */}
+        <div className="w-full h-[1px] bg-[#F6F4F1] opacity-20 mb-[40px]" />
+
+        {/* Game Right-holders Group */}
+        <div className="flex flex-col gap-[32px] w-full">
+          <h3 className="font-inter text-[20px] font-bold tracking-[0.5px] uppercase text-[#F6F4F1] opacity-60">
+            Game Right-holders
+          </h3>
+          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-[16px]">
+              {/* Placeholders 4x3 = 12 items */}
+              {[...Array(12)].map((_, i) => (
+                <div key={`game-placeholder-${i}`} className="w-full aspect-video rounded-[12px] bg-[#0E0E0E] border border-[#FFFFFF10]" />
+              ))}
+          </div>
+        </div>
+
       </div>
     </section>
   );
