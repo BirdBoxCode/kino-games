@@ -28,6 +28,9 @@ export function FilmstripGallery({ images }: FilmstripGalleryProps) {
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (selectedIndex === null) return;
       if (e.key === "Escape") closeLightbox();
@@ -43,6 +46,17 @@ export function FilmstripGallery({ images }: FilmstripGalleryProps) {
       document.body.style.overflow = "";
     };
   }, [selectedIndex, showNext, showPrev]);
+
+  // Clean typed handlers for buttons to prevent propagation
+  const handlePrevClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    showPrev();
+  };
+
+  const handleNextClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    showNext();
+  };
 
   return (
     <>
@@ -123,16 +137,14 @@ export function FilmstripGallery({ images }: FilmstripGalleryProps) {
 
               {/* Navigation Buttons (Desktop) */}
               <button
-                onClick={showPrev}
+                onClick={handlePrevClick}
                 className="absolute left-4 z-50 hidden md:flex items-center justify-center p-4 text-white/50 hover:text-[#F9C962] transition-colors"
-                onClick={(e) => { e.stopPropagation(); showPrev(); }}
               >
                 <ChevronLeft size={48} />
               </button>
               <button
-                onClick={showNext}
+                onClick={handleNextClick}
                 className="absolute right-4 z-50 hidden md:flex items-center justify-center p-4 text-white/50 hover:text-[#F9C962] transition-colors"
-                onClick={(e) => { e.stopPropagation(); showNext(); }}
               >
                 <ChevronRight size={48} />
               </button>
