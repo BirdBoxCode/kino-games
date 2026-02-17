@@ -77,7 +77,7 @@ export function SectionHow() {
           inset: 0,
           width: '100%',
           height: '100%',
-          background: 'linear-gradient(82deg, rgba(0, 0, 0, 0.58) 48.86%, rgba(208, 208, 208, 0.10) 82.27%, rgba(208, 208, 208, 0.07) 93.7%)',
+          background: 'linear-gradient(86deg, rgba(0, 0, 0, 0.25) 49.69%, rgba(102, 102, 102, 0.00) 91.5%)',
           zIndex: 1,
           pointerEvents: 'none'
         }}
