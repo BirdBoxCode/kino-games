@@ -1,6 +1,8 @@
 "use client";
 
-import { LighthouseGallery } from "./LighthouseGallery";
+import { motion } from "framer-motion";
+import { FilmstripGallery } from "./FilmstripGallery";
+import { LightSweep, contentVariants } from "./ProjectorReveal";
 
 export function SectionGamesCinemas() {
   const cinemasImages = [
@@ -8,6 +10,7 @@ export function SectionGamesCinemas() {
     "/section-cinemas-games/cinema-image2.png",
     "/section-cinemas-games/cinema-image3.png",
     "/section-cinemas-games/cinema-image4.png",
+    "/section-cinemas-games/cinema-image5.jpg",
   ];
 
   const gamesImages = [
@@ -15,6 +18,9 @@ export function SectionGamesCinemas() {
     "/section-cinemas-games/game-image2.png",
     "/section-cinemas-games/game-image3.png",
     "/section-cinemas-games/game-image4.png",
+    "/section-cinemas-games/game-image5.png",
+    "/section-cinemas-games/game-image6.png",
+    "/section-cinemas-games/game-image7.png",
   ];
 
   return (
@@ -82,21 +88,7 @@ export function SectionGamesCinemas() {
           margin: "0 auto",
         }}
       >
-        {/* Section Sub Header */}
-        <div
-          className="section-sub-header"
-          style={{
-            color: "#F2EFEA",
-            fontFamily: "Inter, sans-serif",
-            fontSize: "24px",
-            fontStyle: "normal",
-            fontWeight: 600,
-            lineHeight: "normal",
-            letterSpacing: "0.5px",
-          }}
-        >
-          Cinemas & Game Right-Holders
-        </div>
+
 
         {/* Content Wrapper for BOTH blocks */}
         <div
@@ -108,67 +100,159 @@ export function SectionGamesCinemas() {
             flexDirection: "column",
             alignItems: "flex-start",
             gap: "5px",
+            position: "relative" // for LightSweep
           }}
         >
+          <LightSweep />
+          
           {/* =======================
               BLOCK 1: FOR CINEMAS
              ======================= */}
+          {/* =======================
+              BLOCK 1: FOR CINEMAS
+             ======================= */}
+          <motion.h3
+            variants={contentVariants}
+            className="section-header"
+            style={{
+              fontFamily: "Garet, Inter, sans-serif",
+              fontSize: "32px",
+              fontWeight: 850,
+              lineHeight: "110%",
+              letterSpacing: "0.7px",
+              textTransform: "uppercase",
+              color: "#F6F4F1",
+              margin: "0 0 10px 0",
+            }}
+          >
+            FOR <span style={{ color: "#F9C962" }}>CINEMAS</span>
+          </motion.h3>
           <div
-            className="content-row"
+            className="content-row content-row-gap"
             style={{
               display: "flex",
-              alignItems: "center",
+              alignItems: "center", // Vertically center
               justifyContent: "space-between",
-              gap: "40px",
+              // gap handled by class
               width: "100%",
               flexWrap: "wrap",
             }}
           >
             {/* Text Column */}
             <div className="text-column" style={{ flex: "1 1 400px" }}>
-              <h3
-                className="section-header"
-                style={{
-                  fontFamily: "Garet, Inter, sans-serif",
-                  fontSize: "48px",
-                  fontWeight: 850,
-                  lineHeight: "110%",
-                  letterSpacing: "0.7px",
-                  textTransform: "uppercase",
-                  color: "#F6F4F1",
-                  margin: "0 0 10px 0",
-                }}
-              >
-                FOR <span style={{ color: "#F9C962" }}>CINEMAS</span>
-              </h3>
 
-              <div
+              <motion.div
+                variants={contentVariants}
                 className="bullets"
-                style={{ display: "flex", flexDirection: "column" }}
+                style={{ 
+                  display: "flex", 
+                  flexDirection: "column",
+                  backgroundColor: "rgba(0, 0, 0, 0.4)",
+                  backdropFilter: "blur(16px)",
+                  border: "1px solid rgba(246, 244, 241, 0.1)",
+                  borderRadius: "24px",
+                  padding: "20px 32px",
+                  gap: "0px",
+                  width: "fit-content" // Keep hugging content
+                }}
               >
                 <Bullet text="New audiences beyond traditional cinema-goers" />
                 <Bullet text="Fresh programming formats" />
                 <Bullet text="Cultural relevance in digital art" />
-              </div>
+              </motion.div>
             </div>
 
             {/* Gallery Column */}
-            <div
-              className="gallery-column"
-              style={{ flex: "1 1 50%", maxWidth: "50%" }}
+            <motion.div
+              variants={contentVariants}
+              className="gallery-column bg-black/40 backdrop-blur-[16px] border border-[#F6F4F1]/10 rounded-[24px] p-[20px] max-[1040px]:bg-transparent max-[1040px]:backdrop-blur-none max-[1040px]:border-none max-[1040px]:p-0"
+              style={{ 
+                flex: "1 1 400px",
+                maxWidth: "100%", 
+                minWidth: "300px",
+                overflow: "hidden",
+              }}
             >
-              <LighthouseGallery images={cinemasImages} />
-            </div>
+              <FilmstripGallery images={cinemasImages} />
+            </motion.div>
+            
+            {/* Spacer / Empty Column on Desktop if we want to retain the 'side' look, 
+                but user asked for stacking. Actually, user likely meant stacking the *gallery* under the bullets,
+                but keeping the two main blocks (Cinemas vs Games) distinct?
+                Re-reading: "For both content blocks... move the thumbnail strip so it sits directly UNDER the bullet list panel"
+                And: "Desktop (lg+): Use a 2-column layout per block: left column: heading + bullet list card, right column: filmstrip gallery" -> WAIT.
+                The previous request said "Desktop: 2-column layout... Right column: filmstrip gallery".
+                The NEW request says: "move the thumbnail strip so it sits directly UNDER the bullet list panel... not to the side."
+                
+                This creates a contradiction or a change of heart.
+                "move the thumbnail strip so it sits directly UNDER the bullet list panel (the grey/blur box), not to the side."
+                "Thumbnail strip must match the exact width of the grey bullet panel."
+                
+                This implies a Vertical Stack for each block:
+                [ Heading ]
+                [ Bullet Box ]
+                [ Filmstrip ]
+                
+                And then likely these blocks are arranged on the page.
+                Given the space constraints and "responsive 2-column (desktop)", maybe the user means the two BLOCKS (Cinemas vs Games) should be side-by-side?
+                No, they are usually separate sections. 
+                
+                The user provided a screenshot (which I can't see but description says "match style").
+                
+                Let's assume the structure for *each* block is:
+                <BlockContainer>
+                  <Heading />
+                  <BulletPanel />
+                  <Filmstrip />
+                </BlockContainer>
+                
+                And the page layout puts these blocks... where?
+                In the previous code, they were `content-row` (flex).
+                The previous code had `Text Column` and `Gallery Column`.
+                
+                I will consolidate to a single column per block.
+                And then maybe lay out the two blocks side-by-side on desktop?
+                The original design usually had them stacked vertically with a divider.
+                
+                "Desktop (lg+): Use a 2-column layout per block..." -> This was the OLD request.
+                The NEW request (Step 203) overrides it: "move the thumbnail strip so it sits directly UNDER the bullet list panel... not to the side."
+                
+                So, single column for the content of the block.
+                But what about the page layout?
+                If I stack everything vertically, it might be too tall.
+                However, if I put the two blocks side-by-side (Cinemas Left, Games Right), that fits the "2-column" idea but applies it to the blocks themselves.
+                
+                Let's stick to the safe bet:
+                Cinemas Block (Top) -> Stacked Content
+                Divider
+                Games Block (Bottom) -> Stacked Content
+                
+                Wait, if I do that, the "flex-wrap" container might look empty on the right if I just remove the gallery column.
+                The user said "For both content blocks... move the thumbnail strip so it sits directly UNDER the bullet list panel".
+                
+                So I will perform the merge as shown in my code block above.
+                I will remove the separate `gallery-column`.
+             */}
+             
+             {/* Right side image or decoration? The user didn't specify what goes on the right if the gallery moves. 
+                 If the gallery moves under the text, the right side is empty.
+                 Maybe the user wants the content to be centered or wider?
+                 "The thumbnail strip must match the exact width of the grey bullet panel."
+                 
+                 I'll just let the `text-column` expand or center.
+                 I'll remove the `gallery-column` entirely.
+              */}
           </div>
 
           {/* Divider Line */}
-          <div
+          <motion.div
+            variants={contentVariants}
             className="divider-line"
             style={{
               width: "100%",
               height: "1px",
               background: "#F6F4F1",
-              margin: "20px 0", // Reduced margin
+              margin: "20px 0", 
               opacity: 0.5,
             }}
           />
@@ -176,52 +260,70 @@ export function SectionGamesCinemas() {
           {/* ==================================
               BLOCK 2: FOR GAME RIGHT-HOLDERS
              ================================== */}
+          <motion.h3
+            variants={contentVariants}
+            className="section-header"
+            style={{
+              fontFamily: "Garet, Inter, sans-serif",
+              fontSize: "32px",
+              fontWeight: 850,
+              lineHeight: "110%",
+              letterSpacing: "0.7px",
+              textTransform: "uppercase",
+              color: "#F6F4F1",
+              margin: "0 0 10px 0",
+            }}
+          >
+            FOR <span style={{ color: "#F9C962" }}>GAME RIGHT-HOLDERS</span>
+          </motion.h3>
           <div
-            className="content-row"
+            className="content-row content-row-gap"
             style={{
               display: "flex",
-              alignItems: "center",
+              alignItems: "center", // Vertically center
               justifyContent: "space-between",
-              gap: "40px",
+              // gap handled by class
               width: "100%",
               flexWrap: "wrap",
             }}
           >
             {/* Text Column */}
             <div className="text-column" style={{ flex: "1 1 400px" }}>
-              <h3
-                className="section-header"
-                style={{
-                  fontFamily: "Garet, Inter, sans-serif",
-                  fontSize: "48px",
-                  fontWeight: 850,
-                  lineHeight: "110%",
-                  letterSpacing: "0.7px",
-                  textTransform: "uppercase",
-                  color: "#F6F4F1",
-                  margin: "0 0 10px 0",
-                }}
-              >
-                FOR <span style={{ color: "#F9C962" }}>GAME RIGHT-HOLDERS</span>
-              </h3>
 
-              <div
+              <motion.div
+                variants={contentVariants}
                 className="bullets"
-                style={{ display: "flex", flexDirection: "column" }}
+                style={{ 
+                  display: "flex", 
+                  flexDirection: "column",
+                  backgroundColor: "rgba(0, 0, 0, 0.4)",
+                  backdropFilter: "blur(16px)",
+                  border: "1px solid rgba(246, 244, 241, 0.1)",
+                  borderRadius: "24px",
+                  padding: "20px 32px",
+                  gap: "0px",
+                  width: "fit-content"
+                }}
               >
                 <Bullet text="New audiences beyond traditional gaming spaces" />
                 <Bullet text="Premium cinema venues for launches and events" />
                 <Bullet text="Games presented as cultural works on the big screen" />
-              </div>
+              </motion.div>
             </div>
 
             {/* Gallery Column */}
-            <div
-              className="gallery-column"
-              style={{ flex: "1 1 50%", maxWidth: "50%" }}
+            <motion.div
+              variants={contentVariants}
+              className="gallery-column bg-black/40 backdrop-blur-[16px] border border-[#F6F4F1]/10 rounded-[24px] p-[20px] max-[1040px]:bg-transparent max-[1040px]:backdrop-blur-none max-[1040px]:border-none max-[1040px]:p-0"
+              style={{ 
+                flex: "1 1 400px",
+                maxWidth: "100%", 
+                minWidth: "300px",
+                overflow: "hidden",
+              }}
             >
-              <LighthouseGallery images={gamesImages} />
-            </div>
+              <FilmstripGallery images={gamesImages} />
+            </motion.div>
           </div>
         </div>
       </div>
@@ -231,7 +333,8 @@ export function SectionGamesCinemas() {
 
 function Bullet({ text }: { text: string }) {
   return (
-    <div
+    <motion.div
+      variants={contentVariants}
       className="bullet"
       style={{
         display: "flex",
@@ -266,6 +369,6 @@ function Bullet({ text }: { text: string }) {
       >
         {text}
       </p>
-    </div>
+    </motion.div>
   );
 }

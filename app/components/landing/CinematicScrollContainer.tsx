@@ -1,12 +1,19 @@
 "use client";
 
-import { useEffect, useState, ReactElement, cloneElement } from "react";
+import { useEffect, useState, ReactElement, cloneElement, useCallback } from "react";
 import { useReducedMotion, useMotionValue, useTransform } from "framer-motion";
 import { ScrollIndicator } from "./ScrollIndicator";
+import { ProjectorReveal } from "./ProjectorReveal";
 
 interface CinematicScrollContainerProps {
   children: ReactElement[];
 }
+
+
+// Sensitivity settings
+const THRESHOLD = 0.4; 
+const INTENT_DAMPING = 1200; 
+const COOLDOWN_MS = 1000; 
 
 export function CinematicScrollContainer({ 
   children, 
@@ -14,14 +21,66 @@ export function CinematicScrollContainer({
   const [activeIndex, setActiveIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isCinematic, setIsCinematic] = useState(true);
-  const intent = useMotionValue(0); 
+  const intent = useMotionValue(0);
   const prefersReducedMotion = useReducedMotion();
   const totalSections = children.length;
 
-  // Sensitivity settings
-  const THRESHOLD = 0.4; 
-  const INTENT_DAMPING = 1200; 
-  const COOLDOWN_MS = 1000; 
+ 
+
+  // Move performSwitch logic here so it can be used by both event listener and scroll handler
+  const performSwitch = useCallback((targetIndex: number) => {
+    setIsTransitioning(true);
+    setActiveIndex(targetIndex);
+    
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, COOLDOWN_MS);
+  }, []);
+
+  // Event Listener for programmatic navigation (Navbar)
+  useEffect(() => {
+    const handleNavRequest = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      const { index, type, targetId } = customEvent.detail;
+
+      if (type === 'cinematic') {
+        // If we are currently in Normal Scroll Mode (scrolled past),
+        // we must scroll back to top to re-enter cinematic experience.
+        if (!isCinematic) {
+          setIsCinematic(true);
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+        performSwitch(index);
+      } else if (type === 'scroll-to-target') {
+        const targetElement = document.getElementById(targetId);
+
+        if (isCinematic) {
+          setIsCinematic(false);
+          document.body.style.overflow = '';
+          // Jump to the end of the cinematic spacer to simulate scrolling down from the last section
+          // The spacer height is totalSections * 100vh.
+          // The last section starts at (totalSections - 1) * 100vh.
+          // We scroll to the top of the last section to ensure visual continuity before scrolling away.
+          window.scrollTo({ top: (totalSections - 1) * window.innerHeight, behavior: "instant" });
+          
+          // Then smooth scroll to the target after a short delay to allow state/layout to settle
+          setTimeout(() => {
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 100);
+        } else {
+          // Already in normal mode, just scroll there
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }
+    };
+
+    window.addEventListener('cinematic-nav', handleNavRequest);
+    return () => window.removeEventListener('cinematic-nav', handleNavRequest);
+  }, [isCinematic, performSwitch, totalSections]);
 
   useEffect(() => {
     if (prefersReducedMotion) return;
@@ -36,15 +95,6 @@ export function CinematicScrollContainer({
 
     let accumulatedDelta = 0;
     let timeoutId: NodeJS.Timeout;
-
-    const performSwitchLocal = (targetIndex: number) => {
-      setIsTransitioning(true);
-      setActiveIndex(targetIndex);
-      
-      setTimeout(() => {
-        setIsTransitioning(false);
-      }, COOLDOWN_MS);
-    };
 
     const handleWheel = (e: WheelEvent) => {
       if (!isCinematic) return;
@@ -83,7 +133,7 @@ export function CinematicScrollContainer({
         const targetIndex = activeIndex + direction;
 
         if (targetIndex >= 0 && targetIndex < totalSections) {
-          performSwitchLocal(targetIndex);
+          performSwitch(targetIndex);
           accumulatedDelta = 0;
           intent.set(0);
         }
@@ -124,7 +174,7 @@ export function CinematicScrollContainer({
         const targetIndex = activeIndex + direction;
         
         if (targetIndex >= 0 && targetIndex < totalSections) {
-          performSwitchLocal(targetIndex);
+          performSwitch(targetIndex);
           intent.set(0);
         }
       }
@@ -146,7 +196,7 @@ export function CinematicScrollContainer({
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [activeIndex, isTransitioning, totalSections, prefersReducedMotion, intent, isCinematic]);
+  }, [activeIndex, isTransitioning, totalSections, prefersReducedMotion, intent, isCinematic, performSwitch]);
 
   // RE-ENTER CINEMATIC MODE
   useEffect(() => {
@@ -176,7 +226,7 @@ export function CinematicScrollContainer({
     // The user requested: "remove the scroll animation... when the user scrolls down"
     if (activeIndex === totalSections - 1 && v > 0) return 0;
 
-    return Math.min(1, Math.abs(v) / THRESHOLD);
+    return Math.sign(v) * Math.min(1, Math.abs(v) / THRESHOLD);
   });
 
   if (prefersReducedMotion) {
@@ -199,20 +249,27 @@ export function CinematicScrollContainer({
         {children.map((child, index) => {
           const isActive = index === activeIndex;
           return (
-            <div 
-              key={index}
+            <ProjectorReveal 
+              key={index} 
+              isActive={isActive}
               className="absolute inset-0"
-              style={{ 
-                zIndex: isActive ? 50 : 10,
-                opacity: isActive ? 1 : 0,
-                pointerEvents: isActive ? 'auto' : 'none',
-                transition: 'opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1)',
-                transform: isActive ? 'scale(1)' : 'scale(1.05)',
-                visibility: isActive ? 'visible' : (index === activeIndex - 1 || index === activeIndex + 1 ? 'visible' : 'hidden')
-              }}
             >
-              {cloneElement(child, { scrollProgress: isActive ? 0 : 1 } as Record<string, unknown>)}
-            </div>
+              {/* Keep z-index and pointer-events logic on a wrapper if needed, 
+                  or let ProjectorReveal handle basic visibility. 
+                  ProjectorReveal sets opacity to 0 when hidden, so pointerEvents should be none effectively,
+                  but explicit handling is safer. */}
+               <div
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    pointerEvents: isActive ? 'auto' : 'none',
+                    zIndex: isActive ? 50 : 10,
+                    // Remove manual opacity/transform transitions as ProjectorReveal handles entrance
+                  }}
+               >
+                 {cloneElement(child, { scrollProgress: isActive ? 0 : 1 } as Record<string, unknown>)}
+               </div>
+            </ProjectorReveal>
           );
         })}
 

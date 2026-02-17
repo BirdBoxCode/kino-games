@@ -7,9 +7,10 @@ import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const navLinks = [
-  { name: "How It Works", href: "/#how-it-works" },
-  { name: "Our Model", href: "/#our-model" },
-  { name: "Partners", href: "/#partners" },
+  { name: "About", href: "/#about", index: 1, type: 'cinematic' },
+  { name: "How It Works", href: "/#how-it-works", index: 3, type: 'cinematic' },
+  { name: "Our Model", href: "/#our-model", index: 5, type: 'cinematic' },
+  { name: "Partners", href: "/#partners", index: -1, type: 'normal' },
 ];
 
 export default function Navbar() {
@@ -27,12 +28,53 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
+  const goToSection = (index: number) => {
+    window.dispatchEvent(new CustomEvent('cinematic-nav', { 
+      detail: { index, type: 'cinematic' } 
+    }));
+  };
+
+  const handleNavClick = (e: React.MouseEvent, link: { index: number; type: string; name: string; href: string }) => {
+    e.preventDefault(); // Prevent default anchor jump
+    setIsOpen(false);
+
+    if (link.type === 'cinematic') {
+      goToSection(link.index);
+    } else if (link.type === 'normal') {
+      // Normal scroll for non-cinematic sections (Partners, etc.)
+      const targetId = link.href.replace('/#', '');
+      
+      window.dispatchEvent(new CustomEvent('cinematic-nav', { 
+        detail: {
+          type: 'scroll-to-target',
+          targetId
+        } 
+      }));
+    }
+  };
+
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsOpen(false);
+    const footer = document.querySelector("footer");
+    if (footer) {
+      footer.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // Logo click returns to Hero (Cinematic 0)
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsOpen(false);
+    goToSection(0);
+  };
+
   return (
     <>
       <nav className="fixed top-0 left-0 w-full h-[120px] bg-transparent border-b-[1px] border-[#2A2A2A] flex items-center justify-center z-[999] px-4 md:px-12 backdrop-blur-sm">
         <div className="w-full max-w-[1440px] flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="relative z-50">
+          <Link href="/" onClick={handleLogoClick} className="relative z-50">
             <div className="w-[157px] h-[43.2px] relative">
               <Image
                 src="/navbarlogo.svg"
@@ -50,6 +92,7 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link)}
                 className="relative font-inter font-medium text-[16px] text-text-on-dark tracking-[2px] group py-1"
               >
                 {link.name}
@@ -59,6 +102,7 @@ export default function Navbar() {
             ))}
             <Link
               href="/#contact"
+              onClick={handleContactClick}
               className="flex items-center gap-[10px] px-[18px] py-[10px] bg-transparent border-2 border-accent-gold rounded-[6px] text-text-on-dark font-inter font-medium text-[16px] tracking-[2px] hover:bg-accent-gold hover:text-text-on-light transition-all duration-300"
             >
               Contact Us
@@ -90,7 +134,7 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => handleNavClick(e, link)}
                   className="relative font-inter font-medium text-[24px] text-text-on-dark tracking-[2px] group py-1"
                 >
                   {link.name}
@@ -99,7 +143,7 @@ export default function Navbar() {
               ))}
               <Link
                 href="/#contact"
-                onClick={() => setIsOpen(false)}
+                onClick={handleContactClick}
                 className="mt-4 flex items-center gap-[10px] px-[24px] py-[12px] bg-transparent border-2 border-accent-gold rounded-[6px] text-text-on-dark font-inter font-medium text-[18px] tracking-[2px] hover:bg-accent-gold hover:text-text-on-light transition-all duration-300"
               >
                 Contact Us

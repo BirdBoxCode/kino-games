@@ -2,6 +2,7 @@
 
 import { motion, useTransform, useMotionValue } from "framer-motion";
 import { useEffect } from "react";
+import { LightSweep, contentVariants } from "./ProjectorReveal";
 
 interface SectionWhyProps {
   scrollProgress?: number; // 0-1 value from CinematicScrollContainer
@@ -21,6 +22,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
 
   return (
     <motion.section 
+      id="about"
       className="section-why"
       style={{
         display: 'flex',
@@ -60,7 +62,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
       />
 
       {/* Section Title - wrapper for all text content */}
-      <div 
+      <motion.div 
         className="section-title"
         style={{
           display: 'flex',
@@ -73,8 +75,11 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
           maxWidth: '1280px'
         }}
       >
+        <LightSweep />
+
         {/* Section Sub-header */}
-        <div
+        <motion.div
+          variants={contentVariants}
           className="section-sub-header"
           style={{
             color: '#F2EFEA',
@@ -87,7 +92,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
           }}
         >
           Cinemas &amp; Game Right-Holders
-        </div>
+        </motion.div>
 
         {/* Conte-wrapper */}
         <div 
@@ -113,7 +118,8 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
             }}
           >
             {/* Section Header - split into two colored parts */}
-            <h2
+            <motion.h2
+              variants={contentVariants}
               className="section-header"
               style={{
                 fontFamily: 'var(--font-garet), Garet, Inter, sans-serif',
@@ -129,7 +135,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
               <span style={{ color: '#F9C962' }}>A NEW STAGE FOR</span>
               <br />
               <span style={{ color: '#F6F4F1' }}>INTERACTIVE CULTURE</span>
-            </h2>
+            </motion.h2>
           </div>
 
           {/* Bullets */}
@@ -145,7 +151,8 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
             }}
           >
             {/* Bullet 1 */}
-            <div 
+            <motion.div 
+              variants={contentVariants}
               className="bullet"
               style={{
                 display: 'flex',
@@ -185,7 +192,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
                     width: '100%',
                     color: '#F6F4F1',
                     fontFamily: 'var(--font-inter), Inter, sans-serif',
-                    fontSize: 'clamp(16px, 1.8vw, 20px)',
+                    fontSize: 'clamp(16px, 1.8vw, 18px)',
                     fontStyle: 'normal',
                     fontWeight: 500,
                     lineHeight: '1.4',
@@ -196,10 +203,11 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
                   Cinemas become gateways to new audiences, while game creators gain a high-impact marketing platform.
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Bullet 2 */}
-            <div 
+            <motion.div 
+              variants={contentVariants}
               className="bullet"
               style={{
                 display: 'flex',
@@ -239,7 +247,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
                     width: '100%',
                     color: '#F6F4F1',
                     fontFamily: 'var(--font-inter), Inter, sans-serif',
-                    fontSize: 'clamp(16px, 1.8vw, 20px)',
+                    fontSize: 'clamp(16px, 1.8vw, 18px)',
                     fontStyle: 'normal',
                     fontWeight: 500,
                     lineHeight: '1.4',
@@ -250,10 +258,10 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
                   Together, they present video games as a cultural experience within iconic cinematic spaces.
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </motion.section>
   );
 }

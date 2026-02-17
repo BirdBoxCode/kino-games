@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useTransform, MotionValue, useMotionValue } from "framer-motion";
+import { motion, useTransform, MotionValue, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useEffect } from "react";
 
@@ -17,11 +17,9 @@ interface ScrollIndicatorProps {
  * At the end of the transition (0.8 -> 1.0):
  * - The entire indicator fades out.
  */
-const THRESHOLD = 0.4;
-
 export function ScrollIndicator({ progress, className = "" }: ScrollIndicatorProps) {
-  // Ensure we have a MotionValue for transforms
   const motionProgress = useMotionValue(0);
+  const prefersReducedMotion = useReducedMotion();
   
   useEffect(() => {
     if (typeof progress === "number") {
@@ -31,51 +29,44 @@ export function ScrollIndicator({ progress, className = "" }: ScrollIndicatorPro
     }
   }, [progress, motionProgress]);
 
-  // Phase 1: Gold circle appears and chevron changes color (0 -> 0.4)
-  const circleScale = useTransform(motionProgress, [0, 0.4], [0, 1]);
-  const circleOpacity = useTransform(motionProgress, [0, 0.1], [0, 1]);
-  const chevronColor = useTransform(motionProgress, [0.2, 0.4], ["#F6F4F1", "#000000"]);
+  // Amplify progress so the circle appears immediately (sensitivity 15x)
+  // Use absolute value for scale calculation
+  const amplifiedProgress = useTransform(motionProgress, (v) => Math.min(Math.abs(v) * 15, 1));
   
-  // Phase 2: Fade out at the very end of the transition (Disabled for now as intent reaches 0 after switch)
-  // Actually, we can keep it as a safety or if we want it to fade when intent is full.
-  const groupOpacity = useTransform(motionProgress, [THRESHOLD, THRESHOLD + 0.1], [1, 1]);
+  // Smooth out the movement with a spring
+  const smoothProgress = useSpring(amplifiedProgress, { stiffness: 400, damping: 30 });
 
-  // Floating effect when at rest
-  const floatY = useTransform(motionProgress, [0, 0.05], [10, 0]);
+  const activeScale = prefersReducedMotion ? 0 : smoothProgress;
+  
+  // Rotate chevron based on direction (negative progress = up)
+  const rotation = useTransform(motionProgress, (v) => v < 0 ? 180 : 0);
 
   return (
     <motion.div 
-      style={{ opacity: groupOpacity }}
-      className={`absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center h-16 w-16 ${className}`}
+      className={`absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center justify-center ${className}`}
+      style={{ rotate: rotation }}
     >
-      {/* Filled Gold Circle */}
-      <motion.div 
-        className="absolute rounded-full bg-[#F9C962] pointer-events-none"
-        style={{
-          width: '100%',
-          height: '100%',
-          scale: circleScale,
-          opacity: circleOpacity
-        }}
-      />
-
-      {/* Chevron Icon */}
-      <motion.div
-        animate={{
-          y: [0, 10, 0]
-        }}
-        transition={{
-          y: { repeat: Infinity, duration: 2, ease: "easeInOut" }
-        }}
-        style={{ 
-          color: chevronColor as unknown as string,
-          y: floatY // This will override the animation slightly or add to it? 
-          // Actually, motion.div animate and style.y can conflict.
-        }}
-        className="relative z-10 flex items-center justify-center"
-      >
-        <ChevronDown size={32} strokeWidth={2} />
-      </motion.div>
+      {/* Circle Container */}
+      <div className="relative w-12 h-12 rounded-full overflow-hidden flex items-center justify-center">
+        {/* Fill */}
+        <motion.div 
+          className="absolute inset-0 bg-[#F9C962] rounded-full"
+          style={{ 
+            scale: activeScale,
+          }}
+        />
+        
+        {/* Chevron Icon */}
+        <motion.div
+          animate={{ y: [0, 3, 0] }}
+          transition={{
+            y: { repeat: Infinity, duration: 2, ease: "easeInOut" }
+          }}
+          className="relative z-10 text-[#F6F4F1] opacity-80"
+        >
+          <ChevronDown size={24} strokeWidth={2} />
+        </motion.div>
+      </div>
     </motion.div>
   );
 }

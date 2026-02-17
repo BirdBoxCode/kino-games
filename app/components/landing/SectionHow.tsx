@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
+import { LightSweep, contentVariants } from "./ProjectorReveal";
 
 export function SectionHow() {
   return (
@@ -98,6 +100,8 @@ export function SectionHow() {
           justifyContent: 'center'
         }}
       >
+        <LightSweep />
+
         {/* Content Top */}
         <div 
           className="content-top"
@@ -112,7 +116,8 @@ export function SectionHow() {
           <span style={{ color: '#F6F4F1', fontFamily: 'Inter, sans-serif', fontSize: '20px', fontWeight: 600 }}>
              From game to cinema
           </span>
-           <h2 
+           <motion.h2 
+            variants={contentVariants}
             style={{
               fontFamily: 'Garet, Inter, sans-serif',
               fontSize: 'clamp(40px, 5vw, 64px)',
@@ -121,13 +126,10 @@ export function SectionHow() {
               letterSpacing: '0.7px',
               textTransform: 'uppercase',
               color: '#F9C962', // 'HOW' is yellow, rest white is typical but request says "HOW DOES IT WORK?"
-              // Applying #F9C962 to 'HOW' based on usual pattern, but user didn't specify color split in this prompt.
-              // Looking at the screenshot provided (user said "I will attach... screenshot"), likely "HOW" is yellow.  
-              // I will use yellow for 'HOW' as per common style in this project.
             }}
           >
             <span style={{ color: '#F9C962' }}>HOW</span> <span style={{ color: '#F6F4F1' }}>DOES IT WORK?</span>
-          </h2>
+          </motion.h2>
         </div>
 
         {/* Content Bottom */}
@@ -153,7 +155,7 @@ export function SectionHow() {
             }}
           >
             {/* Trail Item 1 */}
-            <div className="trail-item" style={{ display: 'flex', flexDirection: 'row', gap: '20px', alignItems: 'center' }}>
+            <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'row', gap: '20px', alignItems: 'center' }}>
               <div 
                 className="squiggle-frame1"
                 style={{
@@ -170,15 +172,15 @@ export function SectionHow() {
                 </div>
               </div>
               <div className="how-p1" style={{ maxWidth: '600px' }}>
-                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '20px', color: '#F6F4F1', margin: 0 }}>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#F6F4F1', margin: 0 }}>
                   <span style={{ fontWeight: 700 }}>Games are adapted for the cinema environment.</span><br/>
                   <span style={{ fontWeight: 500 }}>Simple formats designed specifically for large screens and shared spaces.</span>
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Trail Item 2 - Staggered Left Margin for Visual Trail Effect */}
-            <div className="trail-item" style={{ display: 'flex', flexDirection: 'row', gap: '20px', alignItems: 'center', marginLeft: '40px' }}> 
+            <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'row', gap: '20px', alignItems: 'center', marginLeft: '40px' }}> 
               <div 
                 className="squiggle-frame-2"
                 style={{
@@ -195,15 +197,15 @@ export function SectionHow() {
                  </div>
               </div>
               <div className="how-p2" style={{ maxWidth: '600px' }}>
-                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '20px', color: '#F6F4F1', margin: 0 }}>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#F6F4F1', margin: 0 }}>
                   <span style={{ fontWeight: 700 }}>Designed to fit existing cinemas.</span><br/>
                   <span style={{ fontWeight: 500 }}>Screen, sound, and interaction work within standard cinema infrastructure.</span>
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Trail Item 3 - More Staggered */}
-            <div className="trail-item" style={{ display: 'flex', flexDirection: 'row', gap: '20px', alignItems: 'center', marginLeft: '80px' }}>
+            <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'row', gap: '20px', alignItems: 'center', marginLeft: '80px' }}>
                <div 
                  className="squiggle-frame-3"
                  style={{
@@ -220,11 +222,11 @@ export function SectionHow() {
                  </div>
                </div>
                <div className="how-p3" style={{ maxWidth: '600px' }}>
-                   <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '20px', color: '#F6F4F1', margin: 0 }}>
+                   <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#F6F4F1', margin: 0 }}>
                     <span style={{ fontWeight: 500 }}>Browse our catalogue of games, decide how long you want it for, plug in and play.</span>
                    </p>
                </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>
