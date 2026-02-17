@@ -40,9 +40,10 @@ export function SectionPartners() {
         />
         
         <motion.div
-            className="absolute bottom-0 z-0 pointer-events-none"
+            className="absolute z-0 pointer-events-none"
             style={{
                 left: 'calc(20% - 100px)',
+                bottom: -400,
                 y,
                 rotate,
                 width: 'clamp(250px, 35vw, 500px)',
