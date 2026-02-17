@@ -9,15 +9,14 @@ export function SectionPartners() {
   
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "center center"]
+    offset: ["start end", "end start"]
   });
 
   // Parallax effect: 
-  // Slides UP from below as you scroll down (enter view)
-  // Slides DOWN as you scroll up (leave view)
-  const y = useTransform(scrollYProgress, [0, 1], ["100%", "-30%"]);
+  // Subtle movement: slightly moves up as you scroll
+  const y = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
   // Optional: slight rotation or scale for more dynamic entry
-  const rotate = useTransform(scrollYProgress, [0, 1], [-10, 0]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [-2, 2]);
 
   return (
     <section
@@ -42,8 +41,8 @@ export function SectionPartners() {
         <motion.div
             className="absolute z-0 pointer-events-none"
             style={{
-                left: 'calc(20% - 100px)',
-                bottom: -400,
+                left: 'calc(20% - 140px)',
+                bottom: -100,
                 y,
                 rotate,
                 width: 'clamp(250px, 35vw, 500px)',
@@ -99,7 +98,7 @@ export function SectionPartners() {
           {/* Game Creators Group */}
           <div className="flex flex-col gap-[16px] w-full">
             <h3 className="font-inter text-[20px] font-bold tracking-[0.5px] text-[#F6F4F1]">
-              Game Creators
+              Game Right-holders
             </h3>
             <div className="flex gap-[24px] flex-wrap">
                {/* Placeholders */}
