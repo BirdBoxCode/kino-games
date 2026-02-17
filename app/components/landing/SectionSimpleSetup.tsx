@@ -27,7 +27,7 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
 
   return (
     <motion.section
-      className="relative w-full h-screen min-h-[964px] flex flex-col justify-center items-center overflow-hidden bg-black"
+      className="relative w-full md:h-screen min-h-screen flex flex-col justify-center items-center overflow-x-hidden md:overflow-hidden bg-black"
       style={{ opacity: sectionOpacity }}
     >
       {/* Background Image: Dark Cinema */}
@@ -103,15 +103,14 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
             {/* content-bottom: flex, w 1327px, h 573px, flex-col, justify-center, items-center, gap 10px, shrink 0 */}
             <motion.div 
               variants={contentVariants}
-              className="relative flex flex-col justify-center items-center gap-[10px] w-full max-w-[1327px] h-auto md:h-[573px] shrink-0 mt-8 md:mt-0"
+              className="relative flex flex-col justify-center items-center gap-[10px] w-full max-w-[1327px] h-auto md:h-[50vh] shrink-0 mt-4 md:mt-0 mb-8 md:mb-0"
             >
                <Image 
                  src="/section-simple-setup/schema-image.png"
                  alt="Simple Setup Schematic: Main Screen, Host, Players, Game System, Audience"
-                 /* schema-image: w 1229px, h 489px, shrink 0, aspect 284/113 */
                  width={1229}
                  height={489}
-                 className="w-full max-w-[1229px] h-auto shrink-0 aspect-[284/113] object-contain"
+                 className="w-full h-auto md:w-auto md:h-full object-contain"
                  priority
                />
             </motion.div>
