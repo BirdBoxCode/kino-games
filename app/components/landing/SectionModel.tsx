@@ -9,7 +9,7 @@ export function SectionModel() {
   return (
     <section
       id="our-model"
-      className="relative w-full h-screen min-h-[964px] flex flex-col justify-center items-start overflow-hidden bg-[#0E0E0E] px-[20px] pt-[160px] pb-[64px] md:px-[80px]"
+      className="relative w-full h-screen min-h-screen flex flex-col justify-center items-start overflow-hidden bg-[#0E0E0E] px-[20px] pt-[160px] pb-[64px] md:px-[80px]"
     >
       {/* Overlay */}
       <div 
@@ -77,14 +77,7 @@ export function SectionModel() {
       {/* Hand Image */}
       <motion.div 
         variants={contentVariants}
-        className="absolute z-20 pointer-events-none"
-        style={{
-            width: '90%',
-            maxWidth: '1271px',
-            height: '572px',
-            left: '0px',
-            bottom: '0px'
-        }}
+        className="absolute z-20 pointer-events-none w-[90%] md:w-full max-w-[1271px] h-[40vh] md:h-[55vh] left-0 bottom-0"
       >
         <Image
             src="/section-model/hand-image2.png"
