@@ -74,31 +74,6 @@ export function SectionGamesCinemas() {
           }
         }
       `}</style>
-      <style jsx>{`
-        .gallery-box {
-          background-color: rgba(0, 0, 0, 0.4);
-          backdrop-filter: blur(16px);
-          border: 1px solid rgba(246, 244, 241, 0.1);
-          border-radius: 24px;
-          padding: 20px;
-        }
-        @media (max-width: 1040px) {
-          .gallery-box {
-            background-color: transparent;
-            backdrop-filter: none;
-            border: none;
-            padding: 0;
-          }
-        }
-        .content-row-gap {
-          gap: 40px;
-        }
-        @media (max-width: 1040px) {
-          .content-row-gap {
-            gap: 20px;
-          }
-        }
-      `}</style>
       <div
         className="content-wrapper"
         style={{
@@ -158,7 +133,7 @@ export function SectionGamesCinemas() {
               display: "flex",
               alignItems: "center", // Vertically center
               justifyContent: "space-between",
-              gap: "40px",
+              // gap handled by class
               width: "100%",
               flexWrap: "wrap",
             }}
@@ -184,24 +159,18 @@ export function SectionGamesCinemas() {
                 <Bullet text="New audiences beyond traditional cinema-goers" />
                 <Bullet text="Fresh programming formats" />
                 <Bullet text="Cultural relevance in digital art" />
-                <Bullet text="Cultural relevance in digital art" />
               </motion.div>
             </div>
 
             {/* Gallery Column */}
             <motion.div
               variants={contentVariants}
-              className="gallery-column"
+              className="gallery-column bg-black/40 backdrop-blur-[16px] border border-[#F6F4F1]/10 rounded-[24px] p-[20px] max-[1040px]:bg-transparent max-[1040px]:backdrop-blur-none max-[1040px]:border-none max-[1040px]:p-0"
               style={{ 
                 flex: "1 1 400px",
                 maxWidth: "100%", 
                 minWidth: "300px",
                 overflow: "hidden",
-                backgroundColor: "rgba(0, 0, 0, 0.4)",
-                backdropFilter: "blur(16px)",
-                border: "1px solid rgba(246, 244, 241, 0.1)",
-                borderRadius: "24px",
-                padding: "20px",
               }}
             >
               <FilmstripGallery images={cinemasImages} />
@@ -313,7 +282,7 @@ export function SectionGamesCinemas() {
               display: "flex",
               alignItems: "center", // Vertically center
               justifyContent: "space-between",
-              gap: "40px",
+              // gap handled by class
               width: "100%",
               flexWrap: "wrap",
             }}
@@ -339,24 +308,18 @@ export function SectionGamesCinemas() {
                 <Bullet text="New audiences beyond traditional gaming spaces" />
                 <Bullet text="Premium cinema venues for launches and events" />
                 <Bullet text="Games presented as cultural works on the big screen" />
-                <Bullet text="Games presented as cultural works on the big screen" />
               </motion.div>
             </div>
 
             {/* Gallery Column */}
             <motion.div
               variants={contentVariants}
-              className="gallery-column"
+              className="gallery-column bg-black/40 backdrop-blur-[16px] border border-[#F6F4F1]/10 rounded-[24px] p-[20px] max-[1040px]:bg-transparent max-[1040px]:backdrop-blur-none max-[1040px]:border-none max-[1040px]:p-0"
               style={{ 
                 flex: "1 1 400px",
                 maxWidth: "100%", 
                 minWidth: "300px",
                 overflow: "hidden",
-                backgroundColor: "rgba(0, 0, 0, 0.4)",
-                backdropFilter: "blur(16px)",
-                border: "1px solid rgba(246, 244, 241, 0.1)",
-                borderRadius: "24px",
-                padding: "20px",
               }}
             >
               <FilmstripGallery images={gamesImages} />
