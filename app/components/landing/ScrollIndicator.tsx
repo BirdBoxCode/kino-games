@@ -29,41 +29,44 @@ export function ScrollIndicator({ progress, className = "" }: ScrollIndicatorPro
     }
   }, [progress, motionProgress]);
 
-  // Amplify progress so the bar fills up quickly (sensitivity 3x)
-  const amplifiedProgress = useTransform(motionProgress, (v) => Math.min(v * 3, 1));
+  // Amplify progress so the circle appears immediately (sensitivity 15x)
+  // Use absolute value for scale calculation
+  const amplifiedProgress = useTransform(motionProgress, (v) => Math.min(Math.abs(v) * 15, 1));
   
   // Smooth out the movement with a spring
   const smoothProgress = useSpring(amplifiedProgress, { stiffness: 400, damping: 30 });
 
   const activeScale = prefersReducedMotion ? 0 : smoothProgress;
+  
+  // Rotate chevron based on direction (negative progress = up)
+  const rotation = useTransform(motionProgress, (v) => v < 0 ? 180 : 0);
 
   return (
     <motion.div 
-      className={`absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center justify-end ${className}`}
+      className={`absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center justify-center ${className}`}
+      style={{ rotate: rotation }}
     >
-      {/* Vertical Progress Bar */}
-      {/* Track */}
-      <div className="relative w-[8px] h-[56px] rounded-full border border-[#F6F4F1]/30 bg-black/20 backdrop-blur-sm overflow-hidden">
+      {/* Circle Container */}
+      <div className="relative w-12 h-12 rounded-full overflow-hidden flex items-center justify-center">
         {/* Fill */}
         <motion.div 
-          className="absolute bottom-0 left-0 w-full h-full bg-[#F9C962] rounded-full"
+          className="absolute inset-0 bg-[#F9C962] rounded-full"
           style={{ 
-            scaleY: activeScale,
-            originY: 1 
+            scale: activeScale,
           }}
         />
+        
+        {/* Chevron Icon */}
+        <motion.div
+          animate={{ y: [0, 3, 0] }}
+          transition={{
+            y: { repeat: Infinity, duration: 2, ease: "easeInOut" }
+          }}
+          className="relative z-10 text-[#F6F4F1] opacity-80"
+        >
+          <ChevronDown size={24} strokeWidth={2} />
+        </motion.div>
       </div>
-
-      {/* Chevron Icon */}
-      <motion.div
-        animate={{ y: [0, 6, 0] }}
-        transition={{
-          y: { repeat: Infinity, duration: 2, ease: "easeInOut" }
-        }}
-        className="text-[#F6F4F1] opacity-80 -mt-[3px]"
-      >
-        <ChevronDown size={28} strokeWidth={2} />
-      </motion.div>
     </motion.div>
   );
 }

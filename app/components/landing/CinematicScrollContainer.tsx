@@ -39,8 +39,9 @@ export function CinematicScrollContainer({
 
   // Event Listener for programmatic navigation (Navbar)
   useEffect(() => {
-    const handleNavRequest = (e: any) => {
-      const { index, type, targetId } = e.detail;
+    const handleNavRequest = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      const { index, type, targetId } = customEvent.detail;
 
       if (type === 'cinematic') {
         // If we are currently in Normal Scroll Mode (scrolled past),
@@ -225,7 +226,7 @@ export function CinematicScrollContainer({
     // The user requested: "remove the scroll animation... when the user scrolls down"
     if (activeIndex === totalSections - 1 && v > 0) return 0;
 
-    return Math.min(1, Math.abs(v) / THRESHOLD);
+    return Math.sign(v) * Math.min(1, Math.abs(v) / THRESHOLD);
   });
 
   if (prefersReducedMotion) {
