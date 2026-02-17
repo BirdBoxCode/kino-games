@@ -28,11 +28,10 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         gap: '29px',
-        padding: '64px min(80px, 5%)',
+        padding: '80px 0',
         height: '100vh',
-        minHeight: '800px',
         width: '100%',
         position: 'relative',
         overflow: 'hidden',
@@ -63,7 +62,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
 
       {/* Section Title - wrapper for all text content */}
       <motion.div 
-        className="section-title"
+        className="section-title px-[20px] md:px-[80px]"
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -72,7 +71,8 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
           position: 'relative',
           zIndex: 2,
           width: '100%',
-          maxWidth: '1280px'
+          maxWidth: '1440px',
+          margin: '0 auto',
         }}
       >
         <LightSweep />

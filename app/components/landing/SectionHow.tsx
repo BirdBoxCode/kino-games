@@ -35,16 +35,6 @@ export function SectionHow() {
             font-size: 32px !important;
           }
         }
-        .content-wrapper {
-          padding-left: 16px;
-          padding-right: 16px;
-        }
-        @media (min-width: 768px) {
-          .content-wrapper {
-            padding-left: 48px;
-            padding-right: 48px;
-          }
-        }
       `}</style>
       <section 
         id="how-it-works"
@@ -54,10 +44,10 @@ export function SectionHow() {
           // height: '964px', // base
           minHeight: '964px', // responsive
           height: '100vh', 
-          padding: '64px min(80px, 5%)',
+          padding: '64px 0', // Vertical padding only
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'flex-start',
+          alignItems: 'center', // Center content
           gap: '29px',
           alignSelf: 'stretch',
           position: 'relative',
@@ -85,7 +75,7 @@ export function SectionHow() {
 
       {/* Content Wrapper */}
       <div 
-        className="content-wrapper"
+        className="content-wrapper px-[20px] md:px-[80px]"
         style={{
           position: 'relative',
           zIndex: 2,
