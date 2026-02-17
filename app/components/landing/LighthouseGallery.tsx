@@ -40,16 +40,14 @@ export function LighthouseGallery({ images }: LighthouseGalleryProps) {
         className="lighthouse-images"
         style={{
           display: 'flex',
-          height: '150px', 
-          padding: '10px',
-          gap: '10px',
+          height: '180px', // Increased height
+          padding: '10px 0',
+          gap: '15px', // Increased gap
           width: '100%',
           overflowX: 'auto', 
           scrollbarWidth: 'none',
           alignItems: 'center',
-          // Fade effect on the right side
-          maskImage: 'linear-gradient(to right, black 85%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to right, black 85%, transparent 100%)'
+          // Removed fade mask for better visibility
         }}
       >
         {images.map((src, index) => (
@@ -57,16 +55,22 @@ export function LighthouseGallery({ images }: LighthouseGalleryProps) {
             key={index}
             className="lighthouse-image-wrapper"
             style={{
-              flex: '1 0 0',
-              minWidth: '120px', // Reduced to allow 4 items to fit in ~500px+
-              alignSelf: 'stretch',
-              borderRadius: '6px',
+              flex: '0 0 auto', // Changed to not grow/shrink unexpectedly
+              width: '240px',   // Fixed larger width for visibility
+              height: '135px',  // Fixed height (16:9 ratio approx)
+              borderRadius: '8px',
               overflow: 'hidden',
               cursor: 'pointer',
-              position: 'relative'
+              position: 'relative',
+              border: '1px solid rgba(246, 244, 241, 0.2)', // Subtle border
+              backgroundColor: 'rgba(0,0,0,0.3)', // Subtle background
             }}
-            whileHover={{ scale: 1.02, filter: "brightness(1.1)" }}
-            transition={{ duration: 0.3 }}
+            whileHover={{ 
+              scale: 1.05, 
+              borderColor: 'rgba(249, 201, 98, 0.8)', // Gold border on hover
+              filter: "brightness(1.1)" 
+            }}
+            transition={{ duration: 0.2 }}
             onClick={() => openLightbox(index)}
           >
             <img
@@ -76,7 +80,7 @@ export function LighthouseGallery({ images }: LighthouseGalleryProps) {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                pointerEvents: 'none' // Prevent drag ghost
+                pointerEvents: 'none' 
               }}
             />
           </motion.div>

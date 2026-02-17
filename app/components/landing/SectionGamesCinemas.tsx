@@ -89,8 +89,8 @@ export function SectionGamesCinemas() {
           className="section-sub-header"
           style={{
             color: "#F2EFEA",
-            fontFamily: "Inter, sans-serif",
-            fontSize: "24px",
+            fontFamily: "var(--font-inter), Inter, sans-serif",
+            fontSize: "max(18px, 1.5vw)",
             fontStyle: "normal",
             fontWeight: 600,
             lineHeight: "normal",
