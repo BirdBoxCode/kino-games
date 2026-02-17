@@ -9,7 +9,7 @@ export function SectionModel() {
   return (
     <section
       id="our-model"
-      className="relative w-full h-screen min-h-screen flex flex-col justify-center items-start overflow-hidden bg-[#0E0E0E] px-[20px] pt-[160px] pb-[64px] md:px-[80px]"
+      className="relative w-full h-screen min-h-screen flex flex-col justify-center items-start overflow-hidden bg-[#0E0E0E] px-[20px] md:px-[80px] pt-[140px] pb-[40px]"
     >
       {/* Overlay */}
       <div 
