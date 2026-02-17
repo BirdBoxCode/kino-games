@@ -84,21 +84,7 @@ export function SectionGamesCinemas() {
           margin: "0 auto",
         }}
       >
-        {/* Section Sub Header */}
-        <div
-          className="section-sub-header"
-          style={{
-            color: "#F2EFEA",
-            fontFamily: "var(--font-inter), Inter, sans-serif",
-            fontSize: "max(18px, 1.5vw)",
-            fontStyle: "normal",
-            fontWeight: 600,
-            lineHeight: "normal",
-            letterSpacing: "0.5px",
-          }}
-        >
-          Cinemas & Game Right-Holders
-        </div>
+
 
         {/* Content Wrapper for BOTH blocks */}
         <div
@@ -136,7 +122,7 @@ export function SectionGamesCinemas() {
                 className="section-header"
                 style={{
                   fontFamily: "Garet, Inter, sans-serif",
-                  fontSize: "48px",
+                  fontSize: "32px",
                   fontWeight: 850,
                   lineHeight: "110%",
                   letterSpacing: "0.7px",
@@ -150,7 +136,16 @@ export function SectionGamesCinemas() {
 
               <div
                 className="bullets"
-                style={{ display: "flex", flexDirection: "column" }}
+                style={{ 
+                  display: "flex", 
+                  flexDirection: "column",
+                  backgroundColor: "rgba(0, 0, 0, 0.4)",
+                  backdropFilter: "blur(16px)",
+                  border: "1px solid rgba(246, 244, 241, 0.1)",
+                  borderRadius: "24px",
+                  padding: "32px",
+                  gap: "0px"
+                }}
               >
                 <Bullet text="New audiences beyond traditional cinema-goers" />
                 <Bullet text="Fresh programming formats" />
@@ -202,7 +197,7 @@ export function SectionGamesCinemas() {
                 className="section-header"
                 style={{
                   fontFamily: "Garet, Inter, sans-serif",
-                  fontSize: "48px",
+                  fontSize: "32px",
                   fontWeight: 850,
                   lineHeight: "110%",
                   letterSpacing: "0.7px",
@@ -216,7 +211,16 @@ export function SectionGamesCinemas() {
 
               <div
                 className="bullets"
-                style={{ display: "flex", flexDirection: "column" }}
+                style={{ 
+                  display: "flex", 
+                  flexDirection: "column",
+                  backgroundColor: "rgba(0, 0, 0, 0.4)",
+                  backdropFilter: "blur(16px)",
+                  border: "1px solid rgba(246, 244, 241, 0.1)",
+                  borderRadius: "24px",
+                  padding: "32px",
+                  gap: "0px"
+                }}
               >
                 <Bullet text="New audiences beyond traditional gaming spaces" />
                 <Bullet text="Premium cinema venues for launches and events" />
