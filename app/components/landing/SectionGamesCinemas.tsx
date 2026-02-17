@@ -10,6 +10,7 @@ export function SectionGamesCinemas() {
     "/section-cinemas-games/cinema-image2.png",
     "/section-cinemas-games/cinema-image3.png",
     "/section-cinemas-games/cinema-image4.png",
+    "/section-cinemas-games/cinema-image5.jpg",
   ];
 
   const gamesImages = [
@@ -17,6 +18,9 @@ export function SectionGamesCinemas() {
     "/section-cinemas-games/game-image2.png",
     "/section-cinemas-games/game-image3.png",
     "/section-cinemas-games/game-image4.png",
+    "/section-cinemas-games/game-image5.png",
+    "/section-cinemas-games/game-image6.png",
+    "/section-cinemas-games/game-image7.png",
   ];
 
   return (
@@ -111,15 +115,15 @@ export function SectionGamesCinemas() {
             className="content-row"
             style={{
               display: "flex",
-              alignItems: "flex-start",
+              alignItems: "center", // Vertically center
               justifyContent: "space-between",
               gap: "40px",
               width: "100%",
               flexWrap: "wrap",
             }}
           >
-            {/* Text Column - Now contains Gallery too */}
-            <div className="text-column" style={{ flex: "1 1 500px", maxWidth: "100%" }}>
+            {/* Text Column */}
+            <div className="text-column" style={{ flex: "1 1 400px" }}>
               <motion.h3
                 variants={contentVariants}
                 className="section-header"
@@ -146,24 +150,30 @@ export function SectionGamesCinemas() {
                   backdropFilter: "blur(16px)",
                   border: "1px solid rgba(246, 244, 241, 0.1)",
                   borderRadius: "24px",
-                  padding: "32px",
+                  padding: "20px 32px",
                   gap: "0px",
-                  width: "100%"
+                  width: "fit-content" // Keep hugging content
                 }}
               >
                 <Bullet text="New audiences beyond traditional cinema-goers" />
                 <Bullet text="Fresh programming formats" />
                 <Bullet text="Cultural relevance in digital art" />
               </div>
-              
-              {/* Gallery positioned directly under bullets */}
-              <motion.div
-                variants={contentVariants}
-                style={{ width: "100%" }}
-              >
-                <FilmstripGallery images={cinemasImages} />
-              </motion.div>
             </div>
+
+            {/* Gallery Column */}
+            <motion.div
+              variants={contentVariants}
+              className="gallery-column"
+              style={{ 
+                flex: "1 1 400px",
+                maxWidth: "100%", 
+                minWidth: "300px",
+                overflow: "hidden" 
+              }}
+            >
+              <FilmstripGallery images={cinemasImages} />
+            </motion.div>
             
             {/* Spacer / Empty Column on Desktop if we want to retain the 'side' look, 
                 but user asked for stacking. Actually, user likely meant stacking the *gallery* under the bullets,
@@ -253,15 +263,15 @@ export function SectionGamesCinemas() {
             className="content-row"
             style={{
               display: "flex",
-              alignItems: "flex-start", // changed from center to flex-start
+              alignItems: "center", // Vertically center
               justifyContent: "space-between",
               gap: "40px",
               width: "100%",
               flexWrap: "wrap",
             }}
           >
-            {/* Text Column - Now contains Gallery too */}
-            <div className="text-column" style={{ flex: "1 1 500px", maxWidth: "100%" }}>
+            {/* Text Column */}
+            <div className="text-column" style={{ flex: "1 1 400px" }}>
               <motion.h3
                 variants={contentVariants}
                 className="section-header"
@@ -288,24 +298,30 @@ export function SectionGamesCinemas() {
                   backdropFilter: "blur(16px)",
                   border: "1px solid rgba(246, 244, 241, 0.1)",
                   borderRadius: "24px",
-                  padding: "32px",
+                  padding: "20px 32px",
                   gap: "0px",
-                  width: "100%"
+                  width: "fit-content"
                 }}
               >
                 <Bullet text="New audiences beyond traditional gaming spaces" />
                 <Bullet text="Premium cinema venues for launches and events" />
                 <Bullet text="Games presented as cultural works on the big screen" />
               </div>
-              
-               {/* Gallery positioned directly under bullets */}
-              <motion.div
-                variants={contentVariants}
-                style={{ width: "100%" }}
-              >
-                <FilmstripGallery images={gamesImages} />
-              </motion.div>
             </div>
+
+            {/* Gallery Column */}
+            <motion.div
+              variants={contentVariants}
+              className="gallery-column"
+              style={{ 
+                flex: "1 1 400px",
+                maxWidth: "100%", 
+                minWidth: "300px",
+                overflow: "hidden" 
+              }}
+            >
+              <FilmstripGallery images={gamesImages} />
+            </motion.div>
           </div>
         </div>
       </div>
