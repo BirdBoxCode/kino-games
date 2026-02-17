@@ -46,7 +46,7 @@ export function FilmstripGallery({ images }: FilmstripGalleryProps) {
   return (
     <>
       {/* Filmstrip Container Wrapper to control width/position */}
-      <div className="relative w-full group/gallery mt-4">
+      <div className="relative w-full group/gallery">
         {/* Scroll Left Button */}
         <button
           onClick={() => scrollContainerRef.current?.scrollBy({ left: -200, behavior: "smooth" })}

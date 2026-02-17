@@ -111,6 +111,22 @@ export function SectionGamesCinemas() {
           {/* =======================
               BLOCK 1: FOR CINEMAS
              ======================= */}
+          <motion.h3
+            variants={contentVariants}
+            className="section-header"
+            style={{
+              fontFamily: "Garet, Inter, sans-serif",
+              fontSize: "32px",
+              fontWeight: 850,
+              lineHeight: "110%",
+              letterSpacing: "0.7px",
+              textTransform: "uppercase",
+              color: "#F6F4F1",
+              margin: "0 0 10px 0",
+            }}
+          >
+            FOR <span style={{ color: "#F9C962" }}>CINEMAS</span>
+          </motion.h3>
           <div
             className="content-row"
             style={{
@@ -124,22 +140,6 @@ export function SectionGamesCinemas() {
           >
             {/* Text Column */}
             <div className="text-column" style={{ flex: "1 1 400px" }}>
-              <motion.h3
-                variants={contentVariants}
-                className="section-header"
-                style={{
-                  fontFamily: "Garet, Inter, sans-serif",
-                  fontSize: "32px",
-                  fontWeight: 850,
-                  lineHeight: "110%",
-                  letterSpacing: "0.7px",
-                  textTransform: "uppercase",
-                  color: "#F6F4F1",
-                  margin: "0 0 10px 0",
-                }}
-              >
-                FOR <span style={{ color: "#F9C962" }}>CINEMAS</span>
-              </motion.h3>
 
               <div
                 className="bullets"
@@ -169,7 +169,12 @@ export function SectionGamesCinemas() {
                 flex: "1 1 400px",
                 maxWidth: "100%", 
                 minWidth: "300px",
-                overflow: "hidden" 
+                overflow: "hidden",
+                backgroundColor: "rgba(0, 0, 0, 0.4)",
+                backdropFilter: "blur(16px)",
+                border: "1px solid rgba(246, 244, 241, 0.1)",
+                borderRadius: "24px",
+                padding: "20px",
               }}
             >
               <FilmstripGallery images={cinemasImages} />
@@ -259,6 +264,22 @@ export function SectionGamesCinemas() {
           {/* ==================================
               BLOCK 2: FOR GAME RIGHT-HOLDERS
              ================================== */}
+          <motion.h3
+            variants={contentVariants}
+            className="section-header"
+            style={{
+              fontFamily: "Garet, Inter, sans-serif",
+              fontSize: "32px",
+              fontWeight: 850,
+              lineHeight: "110%",
+              letterSpacing: "0.7px",
+              textTransform: "uppercase",
+              color: "#F6F4F1",
+              margin: "0 0 10px 0",
+            }}
+          >
+            FOR <span style={{ color: "#F9C962" }}>GAME RIGHT-HOLDERS</span>
+          </motion.h3>
           <div
             className="content-row"
             style={{
@@ -272,22 +293,6 @@ export function SectionGamesCinemas() {
           >
             {/* Text Column */}
             <div className="text-column" style={{ flex: "1 1 400px" }}>
-              <motion.h3
-                variants={contentVariants}
-                className="section-header"
-                style={{
-                  fontFamily: "Garet, Inter, sans-serif",
-                  fontSize: "32px",
-                  fontWeight: 850,
-                  lineHeight: "110%",
-                  letterSpacing: "0.7px",
-                  textTransform: "uppercase",
-                  color: "#F6F4F1",
-                  margin: "0 0 10px 0",
-                }}
-              >
-                FOR <span style={{ color: "#F9C962" }}>GAME RIGHT-HOLDERS</span>
-              </motion.h3>
 
               <div
                 className="bullets"
@@ -317,7 +322,12 @@ export function SectionGamesCinemas() {
                 flex: "1 1 400px",
                 maxWidth: "100%", 
                 minWidth: "300px",
-                overflow: "hidden" 
+                overflow: "hidden",
+                backgroundColor: "rgba(0, 0, 0, 0.4)",
+                backdropFilter: "blur(16px)",
+                border: "1px solid rgba(246, 244, 241, 0.1)",
+                borderRadius: "24px",
+                padding: "20px",
               }}
             >
               <FilmstripGallery images={gamesImages} />
