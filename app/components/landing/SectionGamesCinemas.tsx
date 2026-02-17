@@ -74,6 +74,31 @@ export function SectionGamesCinemas() {
           }
         }
       `}</style>
+      <style jsx>{`
+        .gallery-box {
+          background-color: rgba(0, 0, 0, 0.4);
+          backdrop-filter: blur(16px);
+          border: 1px solid rgba(246, 244, 241, 0.1);
+          border-radius: 24px;
+          padding: 20px;
+        }
+        @media (max-width: 1040px) {
+          .gallery-box {
+            background-color: transparent;
+            backdrop-filter: none;
+            border: none;
+            padding: 0;
+          }
+        }
+        .content-row-gap {
+          gap: 40px;
+        }
+        @media (max-width: 1040px) {
+          .content-row-gap {
+            gap: 20px;
+          }
+        }
+      `}</style>
       <div
         className="content-wrapper"
         style={{
@@ -128,7 +153,7 @@ export function SectionGamesCinemas() {
             FOR <span style={{ color: "#F9C962" }}>CINEMAS</span>
           </motion.h3>
           <div
-            className="content-row"
+            className="content-row content-row-gap"
             style={{
               display: "flex",
               alignItems: "center", // Vertically center
@@ -141,7 +166,8 @@ export function SectionGamesCinemas() {
             {/* Text Column */}
             <div className="text-column" style={{ flex: "1 1 400px" }}>
 
-              <div
+              <motion.div
+                variants={contentVariants}
                 className="bullets"
                 style={{ 
                   display: "flex", 
@@ -158,7 +184,8 @@ export function SectionGamesCinemas() {
                 <Bullet text="New audiences beyond traditional cinema-goers" />
                 <Bullet text="Fresh programming formats" />
                 <Bullet text="Cultural relevance in digital art" />
-              </div>
+                <Bullet text="Cultural relevance in digital art" />
+              </motion.div>
             </div>
 
             {/* Gallery Column */}
@@ -281,7 +308,7 @@ export function SectionGamesCinemas() {
             FOR <span style={{ color: "#F9C962" }}>GAME RIGHT-HOLDERS</span>
           </motion.h3>
           <div
-            className="content-row"
+            className="content-row content-row-gap"
             style={{
               display: "flex",
               alignItems: "center", // Vertically center
@@ -294,7 +321,8 @@ export function SectionGamesCinemas() {
             {/* Text Column */}
             <div className="text-column" style={{ flex: "1 1 400px" }}>
 
-              <div
+              <motion.div
+                variants={contentVariants}
                 className="bullets"
                 style={{ 
                   display: "flex", 
@@ -311,7 +339,8 @@ export function SectionGamesCinemas() {
                 <Bullet text="New audiences beyond traditional gaming spaces" />
                 <Bullet text="Premium cinema venues for launches and events" />
                 <Bullet text="Games presented as cultural works on the big screen" />
-              </div>
+                <Bullet text="Games presented as cultural works on the big screen" />
+              </motion.div>
             </div>
 
             {/* Gallery Column */}
