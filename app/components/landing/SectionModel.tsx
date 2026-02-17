@@ -20,9 +20,9 @@ export function SectionModel() {
       />
 
       {/* Block Wrapper */}
-      <div className="relative z-20 flex flex-col items-start gap-[0px] w-full max-w-[1440px] grow">
+      <div className="relative z-20 flex flex-col items-start gap-[0px] w-full max-w-[1440px] grow"> 
         {/* Content Wrapper */}
-        <div className="flex items-start gap-[10px] w-full relative">
+        <div className="flex items-start gap-[10px] w-full relative -mb-[100px] z-30">
           <LightSweep />
 
           {/* Content */}
@@ -77,7 +77,7 @@ export function SectionModel() {
         {/* Hand Image - Moved inside flow to prevent overlap */}
         <motion.div 
           variants={contentVariants}
-          className="relative z-20 pointer-events-none w-[90%] md:w-full max-w-[1000px] h-[40vh] md:h-[55vh] self-start -ml-[20px] md:-ml-[80px]"
+          className="relative z-20 pointer-events-none w-[90%] md:w-full max-w-[900px] h-[40vh] md:h-[55vh] self-start -ml-[20px] md:-ml-[80px]"
         >
           <Image
               src="/section-model/hand-image2.png"
