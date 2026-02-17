@@ -38,7 +38,7 @@ export function SectionModel() {
               </h3>
               
               {/* Section Header */}
-              <h2 className="section-header font-garet text-[40px] md:text-[54px] font-[850] leading-[110%] tracking-[0.7px] uppercase text-[#F6F4F1]">
+              <h2 className="section-header font-garet text-[40px] md:text-[48px] font-[850] leading-[110%] tracking-[0.7px] uppercase text-[#F6F4F1]">
                 SUPPORTING <span className="text-[#D63A2F]">creators & cinemas</span>
               </h2>
 
@@ -77,7 +77,7 @@ export function SectionModel() {
         {/* Hand Image - Moved inside flow to prevent overlap */}
         <motion.div 
           variants={contentVariants}
-          className="relative z-20 pointer-events-none w-auto max-w-[900px] h-auto max-h-[40vh] md:max-h-[55vh] self-start -ml-[20px] md:-ml-[80px]"
+          className="relative z-20 pointer-events-none w-auto max-w-1000px] h-auto max-h-[40vh] md:max-h-[55vh] self-start -ml-[20px] md:-ml-[80px]"
         >
           <Image
               src="/section-model/hand-image2.png"

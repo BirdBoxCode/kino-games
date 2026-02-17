@@ -110,7 +110,7 @@ export function SectionHow() {
             variants={contentVariants}
             style={{
               fontFamily: 'Garet, Inter, sans-serif',
-              fontSize: 'clamp(40px, 5vw, 64px)',
+              fontSize: '48px',
               fontWeight: 850,
               lineHeight: '110%',
               letterSpacing: '0.7px',
