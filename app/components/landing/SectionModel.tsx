@@ -43,7 +43,7 @@ export function SectionModel() {
               </h2>
 
               {/* Copy (p1) */}
-              <p className="p1 text-[#F6F4F1] font-inter text-[18px] md:text-[20px] font-medium tracking-[0.5px] mt-2 max-w-[800px]">
+              <p className="p1 text-[#F6F4F1] font-inter text-[18px] md:text-[18px] font-medium tracking-[0.5px] mt-2 max-w-[800px]">
                  We provide a platform that connects game developers directly with cinema exhibitors, ensuring fair revenue sharing and simplified licensing.
                  By bridging the gap between interactive entertainment and the big screen, we create new revenue streams and cultural opportunities for everyone involved.
               </p>

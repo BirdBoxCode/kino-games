@@ -87,10 +87,10 @@ export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
 
           {/* Catalogue Link */}
           <Link href="https://catalog.kinogames.eu/" className="flex items-center gap-2 cursor-pointer group no-underline">
-            <span className="font-inter font-bold text-[20px] leading-normal tracking-[0.5px] text-[#F9C962] group-hover:translate-x-1 transition-transform duration-300">
+            <span className="font-inter font-bold text-[18px] leading-normal tracking-[0.5px] text-[#F9C962] group-hover:translate-x-1 transition-transform duration-300">
               →
             </span>
-            <span className="relative font-inter font-bold text-[20px] leading-normal tracking-[0.5px] text-[#F6F4F1]">
+            <span className="relative font-inter font-bold text-[18px] leading-normal tracking-[0.5px] text-[#F6F4F1]">
               View our catalogue
               {/* Right-to-left underline animation */}
               <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-[#F6F4F1] scale-x-0 origin-right group-hover:scale-x-100 transition-transform duration-300 ease-out" />
