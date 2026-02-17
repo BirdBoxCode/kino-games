@@ -9,15 +9,14 @@ export function SectionPartners() {
   
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "center center"]
+    offset: ["start end", "end start"]
   });
 
   // Parallax effect: 
-  // Slides UP from below as you scroll down (enter view)
-  // Slides DOWN as you scroll up (leave view)
-  const y = useTransform(scrollYProgress, [0, 1], ["100%", "-30%"]);
+  // Subtle movement: slightly moves up as you scroll
+  const y = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
   // Optional: slight rotation or scale for more dynamic entry
-  const rotate = useTransform(scrollYProgress, [0, 1], [-10, 0]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [-2, 2]);
 
   return (
     <section
@@ -40,22 +39,24 @@ export function SectionPartners() {
         />
         
         <motion.div
-            className="absolute bottom-0 z-0 pointer-events-none"
+            className="absolute z-0 pointer-events-none"
             style={{
-                left: 'calc(20% - 100px)',
+                right: -50,
+                top: 0,
+                display: 'none',
                 y,
                 rotate,
                 width: 'clamp(250px, 35vw, 500px)',
                 height: 'clamp(360px, 50vw, 750px)',
-                transformOrigin: 'bottom left'
+                transformOrigin: 'center center'
             }}
         >
-            <div className="relative w-[300px] h-full"> 
+            <div className="relative w-[300px] h-full" style={{ transform: 'rotate(-90deg)' }}> 
                 <Image
                 src="/section-partners/hand-controller.png"
                 alt="Hand Holding Game Controller"
                 fill
-                className="object-contain object-bottom-left"
+                className="object-contain object-top-right"
                 />
             </div>
         </motion.div>
@@ -73,41 +74,70 @@ export function SectionPartners() {
 
 
       {/* Content Wrapper */}
-      <div className="relative z-20 flex flex-col gap-[32px] w-full max-w-[1280px]">
+      <div className="relative z-20 flex flex-col w-full max-w-[1280px]">
         {/* Section Header */}
-        <h2 className="font-garet text-[40px] md:text-[54px] font-[850] leading-[110%] tracking-[0.7px] uppercase text-[#F6F4F1]">
+        <h2 className="font-garet text-[40px] md:text-[48px] font-[850] leading-[110%] tracking-[0.7px] uppercase text-[#F6F4F1] mb-[40px]">
           OUR PARTNERS<br />AND COLLABORATORS
         </h2>
 
-        {/* Partner Groups */}
-        <div className="flex flex-col md:flex-row gap-[64px] items-start w-full">
-          
-          {/* Cinemas Group */}
-          <div className="flex flex-col gap-[16px] w-full">
-            <h3 className="font-inter text-[20px] font-bold tracking-[0.5px] text-[#F6F4F1]">
-              Cinemas
-            </h3>
-            <div className="flex gap-[24px] flex-wrap">
-               {/* Placeholders */}
-               {[1, 2, 3, 4].map((i) => (
-                 <div key={`cinema-${i}`} className="w-[88px] h-[88px] rounded-[8px] bg-[#0E0E0E]" />
-               ))}
-            </div>
-          </div>
+        {/* Divider */}
+        <div className="w-full h-[1px] bg-[#F6F4F1] opacity-20 mb-[40px]" />
 
-          {/* Game Creators Group */}
-          <div className="flex flex-col gap-[16px] w-full">
-            <h3 className="font-inter text-[20px] font-bold tracking-[0.5px] text-[#F6F4F1]">
-              Game Creators
-            </h3>
-            <div className="flex gap-[24px] flex-wrap">
-               {/* Placeholders */}
-               {[1, 2, 3, 4].map((i) => (
-                 <div key={`game-${i}`} className="w-[88px] h-[88px] rounded-[8px] bg-[#0E0E0E]" />
-               ))}
-            </div>
+        {/* Cinemas Group */}
+        <div className="flex flex-col gap-[32px] w-full mb-[64px] bg-black/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-10">
+          <h3 className="font-inter text-[20px] font-bold tracking-[0.5px] uppercase text-[#F6F4F1] opacity-60">
+            Cinema Partners
+          </h3>
+          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-[16px]">
+              {[
+                "Arcadia - Logo.jpg",
+                "Creative Europe Media Logo.png",
+                "FEFFS - Logo.png",
+                "KSPJ - Logo.png",
+                "Logo-SF-Yellow-Square-Vector_1.png",
+                "NERDIC_RGB_WortBildmarke_Quer_B.jpg",
+                "Quai10 - Logo.png",
+                "Savoy - Logo.png",
+                "Votiv-DeFrance-Hauptlogo-Schwarz.png",
+                "lab-1-logo-black.png",
+                "spiel_fabrique_transparent.png",
+              ].map((logo, i) => (
+                <div 
+                  key={`cinema-${i}`} 
+                  className="group relative w-full aspect-video rounded-[12px] bg-[#1A1A1A] flex items-center justify-center overflow-hidden border border-[#FFFFFF10]"
+                >
+                  <Image
+                    src={`/section-partners/partner-logos/${logo}`}
+                    alt={logo.split('.')[0]}
+                    fill
+                    className="object-contain p-6 md:p-8 transition-all duration-300 opacity-80 group-hover:opacity-100 group-hover:scale-105"
+                  />
+                </div>
+              ))}
+              {/* One more placeholder to make it 12 items for 4x3 grid feeling (11 items + 1) */}
+               <div className="group relative w-full aspect-video rounded-[12px] bg-[#1A1A1A] border border-[#FFFFFF10]" />
           </div>
         </div>
+
+        {/* Divider */}
+        <div className="w-full h-[1px] bg-[#F6F4F1] opacity-20 mb-[40px]" />
+
+        {/* Game Right-holders Group */}
+        <div className="flex flex-col gap-[32px] w-full bg-black/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-10">
+          <h3 className="font-inter text-[20px] font-bold tracking-[0.5px] uppercase text-[#F6F4F1] opacity-60">
+            Game Right-holders
+          </h3>
+          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-[16px]">
+              {/* Placeholders 4x3 = 12 items */}
+              {[...Array(12)].map((_, i) => (
+                <div 
+                  key={`game-placeholder-${i}`} 
+                  className="w-full aspect-video rounded-[12px] bg-[#1A1A1A] border border-[#FFFFFF10]" 
+                />
+              ))}
+          </div>
+        </div>
+
       </div>
     </section>
   );

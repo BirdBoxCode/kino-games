@@ -123,7 +123,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
               className="section-header"
               style={{
                 fontFamily: 'var(--font-garet), Garet, Inter, sans-serif',
-                fontSize: 'clamp(32px, 5vw, 54px)',
+                fontSize: '48px',
                 fontStyle: 'normal',
                 fontWeight: 850,
                 lineHeight: '110%',

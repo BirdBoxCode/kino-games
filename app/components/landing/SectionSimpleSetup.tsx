@@ -68,7 +68,7 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
             <h3 className="text-[#F6F4F1] font-inter text-[20px] md:text-[24px] font-semibold tracking-[0.5px]">
               From game to cinema
             </h3>
-            <h2 className="font-garet text-[40px] md:text-[54px] font-[850] leading-[110%] tracking-[0.7px] uppercase text-[#F6F4F1]">
+            <h2 className="font-garet text-[40px] md:text-[48px] font-[850] leading-[110%] tracking-[0.7px] uppercase text-[#F6F4F1]">
               A <span className="text-[#F9C962]">SIMPLE SET UP</span>
             </h2>
             <p className="text-[#F6F4F1] font-inter text-[18px] md:text-[18px] font-medium tracking-[0.5px] max-w-[600px] mt-2">

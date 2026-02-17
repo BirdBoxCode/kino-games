@@ -9,7 +9,7 @@ export function SectionModel() {
   return (
     <section
       id="our-model"
-      className="relative w-full h-screen min-h-[964px] flex flex-col justify-center items-start overflow-hidden bg-[#0E0E0E] px-[20px] pt-[160px] pb-[64px] md:px-[80px]"
+      className="relative w-full h-screen min-h-screen flex flex-col justify-center items-start overflow-hidden bg-[#0E0E0E] px-[20px] md:px-[80px] pt-[140px] pb-[40px]"
     >
       {/* Overlay */}
       <div 
@@ -20,9 +20,9 @@ export function SectionModel() {
       />
 
       {/* Block Wrapper */}
-      <div className="relative z-20 flex flex-col items-start gap-[40px] h-full md:h-[804px] shrink-0 w-full max-w-[1440px]">
+      <div className="relative z-20 flex flex-col items-start gap-[0px] w-full max-w-[1440px] grow"> 
         {/* Content Wrapper */}
-        <div className="flex items-start gap-[10px] w-full relative">
+        <div className="flex items-start gap-[10px] w-full relative z-30">
           <LightSweep />
 
           {/* Content */}
@@ -38,7 +38,7 @@ export function SectionModel() {
               </h3>
               
               {/* Section Header */}
-              <h2 className="section-header font-garet text-[40px] md:text-[54px] font-[850] leading-[110%] tracking-[0.7px] uppercase text-[#F6F4F1]">
+              <h2 className="section-header font-garet text-[40px] md:text-[48px] font-[850] leading-[110%] tracking-[0.7px] uppercase text-[#F6F4F1]">
                 SUPPORTING <span className="text-[#D63A2F]">creators & cinemas</span>
               </h2>
 
@@ -72,28 +72,23 @@ export function SectionModel() {
             </div>
           </motion.div>
         </div>
-      </div>
 
-      {/* Hand Image */}
-      <motion.div 
-        variants={contentVariants}
-        className="absolute z-20 pointer-events-none"
-        style={{
-            width: '90%',
-            maxWidth: '1271px',
-            height: '572px',
-            left: '0px',
-            bottom: '0px'
-        }}
-      >
-        <Image
-            src="/section-model/hand-image2.png"
-            alt="Hand holding ticket"
-            fill
-            className="object-contain object-bottom-left"
-            priority
-        />
-      </motion.div>
+
+        {/* Hand Image - Moved inside flow to prevent overlap */}
+        <motion.div 
+          variants={contentVariants}
+          className="relative z-20 pointer-events-none w-auto max-w-[1200px] h-auto max-h-[40vh] md:max-h-[55vh] self-start -ml-[20px] md:-ml-[80px] mt-[20px] md:-mt-[40px]"
+        >
+          <Image
+              src="/section-model/hand-image2.png"
+              alt="Hand holding ticket"
+              width={1271}
+              height={572}
+              className="w-auto h-auto max-h-[40vh] md:max-h-[55vh] object-contain object-left-bottom"
+              priority
+          />
+        </motion.div>
+      </div>
     </section>
   );
 }

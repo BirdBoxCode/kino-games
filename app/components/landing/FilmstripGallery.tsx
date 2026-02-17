@@ -1,6 +1,5 @@
-"use client";
-
 import { useState, useRef, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
@@ -11,6 +10,7 @@ interface FilmstripGalleryProps {
 
 export function FilmstripGallery({ images }: FilmstripGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [mounted, setMounted] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const openLightbox = (index: number) => setSelectedIndex(index);
@@ -27,6 +27,7 @@ export function FilmstripGallery({ images }: FilmstripGalleryProps) {
   }, [images.length]);
 
   useEffect(() => {
+    setMounted(true);
     const handleKeyDown = (e: KeyboardEvent) => {
       if (selectedIndex === null) return;
       if (e.key === "Escape") closeLightbox();
@@ -101,65 +102,70 @@ export function FilmstripGallery({ images }: FilmstripGalleryProps) {
         </button>
       </div>
 
-      {/* Lightbox Modal */}
-      <AnimatePresence>
-        {selectedIndex !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 backdrop-blur-sm"
-            onClick={closeLightbox}
-          >
-            {/* Close Button */}
-            <button
-              onClick={closeLightbox}
-              className="absolute top-6 right-6 z-50 p-2 text-white/70 hover:text-white transition-colors"
-            >
-              <X size={32} />
-            </button>
-
-            {/* Navigation Buttons (Desktop) */}
-            <button
-              onClick={showPrev}
-              className="absolute left-4 z-50 hidden md:flex items-center justify-center p-4 text-white/50 hover:text-[#F9C962] transition-colors"
-            >
-              <ChevronLeft size={48} />
-            </button>
-            <button
-              onClick={showNext}
-              className="absolute right-4 z-50 hidden md:flex items-center justify-center p-4 text-white/50 hover:text-[#F9C962] transition-colors"
-            >
-              <ChevronRight size={48} />
-            </button>
-
-            {/* Main Image */}
+      {/* Lightbox Modal - Portaled to body */}
+      {mounted && createPortal(
+        <AnimatePresence>
+          {selectedIndex !== null && (
             <motion.div
-              key={selectedIndex}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="relative w-full h-full max-w-7xl max-h-[85vh] p-4 flex items-center justify-center"
-              onClick={(e) => e.stopPropagation()}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/95 backdrop-blur-sm"
+              onClick={closeLightbox}
             >
-              <Image
-                src={images[selectedIndex]}
-                alt="Fullscreen view"
-                fill
-                className="object-contain"
-                sizes="100vw"
-                priority
-              />
+              {/* Close Button */}
+              <button
+                onClick={closeLightbox}
+                className="absolute top-6 right-6 z-50 p-2 text-white/70 hover:text-white transition-colors"
+              >
+                <X size={32} />
+              </button>
+
+              {/* Navigation Buttons (Desktop) */}
+              <button
+                onClick={showPrev}
+                className="absolute left-4 z-50 hidden md:flex items-center justify-center p-4 text-white/50 hover:text-[#F9C962] transition-colors"
+                onClick={(e) => { e.stopPropagation(); showPrev(); }}
+              >
+                <ChevronLeft size={48} />
+              </button>
+              <button
+                onClick={showNext}
+                className="absolute right-4 z-50 hidden md:flex items-center justify-center p-4 text-white/50 hover:text-[#F9C962] transition-colors"
+                onClick={(e) => { e.stopPropagation(); showNext(); }}
+              >
+                <ChevronRight size={48} />
+              </button>
+
+              {/* Main Image */}
+              <motion.div
+                key={selectedIndex}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                className="relative w-full h-full max-w-7xl max-h-[85vh] p-4 flex items-center justify-center"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Image
+                  src={images[selectedIndex]}
+                  alt="Fullscreen view"
+                  fill
+                  className="object-contain"
+                  sizes="100vw"
+                  priority
+                />
+              </motion.div>
+              
+              {/* Mobile Swipe Hint or Counter */}
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 text-sm font-medium">
+                {selectedIndex + 1} / {images.length}
+              </div>
             </motion.div>
-            
-            {/* Mobile Swipe Hint or Counter */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 text-sm font-medium">
-              {selectedIndex + 1} / {images.length}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   );
 }
