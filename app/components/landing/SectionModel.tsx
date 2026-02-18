@@ -100,14 +100,16 @@ export function SectionModel() {
         {/* Hand Image - Moved inside flow to prevent overlap */}
         <motion.div 
           variants={contentVariants}
-          className="relative z-20 pointer-events-none w-auto max-w-[1200px] h-auto max-h-[35vh] md:max-h-[50vh] self-start -ml-[20px] md:-ml-[80px] mt-[40px] md:-mt-[20px]"
+          className="relative z-20 pointer-events-none w-auto max-w-[1200px] h-auto self-start -ml-[20px] md:-ml-[80px] mt-[20px]"
+          style={{ maxHeight: 'calc(100vh - 520px)' }}
         >
           <Image
               src="/section-model/ticketsplit-nobg.png"
               alt="Ticket split diagram"
               width={1271}
               height={572}
-              className="w-auto h-auto max-h-[35vh] md:max-h-[50vh] object-contain object-left-bottom"
+              className="w-auto h-auto object-contain object-left-bottom"
+              style={{ maxHeight: 'calc(100vh - 520px)' }}
               priority
           />
         </motion.div>
