@@ -77,23 +77,6 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
       >
         <LightSweep />
 
-        {/* Section Sub-header */}
-        <motion.div
-          variants={contentVariants}
-          className="section-sub-header"
-          style={{
-            color: '#F2EFEA',
-            fontFamily: 'var(--font-inter), Inter, sans-serif',
-            fontSize: 'max(18px, 1.5vw)',
-            fontStyle: 'normal',
-            fontWeight: 600,
-            lineHeight: 'normal',
-            letterSpacing: '0.5px'
-          }}
-        >
-          Cinemas &amp; Game Right-Holders
-        </motion.div>
-
         {/* Content-wrapper */}
         <div 
           className="content-wrapper"
@@ -106,17 +89,25 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
             gap: '20px'
           }}
         >
-          {/* Content Top */}
-          <div 
-            className="content-top"
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              gap: '5px',
-              alignSelf: 'stretch'
-            }}
-          >
+          {/* Section Top: subheader + main title */}
+          <div className="section-top">
+            {/* Section Sub-header */}
+            <motion.div
+              variants={contentVariants}
+              className="section-sub-header"
+              style={{
+                color: '#F2EFEA',
+                fontFamily: 'var(--font-inter), Inter, sans-serif',
+                fontSize: 'max(18px, 1.5vw)',
+                fontStyle: 'normal',
+                fontWeight: 600,
+                lineHeight: 'normal',
+                letterSpacing: '0.5px'
+              }}
+            >
+              Cinemas &amp; Game Right-Holders
+            </motion.div>
+
             {/* Section Header - split into two colored parts */}
             <motion.h2
               variants={contentVariants}
