@@ -94,16 +94,16 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
           Cinemas &amp; Game Right-Holders
         </motion.div>
 
-        {/* Conte-wrapper */}
+        {/* Content-wrapper */}
         <div 
-          className="conte-wrapper"
+          className="content-wrapper"
           style={{
             display: 'flex',
             width: '100%',
             maxWidth: '1280px',
             flexDirection: 'column',
             alignItems: 'flex-start',
-            gap: '5px'
+            gap: '20px'
           }}
         >
           {/* Content Top */}
@@ -141,14 +141,18 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
           {/* Bullets */}
           <div 
             className="bullets"
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'flex-start',
-              alignSelf: 'stretch',
-              marginTop: '10px'
-            }}
+        style={{ 
+                  display: "flex", 
+                  flexDirection: "column",
+                  backgroundColor: "rgba(0, 0, 0, 0.4)",
+                  backdropFilter: "blur(16px)",
+                  border: "1px solid rgba(246, 244, 241, 0.1)",
+                  borderRadius: "24px",
+                  padding: "20px 32px",
+                  gap: "0px",
+                  width: "fit-content" // Keep hugging content
+                }}
+                
           >
             {/* Bullet 1 */}
             <motion.div 
