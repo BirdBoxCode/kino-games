@@ -42,7 +42,7 @@ export function SectionHow() {
         style={{
           display: 'flex',
           // height: '964px', // base
-          minHeight: '964px', // responsive
+          minHeight: '800px', // responsive
           height: '100vh', 
           padding: '64px 0', // Vertical padding only
           flexDirection: 'column',
@@ -52,6 +52,7 @@ export function SectionHow() {
           alignSelf: 'stretch',
           position: 'relative',
           overflow: 'hidden',
+          overflowY: 'auto',
           backgroundImage: 'url(/section-how-bg.jpg)',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
