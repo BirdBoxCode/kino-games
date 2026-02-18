@@ -9,7 +9,7 @@ export function SectionModel() {
   return (
     <section
       id="our-model"
-      className="relative w-full h-screen flex flex-col items-start overflow-hidden px-[20px] md:px-[80px] pt-[180px] pb-[40px]"
+      className="relative w-full min-h-screen flex flex-col items-start overflow-hidden px-[20px] md:px-[80px] pt-[120px] md:pt-[180px] pb-[40px]"
       style={{
         backgroundImage: 'url(/section-model/cinema-lobby.png)',
         backgroundRepeat: 'no-repeat',

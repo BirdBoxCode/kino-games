@@ -31,7 +31,7 @@ export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
   return (
     <motion.section 
       style={{ opacity: sectionOpacity }}
-      className="relative h-screen w-full overflow-hidden bg-bg-dark flex flex-col items-start justify-center p-8 md:p-[64px_80px] gap-[24px] self-stretch"
+      className="relative min-h-screen w-full overflow-hidden bg-bg-dark flex flex-col items-start justify-center p-8 md:p-[64px_80px] gap-[24px] self-stretch"
     >
       {/* Background Video */}
       <div className="absolute inset-0 z-0 w-full h-full pointer-events-none overflow-hidden">

@@ -58,3 +58,23 @@ body {
   align-items: flex-start;
   gap: 10px;
 }
+
+/* ─── Mobile: disable fixed viewport heights on cinematic sections ─── */
+/* These sections use height:100vh inline styles or h-screen Tailwind.  */
+/* On mobile (<768px) we let them size to their content instead.        */
+@media (max-width: 767px) {
+  .section-why,
+  .section-games-cinemas,
+  .section-how {
+    height: auto !important;
+    min-height: 100svh !important;
+    padding-top: 100px !important; /* clear the fixed navbar */
+    padding-bottom: 60px !important;
+  }
+
+  /* SectionSimpleSetup already uses min-h-screen, just ensure padding */
+  .section-simple-setup {
+    padding-top: 100px !important;
+    padding-bottom: 60px !important;
+  }
+}

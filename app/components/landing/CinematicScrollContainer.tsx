@@ -21,11 +21,21 @@ export function CinematicScrollContainer({
   const [activeIndex, setActiveIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isCinematic, setIsCinematic] = useState(true);
+  // Track whether we're on mobile (< 768px)
+  const [isMobile, setIsMobile] = useState(false);
   const intent = useMotionValue(0);
   const prefersReducedMotion = useReducedMotion();
   const totalSections = children.length;
 
- 
+  // Detect mobile on mount and on resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Move performSwitch logic here so it can be used by both event listener and scroll handler
   const performSwitch = useCallback((targetIndex: number) => {
@@ -83,6 +93,12 @@ export function CinematicScrollContainer({
   }, [isCinematic, performSwitch, totalSections]);
 
   useEffect(() => {
+    // Skip scroll-jacking entirely on mobile
+    if (isMobile) {
+      document.body.style.overflow = '';
+      return;
+    }
+
     if (prefersReducedMotion) return;
 
     if (!isCinematic) {
@@ -196,11 +212,11 @@ export function CinematicScrollContainer({
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [activeIndex, isTransitioning, totalSections, prefersReducedMotion, intent, isCinematic, performSwitch]);
+  }, [activeIndex, isTransitioning, totalSections, prefersReducedMotion, intent, isCinematic, performSwitch, isMobile]);
 
   // RE-ENTER CINEMATIC MODE
   useEffect(() => {
-    if (prefersReducedMotion || isCinematic) return;
+    if (prefersReducedMotion || isCinematic || isMobile) return;
 
     const handleScroll = () => {
       // If user scrolls back UP into the cinematic spacer area
@@ -213,7 +229,7 @@ export function CinematicScrollContainer({
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isCinematic, prefersReducedMotion, totalSections]);
+  }, [isCinematic, prefersReducedMotion, totalSections, isMobile]);
 
   const canGoDown = activeIndex < totalSections; // Allow "down" intent even on last section (for exit)
   const canGoUp = activeIndex > 0;
@@ -223,18 +239,27 @@ export function CinematicScrollContainer({
     if (v < 0 && !canGoUp) return 0;
     
     // Suppress animation when scrolling DOWN from the last section (Exit)
-    // The user requested: "remove the scroll animation... when the user scrolls down"
     if (activeIndex === totalSections - 1 && v > 0) return 0;
 
     return Math.sign(v) * Math.min(1, Math.abs(v) / THRESHOLD);
   });
 
+  // MOBILE: render as a plain vertical stack, no cinematic behavior
+  if (isMobile) {
+    return (
+      <div className="flex flex-col w-full">
+        {children.map((child, index) => (
+          <div key={index} className="w-full">
+            {child}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   if (prefersReducedMotion) {
     return <div className="flex flex-col">{children}</div>;
   }
-
-  // const isAtLastSection = activeIndex === totalSections - 1; 
-  // We remove this check for the indicator so it shows even on the last section
 
   return (
     <div style={{ height: `${totalSections * 100}vh`, position: 'relative' }}>
@@ -254,17 +279,12 @@ export function CinematicScrollContainer({
               isActive={isActive}
               className="absolute inset-0"
             >
-              {/* Keep z-index and pointer-events logic on a wrapper if needed, 
-                  or let ProjectorReveal handle basic visibility. 
-                  ProjectorReveal sets opacity to 0 when hidden, so pointerEvents should be none effectively,
-                  but explicit handling is safer. */}
                <div
                   style={{
                     width: '100%',
                     height: '100%',
                     pointerEvents: isActive ? 'auto' : 'none',
                     zIndex: isActive ? 50 : 10,
-                    // Remove manual opacity/transform transitions as ProjectorReveal handles entrance
                   }}
                >
                  {cloneElement(child, { scrollProgress: isActive ? 0 : 1 } as Record<string, unknown>)}
