@@ -2,6 +2,7 @@
 
 import { motion, useTransform, useMotionValue } from "framer-motion";
 import { useEffect } from "react";
+import Image from "next/image";
 import { LightSweep, contentVariants } from "./ProjectorReveal";
 
 interface SectionWhyProps {
@@ -35,16 +36,22 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
         width: '100%',
         position: 'relative',
         overflow: 'hidden',
-        backgroundImage: 'url(/kids-cinema-2.png)',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundColor: 'lightgray',
+        backgroundColor: '#1a1a1a',
         opacity: sectionOpacity,
         scale: sectionScale,
         y: sectionY
       }}
     >
+      {/* Background Image – optimized via Next.js (AVIF/WebP) */}
+      <Image
+        src="/kids-cinema-2.png"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center"
+        style={{ zIndex: 0 }}
+      />
       {/* Background Overlay */}
       <div 
         className="section-bg-overlay"

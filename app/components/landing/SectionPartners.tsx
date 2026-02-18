@@ -34,6 +34,7 @@ export function SectionPartners() {
           src="/section-partners/Popcorn.png"
           alt="Popcorn Background"
           fill
+          sizes="100vw"
           className="object-cover object-center"
           priority={false}
         />
@@ -110,6 +111,8 @@ export function SectionPartners() {
                     src={`/section-partners/partner-logos/${logo}`}
                     alt={logo.split('.')[0]}
                     fill
+                    sizes="(max-width: 640px) 33vw, (max-width: 1024px) 25vw, 16vw"
+                    loading="lazy"
                     className="object-contain p-6 md:p-8 transition-all duration-300 opacity-80 group-hover:opacity-100 group-hover:scale-105"
                   />
                 </div>

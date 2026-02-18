@@ -77,4 +77,26 @@ body {
     padding-top: 100px !important;
     padding-bottom: 60px !important;
   }
+
+  /* SectionHow trail layout on mobile */
+  .bullet-trail-wrapper {
+    gap: 40px !important;
+  }
+  .trail-item {
+    margin-left: 0 !important;
+    align-self: flex-start !important;
+    width: 100%;
+  }
+  .squiggle-frame-2, .squiggle-frame-3 {
+    padding: 0 !important;
+    justify-content: flex-start !important;
+  }
+  .how-p1, .how-p2, .how-p3, .how-p3-corrected {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    max-width: 100% !important;
+  }
+  .section-how h2 {
+    font-size: 32px !important;
+  }
 }

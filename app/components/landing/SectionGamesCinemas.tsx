@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { FilmstripGallery } from "./FilmstripGallery";
 import { LightSweep, contentVariants } from "./ProjectorReveal";
 
@@ -28,24 +29,29 @@ export function SectionGamesCinemas() {
       className="section-games-cinemas"
       style={{
         display: "flex",
-        padding: "80px 0", // Vertical padding only
+        padding: "80px 0",
         flexDirection: "column",
         justifyContent: "center",
-        alignItems: "center", // Center content
-        gap: "15px", // Reduced gap
+        alignItems: "center",
+        gap: "15px",
         alignSelf: "stretch",
         position: "relative",
         overflow: "hidden",
-        height: "100vh", // Enforce full viewport height
+        height: "100vh",
         minHeight: "800px",
-        // Background from requirements
-        backgroundImage: "url(/Lobby.png)", // Updated background image
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        backgroundColor: "lightgray", // fallback
+        backgroundColor: "#1a1a1a",
       }}
     >
+      {/* Background Image – optimized via Next.js (AVIF/WebP) */}
+      <Image
+        src="/Lobby.png"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center"
+        style={{ zIndex: 0 }}
+      />
       {/* Overlay Darker */}
       <div
         className="overlay-darker"

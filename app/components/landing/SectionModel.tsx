@@ -11,15 +11,20 @@ export function SectionModel() {
       id="our-model"
       className="relative w-full min-h-screen flex flex-col items-start overflow-hidden px-[20px] md:px-[80px] pt-[120px] md:pt-[180px] pb-[40px]"
       style={{
-        backgroundImage: 'url(/section-model/cinema-lobby.png)',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundColor: 'lightgray',
+        backgroundColor: '#1a1a1a',
         minHeight: '800px',
         overflowY: 'hidden',
       }}
     >
+      {/* Background Image – optimized via Next.js (AVIF/WebP) */}
+      <Image
+        src="/section-model/cinema-lobby.png"
+        alt=""
+        fill
+        sizes="100vw"
+        className="object-cover object-center"
+        style={{ zIndex: 0 }}
+      />
       {/* Overlay */}
       <div 
         className="absolute inset-0 w-full h-full z-10 pointer-events-none"
@@ -104,13 +109,14 @@ export function SectionModel() {
           style={{ maxHeight: 'calc(100vh - 520px)' }}
         >
           <Image
-              src="/section-model/ticketsplit-nobg.png"
+              src="/section-model/Ticketsplit-nobg.png"
               alt="Ticket split diagram"
               width={1271}
               height={572}
+              sizes="(max-width: 768px) 100vw, 60vw"
               className="w-auto h-auto object-contain object-left-bottom"
               style={{ maxHeight: 'calc(100vh - 520px)' }}
-              priority
+              loading="lazy"
           />
         </motion.div>
       </div>

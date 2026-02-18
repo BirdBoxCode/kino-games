@@ -26,7 +26,7 @@ export function PartnersSection({ scrollProgress = 0 }: PartnersSectionProps) {
         </div>
         
         {/* Tailwind Custom Class needed for marquee in styles, or inline style */}
-        <style jsx>{`
+        <style>{`
           @keyframes marquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }

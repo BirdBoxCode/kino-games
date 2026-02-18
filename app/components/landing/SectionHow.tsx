@@ -1,65 +1,40 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { LightSweep, contentVariants } from "./ProjectorReveal";
 
 export function SectionHow() {
   return (
-    <>
-      <style jsx global>{`
-        @media (max-width: 768px) {
-          .section-how {
-            padding: 40px 20px !important;
-            height: auto !important;
-            min-height: auto !important;
-          }
-          .bullet-trail-wrapper {
-            gap: 40px !important;
-          }
-          .trail-item {
-            margin-left: 0 !important;
-            align-self: flex-start !important;
-            width: 100%;
-          }
-          .squiggle-frame-2, .squiggle-frame-3 {
-            padding: 0 !important;
-            justify-content: flex-start !important;
-          }
-          .how-p1, .how-p2, .how-p3, .how-p3-corrected {
-            margin-left: 0 !important;
-            padding-left: 0 !important;
-            max-width: 100% !important;
-          }
-          .section-how h2 {
-            font-size: 32px !important;
-          }
-        }
-      `}</style>
-      <section 
+    <section 
         id="how-it-works"
         className="section-how"
         style={{
           display: 'flex',
-          // height: '964px', // base
-          minHeight: '800px', // responsive
+          minHeight: '800px',
           height: '100vh', 
-          padding: '64px 0', // Vertical padding only
+          padding: '64px 0',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'center', // Center content
+          alignItems: 'center',
           gap: '29px',
           alignSelf: 'stretch',
           position: 'relative',
           overflow: 'hidden',
           overflowY: 'auto',
-          backgroundImage: 'url(/section-how-bg.jpg)',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          backgroundColor: '#222', // fallback
+          backgroundColor: '#222',
         }}
       >
+      {/* Background Image – optimized via Next.js (AVIF/WebP) */}
+      <Image
+        src="/section-how-bg.jpg"
+        alt=""
+        fill
+        sizes="100vw"
+        className="object-cover object-center"
+        style={{ zIndex: 0 }}
+      />
       {/* Overlay */}
       <div 
         className="overlay"
@@ -179,7 +154,6 @@ export function SectionHow() {
 
       </div>
     </section>
-    </>
   );
 }
 

@@ -33,6 +33,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Preload Garet custom font to avoid FOUT */}
+        <link
+          rel="preload"
+          href="/fonts/Garet-Book.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className={`${syne.variable} ${manrope.variable} ${inter.variable} antialiased bg-kino-black text-kino-silver`}
       >

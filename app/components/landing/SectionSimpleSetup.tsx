@@ -36,6 +36,7 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
           src="/dark_cinema.png"
           alt="Dark Cinema Background"
           fill
+          sizes="100vw"
           className="object-cover object-center"
           priority
         />
