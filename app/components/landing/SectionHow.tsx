@@ -103,9 +103,9 @@ export function SectionHow() {
             alignSelf: 'stretch'
           }}
         >
-          <span style={{ color: '#F6F4F1', fontFamily: 'Inter, sans-serif', fontSize: '20px', fontWeight: 600 }}>
-             From game to cinema
-          </span>
+          <motion.h3 variants={contentVariants} className="text-[#F6F4F1] font-inter text-[20px] md:text-[24px] font-semibold tracking-[0.5px]">
+            From game to cinema
+          </motion.h3>
            <motion.h2 
             variants={contentVariants}
             style={{

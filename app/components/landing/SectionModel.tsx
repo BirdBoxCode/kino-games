@@ -33,7 +33,7 @@ export function SectionModel() {
             {/* Content Top */}
             <div className="flex flex-col items-start gap-[5px] self-stretch">
               {/* Section Sub-header */}
-              <h3 className="section-sub-header text-[#F6F4F1] font-inter text-[20px] md:text-[24px] font-semibold tracking-[0.5px]">
+              <h3 style={{ color: '#F6F4F1', fontFamily: 'var(--font-inter), Inter, sans-serif', fontSize: '24px', fontWeight: 600, letterSpacing: '0.5px', margin: 0 }}>
                 How ticket sales are shared
               </h3>
               
