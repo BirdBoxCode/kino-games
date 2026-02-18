@@ -17,7 +17,7 @@ export function SectionModel() {
         backgroundPosition: 'center',
         backgroundColor: 'lightgray',
         minHeight: '800px',
-        overflowY: 'auto',
+        overflowY: 'hidden',
       }}
     >
       {/* Overlay */}
