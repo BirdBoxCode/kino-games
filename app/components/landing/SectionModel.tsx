@@ -37,7 +37,7 @@ export function SectionModel() {
           {/* Content */}
           <motion.div 
             variants={contentVariants}
-            className="flex flex-col items-start w-full max-w-[1280px]"
+            className="flex flex-col items-start w-full max-w-[1280px] gap-[20px]"
           >
             {/* Section Top: subheader + main title */}
             <div className="section-top">
@@ -50,19 +50,33 @@ export function SectionModel() {
               <h2 className="section-header font-garet text-[40px] md:text-[48px] font-[850] leading-[110%] tracking-[0.7px] uppercase text-[#F6F4F1]">
                 SUPPORTING <span className="text-[#D63A2F]">creators & cinemas</span>
               </h2>
+            </div>
 
+            {/* Grey card: p1 + CTA */}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                backdropFilter: 'blur(16px)',
+                border: '1px solid rgba(246, 244, 241, 0.1)',
+                borderRadius: '24px',
+                padding: '20px 32px',
+                maxWidth: '680px',
+              }}
+            >
               {/* Copy (p1) */}
-              <p className="p1 text-[#F6F4F1] font-inter text-[18px] md:text-[18px] font-medium tracking-[0.5px] mt-2 max-w-[800px]">
-                 We provide a platform that connects game developers directly with cinema exhibitors, ensuring fair revenue sharing and simplified licensing.
-                 By bridging the gap between interactive entertainment and the big screen, we create new revenue streams and cultural opportunities for everyone involved.
+              <p className="p1 text-[#F6F4F1] font-inter text-[18px] font-medium tracking-[0.5px]" style={{ margin: 0 }}>
+                We provide a platform that connects game developers directly with cinema exhibitors, ensuring fair revenue sharing and simplified licensing.
+                By bridging the gap between interactive entertainment and the big screen, we create new revenue streams and cultural opportunities for everyone involved.
               </p>
 
               {/* CTA Link */}
-              <div 
+              <div
                 style={{
                   display: 'flex',
-                  padding: '20px 0',
-                  justifyContent: 'center',
+                  padding: '20px 0 0 0',
+                  justifyContent: 'flex-start',
                   alignItems: 'center',
                   gap: '10px'
                 }}
