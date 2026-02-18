@@ -138,7 +138,7 @@ export function SectionHow() {
           >
             {/* Trail Item 1 */}
             <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}>
-              <div style={{ transform: 'scale(0.8)', transformOrigin: 'top left' }}>
+              <div style={{ transform: 'scale(0.69)', transformOrigin: 'top left', display: 'inline-block' }}>
                 <Squiggle1 />
               </div>
               <div className="how-p1" style={{ maxWidth: '500px' }}>
@@ -151,7 +151,7 @@ export function SectionHow() {
 
             {/* Trail Item 2 - Staggered Left Margin for Visual Trail Effect */}
             <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start', marginLeft: '40px' }}>
-              <div style={{ transform: 'scale(0.8)', transformOrigin: 'top left' }}>
+              <div style={{ transform: 'scale(0.60)', transformOrigin: 'top left', display: 'inline-block' }}>
                 <Squiggle2 />
               </div>
               <div className="how-p2" style={{ maxWidth: '500px' }}>
@@ -164,7 +164,7 @@ export function SectionHow() {
 
             {/* Trail Item 3 - More Staggered */}
             <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start', marginLeft: '80px' }}>
-              <div style={{ transform: 'scale(0.8)', transformOrigin: 'top left' }}>
+              <div style={{ transform: 'scale(0.69)', transformOrigin: 'top left', display: 'inline-block' }}>
                 <Squiggle3 />
               </div>
               <div className="how-p3" style={{ maxWidth: '500px' }}>
