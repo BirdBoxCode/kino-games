@@ -29,7 +29,7 @@ export function SectionModel() {
       />
 
       {/* Block Wrapper */}
-      <div className="relative z-20 flex flex-col items-start w-full max-w-[1440px] h-full" style={{ minHeight: 0 }}>
+      <div className="relative z-20 flex flex-col items-start gap-[0px] w-full max-w-[1440px] grow"> 
         {/* Content Wrapper */}
         <div className="flex items-start gap-[10px] w-full relative z-30">
           <LightSweep />
@@ -100,15 +100,14 @@ export function SectionModel() {
         {/* Hand Image - Moved inside flow to prevent overlap */}
         <motion.div 
           variants={contentVariants}
-          className="relative z-20 pointer-events-none w-auto max-w-[1200px] -ml-[20px] md:-ml-[80px] mt-[20px]"
-          style={{ flex: '1 1 0', minHeight: 0, overflow: 'hidden' }}
+          className="relative z-20 pointer-events-none w-auto max-w-[1200px] h-auto max-h-[35vh] md:max-h-[50vh] self-start -ml-[20px] md:-ml-[80px] mt-[40px] md:-mt-[20px]"
         >
           <Image
               src="/section-model/ticketsplit-nobg.png"
               alt="Ticket split diagram"
               width={1271}
               height={572}
-              className="w-auto h-full max-h-full object-contain object-left-bottom"
+              className="w-auto h-auto max-h-[35vh] md:max-h-[50vh] object-contain object-left-bottom"
               priority
           />
         </motion.div>
