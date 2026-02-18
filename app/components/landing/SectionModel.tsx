@@ -77,7 +77,7 @@ export function SectionModel() {
         {/* Hand Image - Moved inside flow to prevent overlap */}
         <motion.div 
           variants={contentVariants}
-          className="relative z-20 pointer-events-none w-auto max-w-[1200px] h-auto max-h-[40vh] md:max-h-[55vh] self-start -ml-[20px] md:-ml-[80px] mt-[20px] md:-mt-[40px]"
+          className="relative z-20 pointer-events-none w-auto max-w-[1200px] h-auto max-h-[40vh] md:max-h-[55vh] self-start -ml-[20px] md:-ml-[80px] mt-[40px] md:-mt-[20px]"
         >
           <Image
               src="/section-model/ticketsplit-nobg.png"
