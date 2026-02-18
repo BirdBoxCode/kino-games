@@ -9,7 +9,7 @@ export function SectionModel() {
   return (
     <section
       id="our-model"
-      className="relative w-full h-screen min-h-screen flex flex-col justify-center items-start overflow-hidden px-[20px] md:px-[80px] pt-[140px] pb-[40px]"
+      className="relative w-full h-screen min-h-screen flex flex-col justify-center items-start overflow-hidden px-[20px] md:px-[80px] pt-[180px] pb-[40px]"
       style={{
         backgroundImage: 'url(/section-model/cinema-lobby.png)',
         backgroundRepeat: 'no-repeat',
@@ -84,14 +84,14 @@ export function SectionModel() {
         {/* Hand Image - Moved inside flow to prevent overlap */}
         <motion.div 
           variants={contentVariants}
-          className="relative z-20 pointer-events-none w-auto max-w-[1200px] h-auto max-h-[40vh] md:max-h-[55vh] self-start -ml-[20px] md:-ml-[80px] mt-[40px] md:-mt-[20px]"
+          className="relative z-20 pointer-events-none w-auto max-w-[1200px] h-auto max-h-[35vh] md:max-h-[50vh] self-start -ml-[20px] md:-ml-[80px] mt-[40px] md:-mt-[20px]"
         >
           <Image
               src="/section-model/ticketsplit-nobg.png"
               alt="Ticket split diagram"
               width={1271}
               height={572}
-              className="w-auto h-auto max-h-[40vh] md:max-h-[55vh] object-contain object-left-bottom"
+              className="w-auto h-auto max-h-[35vh] md:max-h-[50vh] object-contain object-left-bottom"
               priority
           />
         </motion.div>
