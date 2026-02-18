@@ -9,7 +9,14 @@ export function SectionModel() {
   return (
     <section
       id="our-model"
-      className="relative w-full h-screen min-h-screen flex flex-col justify-center items-start overflow-hidden bg-[#0E0E0E] px-[20px] md:px-[80px] pt-[140px] pb-[40px]"
+      className="relative w-full h-screen min-h-screen flex flex-col justify-center items-start overflow-hidden px-[20px] md:px-[80px] pt-[140px] pb-[40px]"
+      style={{
+        backgroundImage: 'url(/section-model/cinema-lobby.png)',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundColor: 'lightgray',
+      }}
     >
       {/* Overlay */}
       <div 
