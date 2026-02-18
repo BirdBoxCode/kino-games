@@ -30,10 +30,10 @@ export function SectionModel() {
             variants={contentVariants}
             className="flex flex-col items-start w-full max-w-[1280px]"
           >
-            {/* Content Top */}
-            <div className="flex flex-col items-start gap-[5px] self-stretch">
+            {/* Section Top: subheader + main title */}
+            <div className="section-top">
               {/* Section Sub-header */}
-              <h3 style={{ color: '#F6F4F1', fontFamily: 'var(--font-inter), Inter, sans-serif', fontSize: '24px', fontWeight: 600, letterSpacing: '0.5px', margin: 0 }}>
+              <h3 style={{ color: '#F6F4F1', fontFamily: 'var(--font-inter), Inter, sans-serif', fontSize: '20px', fontWeight: 600, lineHeight: 'normal', letterSpacing: '0.5px', margin: 0 }}>
                 How ticket sales are shared
               </h3>
               

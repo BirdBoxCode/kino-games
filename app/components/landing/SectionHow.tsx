@@ -92,18 +92,9 @@ export function SectionHow() {
       >
         <LightSweep />
 
-        {/* Content Top */}
-        <div 
-          className="content-top"
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            gap: '5px',
-            alignSelf: 'stretch'
-          }}
-        >
-          <motion.h3 variants={contentVariants} className="text-[#F6F4F1] font-inter text-[20px] md:text-[24px] font-semibold tracking-[0.5px]">
+        {/* Section Top: subheader + main title */}
+        <div className="section-top">
+          <motion.h3 variants={contentVariants} className="text-[#F6F4F1] font-inter text-[20px] font-semibold tracking-[0.5px]">
             From game to cinema
           </motion.h3>
            <motion.h2 
