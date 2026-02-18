@@ -94,9 +94,23 @@ export function SectionGamesCinemas() {
         >
           <LightSweep />
           
-          {/* =======================
-              BLOCK 1: FOR CINEMAS
-             ======================= */}
+          {/* Section Top: subheader + first block title */}
+          <div className="section-top" style={{ marginBottom: '10px' }}>
+            {/* Subheader */}
+            <motion.div
+              variants={contentVariants}
+              style={{
+                color: '#F2EFEA',
+                fontFamily: 'var(--font-inter), Inter, sans-serif',
+                fontSize: '20px',
+                fontWeight: 600,
+                lineHeight: 'normal',
+                letterSpacing: '0.5px'
+              }}
+            >
+              Cinemas &amp; Game Right-Holders
+            </motion.div>
+
           {/* =======================
               BLOCK 1: FOR CINEMAS
              ======================= */}
@@ -111,11 +125,12 @@ export function SectionGamesCinemas() {
               letterSpacing: "0.7px",
               textTransform: "uppercase",
               color: "#F6F4F1",
-              margin: "0 0 10px 0",
+              margin: "0",
             }}
           >
             FOR <span style={{ color: "#F9C962" }}>CINEMAS</span>
           </motion.h3>
+          </div>
           <div
             className="content-row content-row-gap"
             style={{

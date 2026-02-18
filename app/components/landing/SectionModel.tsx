@@ -33,7 +33,7 @@ export function SectionModel() {
             {/* Section Top: subheader + main title */}
             <div className="section-top">
               {/* Section Sub-header */}
-              <h3 style={{ color: '#F6F4F1', fontFamily: 'var(--font-inter), Inter, sans-serif', fontSize: '20px', fontWeight: 600, letterSpacing: '0.5px', margin: 0 }}>
+              <h3 style={{ color: '#F6F4F1', fontFamily: 'var(--font-inter), Inter, sans-serif', fontSize: '20px', fontWeight: 600, lineHeight: 'normal', letterSpacing: '0.5px', margin: 0 }}>
                 How ticket sales are shared
               </h3>
               

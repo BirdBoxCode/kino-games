@@ -98,7 +98,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
               style={{
                 color: '#F2EFEA',
                 fontFamily: 'var(--font-inter), Inter, sans-serif',
-                fontSize: 'max(18px, 1.5vw)',
+                fontSize: '20px',
                 fontStyle: 'normal',
                 fontWeight: 600,
                 lineHeight: 'normal',
@@ -130,20 +130,20 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
           </div>
 
           {/* Bullets */}
-          <div 
+          <motion.div 
+            variants={contentVariants}
             className="bullets"
-        style={{ 
-                  display: "flex", 
-                  flexDirection: "column",
-                  backgroundColor: "rgba(0, 0, 0, 0.4)",
-                  backdropFilter: "blur(16px)",
-                  border: "1px solid rgba(246, 244, 241, 0.1)",
-                  borderRadius: "24px",
-                  padding: "20px 32px",
-                  gap: "0px",
-                  width: "fit-content" // Keep hugging content
-                }}
-                
+            style={{ 
+              display: "flex", 
+              flexDirection: "column",
+              backgroundColor: "rgba(0, 0, 0, 0.4)",
+              backdropFilter: "blur(16px)",
+              border: "1px solid rgba(246, 244, 241, 0.1)",
+              borderRadius: "24px",
+              padding: "20px 32px",
+              gap: "0px",
+              width: "fit-content"
+            }}
           >
             {/* Bullet 1 */}
             <motion.div 
@@ -254,7 +254,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
                 </p>
               </div>
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     </motion.section>
