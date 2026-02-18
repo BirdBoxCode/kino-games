@@ -28,7 +28,7 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
   return (
     <motion.section
       className="relative w-full md:h-screen min-h-screen flex flex-col justify-center items-center overflow-x-hidden md:overflow-hidden bg-black"
-      style={{ opacity: sectionOpacity }}
+      style={{ opacity: sectionOpacity, minHeight: '800px', overflowY: 'auto' }}
     >
       {/* Background Image: Dark Cinema */}
       <div className="absolute inset-0 z-0 select-none pointer-events-none">
@@ -101,12 +101,10 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
             </div>
           </motion.div>
 
-            {/* Schematic Image - Replaces manual SVG/HTML visualization */}
-            {/* Styles applied as per user request */}
-            {/* content-bottom: flex, w 1327px, h 573px, flex-col, justify-center, items-center, gap 10px, shrink 0 */}
-            <motion.div 
+            <motion.div
               variants={contentVariants}
-              className="relative flex flex-col justify-center items-center gap-[10px] w-full max-w-[1327px] h-auto md:h-[50vh] shrink-0 mt-4 md:mt-0 mb-8 md:mb-0"
+              className="relative flex flex-col justify-center items-center gap-[10px] w-full max-w-[1327px] h-auto shrink-0 mt-4 md:-mt-5 mb-8 md:mb-0"
+              style={{ height: 'auto', maxHeight: 'calc(50vh - 40px)' }}
             >
                <Image 
                  src="/section-simple-setup/schema-image.png"
@@ -114,6 +112,7 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
                  width={1229}
                  height={489}
                  className="w-full h-auto md:w-auto md:h-full object-contain"
+                 style={{ maxHeight: 'calc(50vh - 40px)' }}
                  priority
                />
             </motion.div>

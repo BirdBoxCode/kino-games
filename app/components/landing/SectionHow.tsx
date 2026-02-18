@@ -42,7 +42,7 @@ export function SectionHow() {
         style={{
           display: 'flex',
           // height: '964px', // base
-          minHeight: '964px', // responsive
+          minHeight: '800px', // responsive
           height: '100vh', 
           padding: '64px 0', // Vertical padding only
           flexDirection: 'column',
@@ -52,6 +52,7 @@ export function SectionHow() {
           alignSelf: 'stretch',
           position: 'relative',
           overflow: 'hidden',
+          overflowY: 'auto',
           backgroundImage: 'url(/section-how-bg.jpg)',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
@@ -82,7 +83,7 @@ export function SectionHow() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
-          gap: '20px',
+          gap: '10px',
           width: '100%',
           maxWidth: '1440px', // Matches Navbar
           margin: '0 auto',
@@ -93,7 +94,7 @@ export function SectionHow() {
         <LightSweep />
 
         {/* Section Top: subheader + main title */}
-        <div className="section-top">
+        <div className="section-top" style={{ gap: '5px' }}>
           <motion.h3 variants={contentVariants} className="text-[#F6F4F1] font-inter text-[20px] font-semibold tracking-[0.5px]">
             From game to cinema
           </motion.h3>
@@ -132,25 +133,13 @@ export function SectionHow() {
               maxWidth: '1280px',
               flexDirection: 'column',
               alignItems: 'flex-start',
-              gap: '15px'
+              gap: '8px'
             }}
           >
             {/* Trail Item 1 */}
-            <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'row', gap: '20px', alignItems: 'center' }}>
-              <div 
-                className="squiggle-frame1"
-                style={{
-                  display: 'flex',
-                  padding: '0', 
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '80px', // Fixed width for alignment
-                  flexShrink: 0
-                }}
-              >
-                <div style={{ transform: 'scale(0.8)' }}>
-                   <Squiggle1 />
-                </div>
+            <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'column', gap: '2px', alignItems: 'flex-start' }}>
+              <div style={{ transform: 'scale(0.69)', transformOrigin: 'top left', display: 'inline-block', marginBottom: '-20px' }}>
+                <Squiggle1 />
               </div>
               <div className="how-p1" style={{ maxWidth: '500px' }}>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#F6F4F1', margin: 0 }}>
@@ -161,21 +150,9 @@ export function SectionHow() {
             </motion.div>
 
             {/* Trail Item 2 - Staggered Left Margin for Visual Trail Effect */}
-            <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'row', gap: '20px', alignItems: 'center', marginLeft: '40px' }}> 
-              <div 
-                className="squiggle-frame-2"
-                style={{
-                   display: 'flex',
-                   padding: '0',
-                   justifyContent: 'center',
-                   alignItems: 'center',
-                   width: '120px', // Wider frame for this squiggle
-                   flexShrink: 0
-                }}
-              >
-                 <div style={{ transform: 'scale(0.8)' }}>
-                  <Squiggle2 />
-                 </div>
+            <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'column', gap: '2px', alignItems: 'flex-start', marginLeft: '40px' }}>
+              <div style={{ transform: 'scale(0.60)', transformOrigin: 'top left', display: 'inline-block', marginBottom: '-20px' }}>
+                <Squiggle2 />
               </div>
               <div className="how-p2" style={{ maxWidth: '500px' }}>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#F6F4F1', margin: 0 }}>
@@ -186,27 +163,15 @@ export function SectionHow() {
             </motion.div>
 
             {/* Trail Item 3 - More Staggered */}
-            <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'row', gap: '20px', alignItems: 'center', marginLeft: '80px' }}>
-               <div 
-                 className="squiggle-frame-3"
-                 style={{
-                    display: 'flex',
-                    padding: '0',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: '60px',
-                    flexShrink: 0
-                 }}
-               >
-                 <div style={{ transform: 'scale(0.8)' }}>
-                   <Squiggle3 />
-                 </div>
-               </div>
-               <div className="how-p3" style={{ maxWidth: '500px' }}>
-                   <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#F6F4F1', margin: 0 }}>
-                    <span style={{ fontWeight: 500 }}>Browse our catalogue of games, decide how long you want it for, plug in and play.</span>
-                   </p>
-               </div>
+            <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'column', gap: '2px', alignItems: 'flex-start', marginLeft: '80px' }}>
+              <div style={{ transform: 'scale(0.69)', transformOrigin: 'top left', display: 'inline-block', marginBottom: '-20px' }}>
+                <Squiggle3 />
+              </div>
+              <div className="how-p3" style={{ maxWidth: '500px' }}>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#F6F4F1', margin: 0 }}>
+                  <span style={{ fontWeight: 500 }}>Browse our catalogue of games, decide how long you want it for, plug in and play.</span>
+                </p>
+              </div>
             </motion.div>
 
           </div>

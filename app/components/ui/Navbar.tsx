@@ -9,7 +9,6 @@ import { AnimatePresence, motion } from "framer-motion";
 const navLinks = [
   { name: "About", href: "/#about", index: 1, type: 'cinematic' },
   { name: "How It Works", href: "/#how-it-works", index: 3, type: 'cinematic' },
-  { name: "Setup", href: "/#setup", index: 3, type: 'cinematic' },
   { name: "Our Model", href: "/#our-model", index: 5, type: 'cinematic' },
   { name: "Partners", href: "/#partners", index: -1, type: 'normal' },
 ];
@@ -128,7 +127,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-bg-dark z-40 flex flex-col items-center justify-center md:hidden"
+            className="fixed inset-0 bg-bg-dark z-[200] flex flex-col items-center justify-center md:hidden"
           >
             <div className="flex flex-col items-center gap-8">
               {navLinks.map((link) => (
