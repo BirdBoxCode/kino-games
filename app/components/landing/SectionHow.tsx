@@ -137,21 +137,9 @@ export function SectionHow() {
             }}
           >
             {/* Trail Item 1 */}
-            <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'row', gap: '20px', alignItems: 'center' }}>
-              <div 
-                className="squiggle-frame1"
-                style={{
-                  display: 'flex',
-                  padding: '0', 
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '80px', // Fixed width for alignment
-                  flexShrink: 0
-                }}
-              >
-                <div style={{ transform: 'scale(0.8)' }}>
-                   <Squiggle1 />
-                </div>
+            <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}>
+              <div style={{ transform: 'scale(0.8)', transformOrigin: 'top left' }}>
+                <Squiggle1 />
               </div>
               <div className="how-p1" style={{ maxWidth: '500px' }}>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#F6F4F1', margin: 0 }}>
@@ -162,21 +150,9 @@ export function SectionHow() {
             </motion.div>
 
             {/* Trail Item 2 - Staggered Left Margin for Visual Trail Effect */}
-            <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'row', gap: '20px', alignItems: 'center', marginLeft: '40px' }}> 
-              <div 
-                className="squiggle-frame-2"
-                style={{
-                   display: 'flex',
-                   padding: '0',
-                   justifyContent: 'center',
-                   alignItems: 'center',
-                   width: '120px', // Wider frame for this squiggle
-                   flexShrink: 0
-                }}
-              >
-                 <div style={{ transform: 'scale(0.8)' }}>
-                  <Squiggle2 />
-                 </div>
+            <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start', marginLeft: '40px' }}>
+              <div style={{ transform: 'scale(0.8)', transformOrigin: 'top left' }}>
+                <Squiggle2 />
               </div>
               <div className="how-p2" style={{ maxWidth: '500px' }}>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#F6F4F1', margin: 0 }}>
@@ -187,27 +163,15 @@ export function SectionHow() {
             </motion.div>
 
             {/* Trail Item 3 - More Staggered */}
-            <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'row', gap: '20px', alignItems: 'center', marginLeft: '80px' }}>
-               <div 
-                 className="squiggle-frame-3"
-                 style={{
-                    display: 'flex',
-                    padding: '0',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: '60px',
-                    flexShrink: 0
-                 }}
-               >
-                 <div style={{ transform: 'scale(0.8)' }}>
-                   <Squiggle3 />
-                 </div>
-               </div>
-               <div className="how-p3" style={{ maxWidth: '500px' }}>
-                   <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#F6F4F1', margin: 0 }}>
-                    <span style={{ fontWeight: 500 }}>Browse our catalogue of games, decide how long you want it for, plug in and play.</span>
-                   </p>
-               </div>
+            <motion.div variants={contentVariants} className="trail-item" style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start', marginLeft: '80px' }}>
+              <div style={{ transform: 'scale(0.8)', transformOrigin: 'top left' }}>
+                <Squiggle3 />
+              </div>
+              <div className="how-p3" style={{ maxWidth: '500px' }}>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#F6F4F1', margin: 0 }}>
+                  <span style={{ fontWeight: 500 }}>Browse our catalogue of games, decide how long you want it for, plug in and play.</span>
+                </p>
+              </div>
             </motion.div>
 
           </div>
