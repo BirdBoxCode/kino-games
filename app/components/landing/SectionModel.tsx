@@ -80,8 +80,8 @@ export function SectionModel() {
           className="relative z-20 pointer-events-none w-auto max-w-[1200px] h-auto max-h-[40vh] md:max-h-[55vh] self-start -ml-[20px] md:-ml-[80px] mt-[20px] md:-mt-[40px]"
         >
           <Image
-              src="/section-model/hand-image2.png"
-              alt="Hand holding ticket"
+              src="/section-model/ticketsplit-nobg.png"
+              alt="Ticket split diagram"
               width={1271}
               height={572}
               className="w-auto h-auto max-h-[40vh] md:max-h-[55vh] object-contain object-left-bottom"
