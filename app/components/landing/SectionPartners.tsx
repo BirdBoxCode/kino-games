@@ -88,13 +88,12 @@ export function SectionPartners() {
           <h3 className="font-inter text-[20px] font-bold tracking-[0.5px] uppercase text-[#F6F4F1] opacity-60">
             Cinema Partners
           </h3>
-          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-[16px]">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-[16px]">
               {[
                 "Arcadia - Logo.jpg",
                 "Creative Europe Media Logo.png",
                 "FEFFS - Logo.png",
                 "KSPJ - Logo.png",
-                "Logo-SF-Yellow-Square-Vector_1.png",
                 "NERDIC_RGB_WortBildmarke_Quer_B.jpg",
                 "Quai10 - Logo.png",
                 "Savoy - Logo.png",
@@ -114,8 +113,7 @@ export function SectionPartners() {
                   />
                 </div>
               ))}
-              {/* One more placeholder to make it 12 items for 4x3 grid feeling (11 items + 1) */}
-               <div className="group relative w-full aspect-video rounded-[12px] bg-[#1A1A1A] border border-[#FFFFFF10]" />
+
           </div>
         </div>
 
