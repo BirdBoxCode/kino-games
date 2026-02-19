@@ -31,7 +31,7 @@ export function SectionPartners() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0 select-none pointer-events-none">
         <Image
-          src="/section-partners/Popcorn.png"
+          src="/section-partners/popcorn-controller.png"
           alt="Popcorn Background"
           fill
           className="object-cover object-center"
@@ -90,20 +90,23 @@ export function SectionPartners() {
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-[16px]">
               {[
-                "arcadia 1.png",
-                "Creative Europe Media Logo 1.png",
-                "FEFFS - Logo 1.png",
-                "KSPJ - Logo 1.png",
-                "nerdic2 1.png",
-                "Quai10 - Logo 1.png",
-                "savoy.png",
-                "Votiv-DeFrance-Hauptlogo-Schwarz 1.png",
-                "lab-1-logo-black 1.png",
-                "spiel_fabrique_transparent 1.png",
-              ].map((logo, i) => (
-                <div 
-                  key={`cinema-${i}`} 
-                  className="group relative w-full aspect-video rounded-[12px] flex items-center justify-center overflow-hidden border bg-[#F0EDE8] border-[#00000010]"
+                { logo: "arcadia 1.png",                          url: "https://www.arcadiacinema.com/" },
+                { logo: "Creative Europe Media Logo 1.png",       url: "https://www.creative-europe-media.eu/" },
+                { logo: "FEFFS - Logo 1.png",                     url: "https://strasbourgfestival.com/en/" },
+                { logo: "KSPJ - Logo 1.png",                      url: "https://kspj.si/en/home/" },
+                { logo: "nerdic2 1.png",                          url: "https://nerdic.org/" },
+                { logo: "Quai10 - Logo 1.png",                    url: "https://www.quai10.be/" },
+                { logo: "savoy.png",                              url: "https://savoy.premiumkino.de/" },
+                { logo: "Votiv-DeFrance-Hauptlogo-Schwarz 1.png", url: "https://www.votivkino.at/" },
+                { logo: "lab-1-logo-black 1.png",                 url: "https://www.lab-1.nl/en/" },
+                { logo: "spiel_fabrique_transparent 1.png",       url: "https://spielfabrique.eu/Thunderfox/" },
+              ].map(({ logo, url }, i) => (
+                <a
+                  key={`cinema-${i}`}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative w-full aspect-video rounded-[12px] flex items-center justify-center overflow-hidden border bg-[#F3EEE6] border-[#00000010] cursor-pointer"
                 >
                   <Image
                     src={`/section-partners/partner-logos/${logo}`}
@@ -112,7 +115,7 @@ export function SectionPartners() {
                     className="object-contain transition-all duration-300 opacity-80 group-hover:opacity-100 group-hover:scale-105"
                     style={{ padding: "25px" }}
                   />
-                </div>
+                </a>
               ))}
 
           </div>
