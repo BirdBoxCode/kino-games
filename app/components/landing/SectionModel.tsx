@@ -30,7 +30,7 @@ export function SectionModel() {
       />
 
       {/* Block Wrapper */}
-      <div className="relative z-20 flex flex-col items-start gap-[0px] w-full max-w-[1440px]"> 
+      <div className="relative z-20 flex flex-col items-start gap-[0px] w-full max-w-[1440px] md:pr-[calc(45vw+40px)] xl:pr-[740px]"> 
         {/* Content Wrapper */}
         <div className="flex items-start gap-[10px] w-full relative z-30">
           <LightSweep />
@@ -102,16 +102,15 @@ export function SectionModel() {
       {/* TicketSwap Image - pinned to section bottom-right */}
       <motion.div 
         variants={contentVariants}
-        className="absolute bottom-0 right-0 z-20 pointer-events-none w-auto max-w-[1200px] h-auto"
-        style={{ maxHeight: 'calc(100vh - 520px)' }}
+        className="absolute bottom-0 right-0 z-20 pointer-events-none"
+        style={{ width: 'clamp(320px, 45vw, 700px)' }}
       >
         <Image
             src="/section-model/ticketswap2.png"
             alt="TicketSwap"
             width={1271}
             height={572}
-            className="w-auto h-auto object-contain object-bottom-right"
-            style={{ maxHeight: 'calc(100vh - 520px)' }}
+            className="w-full h-auto object-contain object-bottom-right"
             priority
         />
       </motion.div>
