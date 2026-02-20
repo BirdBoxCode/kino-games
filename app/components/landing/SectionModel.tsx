@@ -9,13 +9,14 @@ export function SectionModel() {
   return (
     <section
       id="our-model"
-      className="relative w-full min-h-screen flex flex-col items-start overflow-hidden px-[20px] md:px-[80px] pt-[120px] md:pt-[180px] pb-[40px]"
+      className="relative w-full min-h-screen h-screen flex flex-col items-start justify-center overflow-hidden px-[20px] md:px-[80px] py-[80px]"
       style={{
         backgroundImage: 'url(/section-model/cinema-lobby.png)',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundColor: 'lightgray',
+        height: '100vh',
         minHeight: '800px',
         overflowY: 'hidden',
       }}
@@ -29,7 +30,7 @@ export function SectionModel() {
       />
 
       {/* Block Wrapper */}
-      <div className="relative z-20 flex flex-col items-start gap-[0px] w-full max-w-[1440px] grow"> 
+      <div className="relative z-20 flex flex-col items-start gap-[0px] w-full max-w-[1440px]"> 
         {/* Content Wrapper */}
         <div className="flex items-start gap-[10px] w-full relative z-30">
           <LightSweep />
@@ -96,24 +97,24 @@ export function SectionModel() {
           </motion.div>
         </div>
 
-
-        {/* Hand Image - Moved inside flow to prevent overlap */}
-        <motion.div 
-          variants={contentVariants}
-          className="relative z-20 pointer-events-none w-auto max-w-[1200px] h-auto self-start -ml-[20px] md:-ml-[80px] mt-[20px]"
-          style={{ maxHeight: 'calc(100vh - 520px)' }}
-        >
-          <Image
-              src="/section-model/ticketsplit-nobg.png"
-              alt="Ticket split diagram"
-              width={1271}
-              height={572}
-              className="w-auto h-auto object-contain object-left-bottom"
-              style={{ maxHeight: 'calc(100vh - 520px)' }}
-              priority
-          />
-        </motion.div>
       </div>
+
+      {/* TicketSwap Image - pinned to section bottom-right */}
+      <motion.div 
+        variants={contentVariants}
+        className="absolute bottom-0 right-0 z-20 pointer-events-none w-auto max-w-[1200px] h-auto"
+        style={{ maxHeight: 'calc(100vh - 520px)' }}
+      >
+        <Image
+            src="/section-model/ticketswap2.png"
+            alt="TicketSwap"
+            width={1271}
+            height={572}
+            className="w-auto h-auto object-contain object-bottom-right"
+            style={{ maxHeight: 'calc(100vh - 520px)' }}
+            priority
+        />
+      </motion.div>
     </section>
   );
 }
