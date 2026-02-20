@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, TouchEvent } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,6 +12,7 @@ export function FilmstripGallery({ images }: FilmstripGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
 
   const openLightbox = (index: number) => setSelectedIndex(index);
   const closeLightbox = () => setSelectedIndex(null);
@@ -126,6 +127,16 @@ export function FilmstripGallery({ images }: FilmstripGalleryProps) {
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/95 backdrop-blur-sm"
               onClick={closeLightbox}
+              onTouchStart={(e: TouchEvent) => {
+                touchStartX.current = e.touches[0].clientX;
+              }}
+              onTouchEnd={(e: TouchEvent) => {
+                if (touchStartX.current === null) return;
+                const delta = e.changedTouches[0].clientX - touchStartX.current;
+                if (delta < -50) showNext();
+                else if (delta > 50) showPrev();
+                touchStartX.current = null;
+              }}
             >
               {/* Close Button */}
               <button
@@ -135,18 +146,20 @@ export function FilmstripGallery({ images }: FilmstripGalleryProps) {
                 <X size={32} />
               </button>
 
-              {/* Navigation Buttons (Desktop) */}
+              {/* Navigation Buttons (visible on all screen sizes) */}
               <button
                 onClick={handlePrevClick}
-                className="absolute left-4 z-50 hidden md:flex items-center justify-center p-4 text-white/50 hover:text-[#F9C962] transition-colors"
+                className="absolute left-2 md:left-4 z-50 flex items-center justify-center p-3 md:p-4 text-white/50 hover:text-[#F9C962] transition-colors"
               >
-                <ChevronLeft size={48} />
+                <ChevronLeft size={28} className="md:hidden" />
+                <ChevronLeft size={48} className="hidden md:block" />
               </button>
               <button
                 onClick={handleNextClick}
-                className="absolute right-4 z-50 hidden md:flex items-center justify-center p-4 text-white/50 hover:text-[#F9C962] transition-colors"
+                className="absolute right-2 md:right-4 z-50 flex items-center justify-center p-3 md:p-4 text-white/50 hover:text-[#F9C962] transition-colors"
               >
-                <ChevronRight size={48} />
+                <ChevronRight size={28} className="md:hidden" />
+                <ChevronRight size={48} className="hidden md:block" />
               </button>
 
               {/* Main Image */}
