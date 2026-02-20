@@ -54,7 +54,7 @@ export function SectionHow() {
           position: 'relative',
           overflow: 'hidden',
           overflowY: 'auto',
-          backgroundImage: 'url(/section-how-bg.png)',
+          backgroundImage: 'url(/popcorn-lady-large.png)',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
