@@ -68,10 +68,10 @@ export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
             variants={contentVariants}
             className="flex flex-col items-start m-0"
         >
-          <span className="font-garet font-[850] text-[40px] sm:text-[54px] md:text-[64px] leading-[100%] tracking-[2px] uppercase text-[#F6F4F1]">
+          <span className="font-garet font-[850] text-[38px] sm:text-[54px] md:text-[64px] leading-[100%] tracking-[2px] uppercase text-[#F6F4F1]">
             NEW MEDIUM.
           </span>
-          <span className="font-garet font-[850] text-[40px] sm:text-[54px] md:text-[64px] leading-[100%] tracking-[2px] uppercase text-[#F9C962]">
+          <span className="font-garet font-[850] text-[38px] sm:text-[54px] md:text-[64px] leading-[100%] tracking-[2px] uppercase text-[#F9C962]">
             NEW AUDIENCE.
           </span>
         </motion.h1>
