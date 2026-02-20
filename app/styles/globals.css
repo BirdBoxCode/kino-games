@@ -78,3 +78,10 @@ body {
     padding-bottom: 60px !important;
   }
 }
+
+/* ─── Mobile: section main headers → 32px ─── */
+@media (max-width: 767px) {
+  .section-header {
+    font-size: 32px !important;
+  }
+}

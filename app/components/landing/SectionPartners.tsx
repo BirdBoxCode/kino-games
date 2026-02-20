@@ -76,7 +76,7 @@ export function SectionPartners() {
       {/* Content Wrapper */}
       <div className="relative z-20 flex flex-col w-full max-w-[1280px]">
         {/* Section Header */}
-        <h2 className="font-garet text-[40px] md:text-[48px] font-[850] leading-[110%] tracking-[0.7px] uppercase text-[#F6F4F1] mb-[40px]">
+        <h2 className="section-header font-garet text-[40px] md:text-[48px] font-[850] leading-[110%] tracking-[0.7px] uppercase text-[#F6F4F1] mb-[40px]">
           OUR PARTNERS AND COLLABORATORS
         </h2>
 
