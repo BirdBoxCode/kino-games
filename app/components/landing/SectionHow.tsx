@@ -30,7 +30,7 @@ export function SectionHow() {
           .how-p1, .how-p2, .how-p3, .how-p3-corrected {
             margin-left: 0 !important;
             padding-left: 0 !important;
-            max-width: 100% !important;
+            max-width: 440px !important;
           }
           .section-how h2 {
             font-size: 32px !important;
