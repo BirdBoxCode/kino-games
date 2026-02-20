@@ -106,7 +106,7 @@ export function SectionPartners() {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative w-full aspect-video rounded-[12px] flex items-center justify-center overflow-hidden border bg-[#F3EEE6] border-[#00000010] cursor-pointer"
+                  className="group relative w-full aspect-video rounded-[12px] flex items-center justify-center overflow-hidden border bg-[#F4EFE8] border-[#00000010] cursor-pointer"
                 >
                   <Image
                     src={`/section-partners/partner-logos/${logo}`}
