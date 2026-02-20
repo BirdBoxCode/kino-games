@@ -35,7 +35,7 @@ export function SectionModel() {
 
         <motion.div
           variants={contentVariants}
-          className="flex flex-col items-start gap-[20px] w-full max-w-[680px]"
+          className="flex flex-col items-start gap-[20px] w-full md:pr-[calc(50vw-20px)] xl:pr-[620px]"
         >
           {/* Section Sub-header */}
           <h3 style={{ color: '#F6F4F1', fontFamily: 'var(--font-inter), Inter, sans-serif', fontSize: '20px', fontWeight: 600, lineHeight: 'normal', letterSpacing: '0.5px', margin: 0 }}>
@@ -43,7 +43,7 @@ export function SectionModel() {
           </h3>
 
           {/* Section Header */}
-          <h2 className="section-header font-garet text-[40px] md:text-[48px] font-[850] leading-[110%] tracking-[0.7px] uppercase text-[#F6F4F1]" style={{ margin: 0 }}>
+          <h2 className="section-header font-garet text-[40px] md:text-[48px] font-[850] leading-[110%] tracking-[0.7px] uppercase text-[#F6F4F1] whitespace-normal xl:whitespace-nowrap" style={{ margin: 0 }}>
             SUPPORTING <span className="text-[#D63A2F]">creators &amp; cinemas</span>
           </h2>
 
@@ -57,6 +57,7 @@ export function SectionModel() {
               border: '1px solid rgba(246, 244, 241, 0.1)',
               borderRadius: '24px',
               padding: '20px 32px',
+              maxWidth: '680px',
             }}
           >
             <p className="p1 text-[#F6F4F1] font-inter text-[18px] font-medium tracking-[0.5px]" style={{ margin: 0 }}>
@@ -84,7 +85,7 @@ export function SectionModel() {
       <motion.div
         variants={contentVariants}
         className="absolute bottom-0 right-0 z-20 pointer-events-none"
-        style={{ width: 'clamp(360px, 62vw, 960px)' }}
+        style={{ width: 'clamp(360px, 48vw, 840px)' }}
       >
         <Image
           src="/section-model/ticketswap2.png"
