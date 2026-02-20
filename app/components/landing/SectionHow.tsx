@@ -13,6 +13,7 @@ export function SectionHow() {
             padding: 40px 20px !important;
             height: auto !important;
             min-height: auto !important;
+            background-position: 20% center !important;
           }
           .bullet-trail-wrapper {
             gap: 40px !important;
@@ -141,7 +142,7 @@ export function SectionHow() {
               <div style={{ transform: 'scale(0.69)', transformOrigin: 'top left', display: 'inline-block', marginBottom: '-20px' }}>
                 <Squiggle1 />
               </div>
-              <div className="how-p1" style={{ maxWidth: '500px' }}>
+              <div className="how-p1" style={{ maxWidth: '440px' }}>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#F6F4F1', margin: 0 }}>
                   <span style={{ fontWeight: 700 }}>Games are adapted for the cinema environment.</span><br/>
                   <span style={{ fontWeight: 500 }}>Simple formats designed specifically for large screens and shared spaces.</span>
@@ -154,7 +155,7 @@ export function SectionHow() {
               <div style={{ transform: 'scale(0.60)', transformOrigin: 'top left', display: 'inline-block', marginBottom: '-20px' }}>
                 <Squiggle2 />
               </div>
-              <div className="how-p2" style={{ maxWidth: '500px' }}>
+              <div className="how-p2" style={{ maxWidth: '440px' }}>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#F6F4F1', margin: 0 }}>
                   <span style={{ fontWeight: 700 }}>Designed to fit existing cinemas.</span><br/>
                   <span style={{ fontWeight: 500 }}>Screen, sound, and interaction work within standard cinema infrastructure.</span>
@@ -167,7 +168,7 @@ export function SectionHow() {
               <div style={{ transform: 'scale(0.69)', transformOrigin: 'top left', display: 'inline-block', marginBottom: '-20px' }}>
                 <Squiggle3 />
               </div>
-              <div className="how-p3" style={{ maxWidth: '500px' }}>
+              <div className="how-p3" style={{ maxWidth: '440px' }}>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#F6F4F1', margin: 0 }}>
                   <span style={{ fontWeight: 500 }}>Browse our catalogue of games, decide how long you want it for, plug in and play.</span>
                 </p>
