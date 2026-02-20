@@ -35,20 +35,24 @@ export default function Navbar() {
   };
 
   const handleNavClick = (e: React.MouseEvent, link: { index: number; type: string; name: string; href: string }) => {
-    e.preventDefault(); // Prevent default anchor jump
+    e.preventDefault();
     setIsOpen(false);
 
-    if (link.type === 'cinematic') {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+    if (isMobile) {
+      // On mobile, skip the cinematic system and scroll directly to the section
+      const targetId = link.href.replace('/#', '');
+      setTimeout(() => {
+        const el = document.getElementById(targetId);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 320); // wait for menu close animation
+    } else if (link.type === 'cinematic') {
       goToSection(link.index);
     } else if (link.type === 'normal') {
-      // Normal scroll for non-cinematic sections (Partners, etc.)
       const targetId = link.href.replace('/#', '');
-      
       window.dispatchEvent(new CustomEvent('cinematic-nav', { 
-        detail: {
-          type: 'scroll-to-target',
-          targetId
-        } 
+        detail: { type: 'scroll-to-target', targetId } 
       }));
     }
   };
@@ -62,11 +66,17 @@ export default function Navbar() {
     }
   };
 
-  // Logo click returns to Hero (Cinematic 0)
+  // Logo click returns to Hero (Cinematic 0 on desktop, scroll-to-top on mobile)
   const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsOpen(false);
-    goToSection(0);
+
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    if (isMobile) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      goToSection(0);
+    }
   };
 
   return (
