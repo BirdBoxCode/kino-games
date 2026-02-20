@@ -82,7 +82,7 @@ export function SectionModel() {
                 →
               </span>
               <span className="relative font-inter font-bold text-[18px] leading-normal tracking-[0.5px] text-[#F6F4F1]">
-                View our catalogue of games!
+                View our catalogue of games
                 <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-[#F6F4F1] scale-x-0 origin-right group-hover:scale-x-100 transition-transform duration-300 ease-out" />
               </span>
             </Link>
