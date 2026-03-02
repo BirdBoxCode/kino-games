@@ -99,10 +99,10 @@ export function SectionModel({ scrollIntent }: { scrollIntent?: MotionValue<numb
         </div>
 
 
-        {/* Hand Image - Moved inside flow to prevent overlap */}
+        {/* Hand Image — desktop only, in flow */}
         <motion.div 
           variants={contentVariants}
-          className="relative z-20 pointer-events-none w-auto max-w-[1200px] h-auto self-start -ml-[20px] md:-ml-[80px] mt-[20px]"
+          className="hidden md:block relative z-20 pointer-events-none w-auto max-w-[1200px] h-auto self-start md:-ml-[80px] mt-[20px]"
           style={{ maxHeight: 'calc(100vh - 520px)' }}
         >
           <Image
