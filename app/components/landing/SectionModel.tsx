@@ -10,7 +10,7 @@ export function SectionModel({ scrollIntent }: { scrollIntent?: MotionValue<numb
   return (
     <section
       id="our-model"
-      className="relative w-full min-h-screen flex flex-col items-start overflow-hidden px-[20px] md:px-[80px] pt-[120px] md:pt-[180px] pb-[45vw] md:pb-[40px]"
+      className="relative w-full min-h-screen flex flex-col items-start overflow-hidden px-[20px] md:px-[80px] pt-[120px] md:pt-[180px] pb-[40px]"
       style={{
         backgroundImage: 'url(/section-model/cinema-lobby.png)',
         backgroundRepeat: 'no-repeat',
@@ -115,6 +115,8 @@ export function SectionModel({ scrollIntent }: { scrollIntent?: MotionValue<numb
               priority
           />
         </motion.div>
+        {/* Mobile-only spacer — reserves room for the absolute hand image below */}
+        <div className="md:hidden w-full shrink-0" style={{ height: 'clamp(260px, 55vw, 520px)' }} />
       </div>
 
       {/* Mobile only — absolutely pinned flush to section bottom, behind text */}
