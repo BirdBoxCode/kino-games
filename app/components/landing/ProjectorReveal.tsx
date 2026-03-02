@@ -114,3 +114,43 @@ export const contentVariants: Variants = {
     }
   }
 };
+
+/**
+ * Scroll-lift variants — Pathé-style subtle content elevation.
+ * Wraps a section's primary text/content block.
+ * - Desktop: enters at y=12, lifts to y=-12 as section becomes active
+ * - Syncs with ProjectorReveal's hidden/visible cascade automatically
+ */
+export const scrollLiftVariants: Variants = {
+  hidden: {
+    opacity: 0.98,
+    y: 12,
+  },
+  visible: {
+    opacity: 1,
+    y: -12,
+    transition: {
+      duration: 0.85,
+      ease: [0.25, 0.46, 0.45, 0.94], // easeOut — premium, not bouncy
+    },
+  },
+};
+
+/**
+ * Mobile-safe version of scrollLiftVariants — no y movement to avoid jitter.
+ * Use this instead of scrollLiftVariants on mobile breakpoints.
+ */
+export const scrollLiftVariantsMobile: Variants = {
+  hidden: {
+    opacity: 0.98,
+    y: 0,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+};

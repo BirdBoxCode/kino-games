@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
+import { scrollLiftVariants } from "./ProjectorReveal";
 
 export function SectionPartners() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -74,7 +75,13 @@ export function SectionPartners() {
 
 
       {/* Content Wrapper */}
-      <div className="relative z-20 flex flex-col w-full max-w-[1280px]">
+      <motion.div
+        className="relative z-20 flex flex-col w-full max-w-[1280px]"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.2 }}
+        variants={scrollLiftVariants}
+      >
         {/* Section Header */}
         <h2 className="section-header font-garet text-[40px] md:text-[48px] font-[850] leading-[110%] tracking-[0.7px] uppercase text-[#F6F4F1] mb-[40px]">
           OUR PARTNERS AND COLLABORATORS
@@ -140,7 +147,7 @@ export function SectionPartners() {
           </div>
         </div>
 
-      </div>
+      </motion.div>
     </section>
   );
 }

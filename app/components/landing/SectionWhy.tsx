@@ -2,7 +2,7 @@
 
 import { motion, useTransform, useMotionValue } from "framer-motion";
 import { useEffect } from "react";
-import { LightSweep, contentVariants } from "./ProjectorReveal";
+import { LightSweep, contentVariants, scrollLiftVariants } from "./ProjectorReveal";
 
 interface SectionWhyProps {
   scrollProgress?: number; // 0-1 value from CinematicScrollContainer
@@ -63,6 +63,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
       {/* Section Title - wrapper for all text content */}
       <motion.div 
         className="section-title px-[20px] md:px-[80px]"
+        variants={scrollLiftVariants}
         style={{
           display: 'flex',
           flexDirection: 'column',

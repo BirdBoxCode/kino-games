@@ -3,13 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { LightSweep, contentVariants } from "./ProjectorReveal";
+import { LightSweep, contentVariants, scrollLiftVariants } from "./ProjectorReveal";
 
 export function SectionModel() {
   return (
     <section
       id="our-model"
-      className="relative w-full min-h-screen flex flex-col items-start overflow-hidden px-[20px] md:px-[80px] pt-[120px] md:pt-[180px] pb-[40px]"
+      className="relative w-full min-h-screen flex flex-col items-start overflow-hidden px-[20px] md:px-[80px] pt-[120px] md:pt-[180px] pb-[calc(45vw+20px)] md:pb-[40px]"
       style={{
         backgroundImage: 'url(/section-model/cinema-lobby.png)',
         backgroundRepeat: 'no-repeat',
@@ -36,7 +36,7 @@ export function SectionModel() {
 
           {/* Content */}
           <motion.div 
-            variants={contentVariants}
+            variants={scrollLiftVariants}
             className="flex flex-col items-start w-full max-w-[1280px] gap-[20px]"
           >
             {/* Section Top: subheader + main title */}
@@ -100,7 +100,7 @@ export function SectionModel() {
         {/* Hand Image - Moved inside flow to prevent overlap */}
         <motion.div 
           variants={contentVariants}
-          className="relative z-20 pointer-events-none w-auto max-w-[1200px] h-auto self-start -ml-[20px] md:-ml-[80px] mt-[20px]"
+          className="hidden md:block relative z-20 pointer-events-none w-auto md:max-w-[1200px] h-auto self-start md:-ml-[80px] mt-[20px]"
           style={{ maxHeight: 'calc(100vh - 520px)' }}
         >
           <Image
@@ -114,6 +114,22 @@ export function SectionModel() {
           />
         </motion.div>
       </div>
+
+      {/* Mobile only – absolutely pinned to bottom-left of section, behind text content */}
+      <motion.div
+        variants={contentVariants}
+        className="absolute bottom-0 left-0 z-[15] pointer-events-none w-full md:hidden"
+      >
+        <Image
+          src="/section-model/ticketsplit-nobg.png"
+          alt="Ticket split diagram"
+          width={1271}
+          height={572}
+          className="w-full h-auto object-contain object-left-bottom"
+          priority
+        />
+      </motion.div>
+
     </section>
   );
 }

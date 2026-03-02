@@ -4,7 +4,7 @@ import { motion, useTransform, useMotionValue } from "framer-motion";
 import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { LightSweep, contentVariants } from "./ProjectorReveal";
+import { LightSweep, contentVariants, scrollLiftVariants } from "./ProjectorReveal";
 
 interface SectionSimpleSetupProps {
   scrollProgress?: number;
@@ -57,7 +57,7 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
         }}
       >
         {/* Content Wrapper */}
-        <div className="flex flex-col items-start w-full max-w-[1280px] gap-[40px] relative">
+        <motion.div className="flex flex-col items-start w-full max-w-[1280px] gap-[40px] relative" variants={scrollLiftVariants}>
           <LightSweep />
 
           {/* Content Top */}
@@ -116,7 +116,7 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
                  priority
                />
             </motion.div>
-        </div>
+        </motion.div>
       </motion.div>
     </motion.section>
   );

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { LightSweep, contentVariants } from "./ProjectorReveal";
+import { LightSweep, contentVariants, scrollLiftVariants } from "./ProjectorReveal";
 
 export function SectionHow() {
   return (
@@ -76,8 +76,9 @@ export function SectionHow() {
       />
 
       {/* Content Wrapper */}
-      <div 
+      <motion.div 
         className="content-wrapper px-[20px] md:px-[80px]"
+        variants={scrollLiftVariants}
         style={{
           position: 'relative',
           zIndex: 2,
@@ -178,7 +179,7 @@ export function SectionHow() {
           </div>
         </div>
 
-      </div>
+      </motion.div>
     </section>
     </>
   );

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { FilmstripGallery } from "./FilmstripGallery";
-import { LightSweep, contentVariants } from "./ProjectorReveal";
+import { LightSweep, contentVariants, scrollLiftVariants } from "./ProjectorReveal";
 
 export function SectionGamesCinemas() {
   const cinemasImages = [
@@ -63,8 +63,9 @@ export function SectionGamesCinemas() {
 
       {/* Content Wrapper */}
 
-      <div
+      <motion.div
         className="content-wrapper px-[20px] md:px-[80px]"
+        variants={scrollLiftVariants}
         style={{
           display: "flex",
           flexDirection: "column",
@@ -330,7 +331,7 @@ export function SectionGamesCinemas() {
             </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
