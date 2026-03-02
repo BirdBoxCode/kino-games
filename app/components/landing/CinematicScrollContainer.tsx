@@ -273,7 +273,6 @@ export function CinematicScrollContainer({
       >
         {children.map((child, index) => {
           const isActive = index === activeIndex;
-          const isHero = index === 0;
           return (
             <ProjectorReveal 
               key={index} 
@@ -290,9 +289,7 @@ export function CinematicScrollContainer({
                >
                  {cloneElement(child, {
                    scrollProgress: isActive ? 0 : 1,
-                   // Pass raw intent to non-Hero sections so they can apply
-                   // the Pathé-style scroll-lift on just their content block
-                   ...(isHero ? {} : { scrollIntent: isActive ? intent : null }),
+                   scrollIntent: isActive ? intent : null,
                  } as Record<string, unknown>)}
                </div>
             </ProjectorReveal>
