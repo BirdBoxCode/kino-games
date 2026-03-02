@@ -1,10 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, MotionValue } from "framer-motion";
 import { FilmstripGallery } from "./FilmstripGallery";
-import { LightSweep, contentVariants } from "./ProjectorReveal";
+import { LightSweep, contentVariants, useScrollIntentY } from "./ProjectorReveal";
 
-export function SectionGamesCinemas() {
+export function SectionGamesCinemas({ scrollIntent }: { scrollIntent?: MotionValue<number> | null }) {
+  const intentY = useScrollIntentY(scrollIntent);
   const cinemasImages = [
     "/section-cinemas-games/cinema-image1.JPG",
     "/section-cinemas-games/cinema-image2.png",
@@ -63,7 +64,7 @@ export function SectionGamesCinemas() {
 
       {/* Content Wrapper */}
 
-      <div
+      <motion.div
         className="content-wrapper px-[20px] md:px-[80px]"
         style={{
           display: "flex",
@@ -75,6 +76,7 @@ export function SectionGamesCinemas() {
           width: "100%",
           maxWidth: "1440px", // Matches Navbar
           margin: "0 auto",
+          y: intentY,
         }}
       >
 
@@ -330,7 +332,7 @@ export function SectionGamesCinemas() {
             </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

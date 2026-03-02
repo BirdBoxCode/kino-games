@@ -1,15 +1,17 @@
 "use client";
 
-import { motion, useTransform, useMotionValue } from "framer-motion";
+import { motion, useTransform, useMotionValue, MotionValue } from "framer-motion";
 import { useEffect } from "react";
-import { LightSweep, contentVariants } from "./ProjectorReveal";
+import { LightSweep, contentVariants, useScrollIntentY } from "./ProjectorReveal";
 
 interface SectionWhyProps {
   scrollProgress?: number; // 0-1 value from CinematicScrollContainer
+  scrollIntent?: MotionValue<number> | null; // raw intent from CinematicScrollContainer
 }
 
-export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
+export function SectionWhy({ scrollProgress = 0, scrollIntent }: SectionWhyProps) {
   const motionProgress = useMotionValue(scrollProgress);
+  const intentY = useScrollIntentY(scrollIntent);
   
   useEffect(() => {
     motionProgress.set(scrollProgress);
@@ -73,6 +75,7 @@ export function SectionWhy({ scrollProgress = 0 }: SectionWhyProps) {
           width: '100%',
           maxWidth: '1440px',
           margin: '0 auto',
+          y: intentY,
         }}
       >
         <LightSweep />
