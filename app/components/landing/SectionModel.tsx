@@ -10,7 +10,7 @@ export function SectionModel({ scrollIntent }: { scrollIntent?: MotionValue<numb
   return (
     <section
       id="our-model"
-      className="relative w-full min-h-screen flex flex-col items-start overflow-hidden px-[20px] md:px-[80px] pt-[120px] md:pt-[180px] pb-[40px]"
+      className="relative w-full min-h-screen flex flex-col items-start overflow-hidden px-[20px] md:px-[80px] pt-[120px] md:pt-[180px] pb-[45vw] md:pb-[40px]"
       style={{
         backgroundImage: 'url(/section-model/cinema-lobby.png)',
         backgroundRepeat: 'no-repeat',
@@ -99,10 +99,10 @@ export function SectionModel({ scrollIntent }: { scrollIntent?: MotionValue<numb
         </div>
 
 
-        {/* Hand Image — desktop only, in flow */}
+        {/* Hand Image - Moved inside flow to prevent overlap */}
         <motion.div 
           variants={contentVariants}
-          className="hidden md:block relative z-20 pointer-events-none w-auto max-w-[1200px] h-auto self-start md:-ml-[80px] mt-[20px]"
+          className="hidden md:block relative z-20 pointer-events-none w-auto max-w-[1200px] h-auto self-start -ml-[20px] md:-ml-[80px] mt-[20px]"
           style={{ maxHeight: 'calc(100vh - 520px)' }}
         >
           <Image
