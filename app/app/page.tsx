@@ -7,10 +7,12 @@ import { SectionModel } from "../components/landing/SectionModel";
 import { SectionPartners } from "../components/landing/SectionPartners";
 import { CinematicScrollContainer } from "../components/landing/CinematicScrollContainer";
 import Footer from "../components/ui/Footer";
+import { HashNav } from "../components/landing/HashNav";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-kino-black text-kino-silver selection:bg-kino-red selection:text-white">
+      <HashNav />
       <CinematicScrollContainer>
         <HeroSection />
         <SectionWhy />

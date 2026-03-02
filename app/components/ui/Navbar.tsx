@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -14,6 +15,8 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const isHome = pathname === '/';
   const [isOpen, setIsOpen] = useState(false);
 
   // Prevent scrolling when mobile menu is open
@@ -35,18 +38,23 @@ export default function Navbar() {
   };
 
   const handleNavClick = (e: React.MouseEvent, link: { index: number; type: string; name: string; href: string }) => {
+    // On non-home pages, let the browser navigate natively to /#section-id
+    if (!isHome) {
+      setIsOpen(false);
+      return; // do NOT preventDefault — let the Link href do a full-page navigation
+    }
+
     e.preventDefault();
     setIsOpen(false);
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
     if (isMobile) {
-      // On mobile, skip the cinematic system and scroll directly to the section
       const targetId = link.href.replace('/#', '');
       setTimeout(() => {
         const el = document.getElementById(targetId);
         if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 320); // wait for menu close animation
+      }, 320);
     } else if (link.type === 'cinematic') {
       goToSection(link.index);
     } else if (link.type === 'normal') {
@@ -58,6 +66,11 @@ export default function Navbar() {
   };
 
   const handleContactClick = (e: React.MouseEvent) => {
+    // On non-home pages, let href="/#contact" navigate naturally
+    if (!isHome) {
+      setIsOpen(false);
+      return;
+    }
     e.preventDefault();
     setIsOpen(false);
     const footer = document.querySelector("footer");
@@ -68,6 +81,11 @@ export default function Navbar() {
 
   // Logo click returns to Hero (Cinematic 0 on desktop, scroll-to-top on mobile)
   const handleLogoClick = (e: React.MouseEvent) => {
+    // On non-home pages, let the href="/" navigate naturally to the home page
+    if (!isHome) {
+      setIsOpen(false);
+      return;
+    }
     e.preventDefault();
     setIsOpen(false);
 
