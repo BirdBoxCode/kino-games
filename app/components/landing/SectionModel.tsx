@@ -102,7 +102,7 @@ export function SectionModel({ scrollIntent }: { scrollIntent?: MotionValue<numb
         {/* Hand Image - Moved inside flow to prevent overlap */}
         <motion.div 
           variants={contentVariants}
-          className="relative z-20 pointer-events-none w-auto max-w-[1200px] h-auto self-start -ml-[20px] md:-ml-[80px] mt-[20px]"
+          className="hidden md:block relative z-20 pointer-events-none w-auto max-w-[1200px] h-auto self-start -ml-[20px] md:-ml-[80px] mt-[20px]"
           style={{ maxHeight: 'calc(100vh - 520px)' }}
         >
           <Image
@@ -115,6 +115,20 @@ export function SectionModel({ scrollIntent }: { scrollIntent?: MotionValue<numb
               priority
           />
         </motion.div>
+        {/* Mobile-only spacer — reserves room for the absolute hand image below */}
+        <div className="md:hidden w-full shrink-0" style={{ height: 'clamp(260px, 55vw, 520px)' }} />
+      </div>
+
+      {/* Mobile only — absolutely pinned flush to section bottom, behind text */}
+      <div className="absolute bottom-0 left-0 w-full z-[15] pointer-events-none md:hidden">
+        <Image
+          src="/section-model/ticketsplit-nobg.png"
+          alt="Ticket split diagram"
+          width={1271}
+          height={572}
+          className="w-full h-auto object-contain object-bottom"
+          priority
+        />
       </div>
     </section>
   );
