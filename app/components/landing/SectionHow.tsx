@@ -1,10 +1,11 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
-import { LightSweep, contentVariants } from "./ProjectorReveal";
+import { motion, MotionValue } from "framer-motion";
+import { LightSweep, contentVariants, useScrollIntentY } from "./ProjectorReveal";
 
-export function SectionHow() {
+export function SectionHow({ scrollIntent }: { scrollIntent?: MotionValue<number> | null }) {
+  const intentY = useScrollIntentY(scrollIntent);
   return (
     <>
       <style jsx global>{`
@@ -76,7 +77,7 @@ export function SectionHow() {
       />
 
       {/* Content Wrapper */}
-      <div 
+      <motion.div 
         className="content-wrapper px-[20px] md:px-[80px]"
         style={{
           position: 'relative',
@@ -89,7 +90,8 @@ export function SectionHow() {
           maxWidth: '1440px', // Matches Navbar
           margin: '0 auto',
           height: '100%', 
-          justifyContent: 'center'
+          justifyContent: 'center',
+          y: intentY,
         }}
       >
         <LightSweep />
@@ -178,7 +180,7 @@ export function SectionHow() {
           </div>
         </div>
 
-      </div>
+      </motion.div>
     </section>
     </>
   );

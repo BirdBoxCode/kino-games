@@ -1,7 +1,35 @@
 "use client";
 
-import { motion, useReducedMotion, Variants } from "framer-motion";
+import { motion, useReducedMotion, Variants, useTransform, useSpring, MotionValue } from "framer-motion";
 import { ReactNode } from "react";
+
+/**
+ * Pathé-style scroll-intent Y hook.
+ * Pass the `scrollIntent` prop received from CinematicScrollContainer.
+ * - Scrolling DOWN → content drifts DOWN (same direction as gesture)
+ * - Scrolling UP   → content drifts UP
+ * - Perfectly in sync with the yellow circle scroll indicator
+ * - Returns a static 0 when no intent is active (inactive section or mobile)
+ */
+export function useScrollIntentY(
+  scrollIntent: MotionValue<number> | null | undefined
+): MotionValue<number> {
+  // When there's no intent (null = inactive section), create a static zero value
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const fallback = useSpring(0, { stiffness: 1, damping: 1 });
+
+  // Map intent [-1 → +1] to y [-30 → +30] — follows scroll direction (Pathé style)
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const raw = useTransform(
+    scrollIntent ?? fallback,
+    [-1, 0, 1],
+    [230, 0, -230]
+  );
+
+  // Spring smoothing: snappy on input, soft on release
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  return useSpring(raw, { stiffness: 280, damping: 28, mass: 0.7 });
+}
 
 interface ProjectorRevealProps {
   isActive: boolean;

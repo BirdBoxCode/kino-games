@@ -1,17 +1,19 @@
 "use client";
 
-import { motion, useTransform, useMotionValue } from "framer-motion";
+import { motion, useTransform, useMotionValue, MotionValue } from "framer-motion";
 import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { LightSweep, contentVariants } from "./ProjectorReveal";
+import { LightSweep, contentVariants, useScrollIntentY } from "./ProjectorReveal";
 
 interface SectionSimpleSetupProps {
   scrollProgress?: number;
+  scrollIntent?: MotionValue<number> | null;
 }
 
-export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupProps) {
+export function SectionSimpleSetup({ scrollProgress = 0, scrollIntent }: SectionSimpleSetupProps) {
   const motionProgress = useMotionValue(scrollProgress);
+  const intentY = useScrollIntentY(scrollIntent);
 
   useEffect(() => {
     motionProgress.set(scrollProgress);
@@ -57,7 +59,7 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
         }}
       >
         {/* Content Wrapper */}
-        <div className="flex flex-col items-start w-full max-w-[1280px] gap-[40px] relative">
+        <motion.div className="flex flex-col items-start w-full max-w-[1280px] gap-[40px] relative" style={{ y: intentY }}>
           <LightSweep />
 
           {/* Content Top */}
@@ -116,7 +118,7 @@ export function SectionSimpleSetup({ scrollProgress = 0 }: SectionSimpleSetupPro
                  priority
                />
             </motion.div>
-        </div>
+        </motion.div>
       </motion.div>
     </motion.section>
   );

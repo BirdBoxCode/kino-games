@@ -1,16 +1,18 @@
 "use client";
 
-import { motion, useTransform, useMotionValue } from "framer-motion";
+import { motion, useTransform, useMotionValue, MotionValue } from "framer-motion";
 import { useEffect } from "react";
 import Link from "next/link";
-import { LightSweep, contentVariants } from "./ProjectorReveal";
+import { LightSweep, contentVariants, useScrollIntentY } from "./ProjectorReveal";
 
 interface HeroSectionProps {
   scrollProgress?: number; // 0-1 value from CinematicScrollContainer
+  scrollIntent?: MotionValue<number> | null;
 }
 
-export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
+export function HeroSection({ scrollProgress = 0, scrollIntent }: HeroSectionProps) {
   const motionProgress = useMotionValue(scrollProgress);
+  const intentY = useScrollIntentY(scrollIntent);
   
   useEffect(() => {
     motionProgress.set(scrollProgress);
@@ -58,7 +60,8 @@ export function HeroSection({ scrollProgress = 0 }: HeroSectionProps) {
         className="relative z-20 flex flex-col justify-center items-start gap-[5px] w-full max-w-[1280px] shrink-0"
         style={{ 
           opacity: contentOpacity,
-          y: contentY
+          y: contentY,
+          translateY: intentY,
         }}
       >
         <LightSweep />

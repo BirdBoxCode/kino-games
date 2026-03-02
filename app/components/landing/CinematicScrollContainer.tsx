@@ -287,7 +287,10 @@ export function CinematicScrollContainer({
                     zIndex: isActive ? 50 : 10,
                   }}
                >
-                 {cloneElement(child, { scrollProgress: isActive ? 0 : 1 } as Record<string, unknown>)}
+                 {cloneElement(child, {
+                   scrollProgress: isActive ? 0 : 1,
+                   scrollIntent: isActive ? intent : null,
+                 } as Record<string, unknown>)}
                </div>
             </ProjectorReveal>
           );

@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { LightSweep, contentVariants } from "./ProjectorReveal";
+import { motion, MotionValue } from "framer-motion";
+import { LightSweep, contentVariants, useScrollIntentY } from "./ProjectorReveal";
 
-export function SectionModel() {
+export function SectionModel({ scrollIntent }: { scrollIntent?: MotionValue<number> | null }) {
+  const intentY = useScrollIntentY(scrollIntent);
   return (
     <section
       id="our-model"
@@ -38,6 +39,7 @@ export function SectionModel() {
           <motion.div 
             variants={contentVariants}
             className="flex flex-col items-start w-full max-w-[1280px] gap-[20px]"
+            style={{ y: intentY }}
           >
             {/* Section Top: subheader + main title */}
             <div className="section-top">
