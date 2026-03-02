@@ -116,6 +116,18 @@ export function SectionModel({ scrollIntent }: { scrollIntent?: MotionValue<numb
           />
         </motion.div>
       </div>
+
+      {/* Mobile only — absolutely pinned flush to section bottom, behind text */}
+      <div className="absolute bottom-0 left-0 w-full z-[15] pointer-events-none md:hidden">
+        <Image
+          src="/section-model/ticketsplit-nobg.png"
+          alt="Ticket split diagram"
+          width={1271}
+          height={572}
+          className="w-full h-auto object-contain object-bottom"
+          priority
+        />
+      </div>
     </section>
   );
 }
